@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나를 소개합니다</title>
+    
+    <!-- 1. 외부 라이브러리 불러오기 (Tailwind CSS, FontAwesome 아이콘, Canvas Confetti 폭죽 효과) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        /* 
+         ==================================================================
+         🎨 [색상 변경 팁] 
+         아래의 `--primary`, `--primary-hover` 등의 색상 코드(#)를 
+         자신이 좋아하는 색상으로 자유롭게 바꾸어 보세요!
+         예시:
+          - 민트 파스텔: #4ade80, #22c55e
+          - 스카이 블루: #38bdf8, #0284c7
+          - 라벤더 보라: #c084fc, #9333ea
+          - 피치 핑크: #f472b6, #e11d48
+         ==================================================================
+        */
+        :root {
+            --primary-color: #6366f1;       /* 메인 포인트 색상 (기본: 인디고 파스텔) */
+            --primary-hover: #4f46e5;       /* 마우스를 올렸을 때 색상 */
+            --bg-gradient-from: #f0f9ff;   /* 배경 시직 색상 (연한 하늘색) */
+            --bg-gradient-to: #e0e7ff;     /* 배경 끝 색상 (연한 보라색) */
+            --card-bg: #ffffff;            /* 카드 배경색 (하얀색) */
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-from), var(--bg-gradient-to));
+            min-height: 100vh;
+        }
+
+        /* 메인 컬러를 적용하는 클래스들 */
+        .theme-bg { background-color: var(--primary-color); }
+        .theme-bg-hover:hover { background-color: var(--primary-hover); }
+        .theme-text { color: var(--primary-color); }
+        .theme-border { border-color: var(--primary-color); }
+
+        /* 카드 마우스 호버 효과 */
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* 반짝이는 버튼 애니메이션 */
+        @keyframes pulse-subtle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .animate-bounce-subtle {
+            animation: pulse-subtle 2s infinite;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen text-gray-800 antialiased p-4 sm:p-8 justify-between">
+
+    <main class="max-w-4xl mx-auto w-full">
+        <!-- 
+         ==================================================================
+         👤 [1] 프로필 상단 영역 (이름, 한 줄 소개 수정하기)
+         ==================================================================
+        -->
+        <header class="text-center my-8 sm:my-12">
+            <!-- 프로필 아바타 / 캐릭터 아이콘 -->
+            <div class="relative inline-block mb-4">
+                <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full theme-bg text-white flex items-center justify-center text-6xl shadow-lg mx-auto border-4 border-white">
+                    <!-- 💡 아이콘 바꾸기: fa-user 대신 fa-cat, fa-dog, fa-gamepad, fa-smile 등 사용 가능 -->
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <span class="absolute bottom-2 right-2 bg-yellow-400 text-xl p-2 rounded-full shadow border-2 border-white">✨</span>
+            </div>
+
+            <!-- 제목 및 자기소개 글 -->
+            <!-- 💡 아래의 이름을 본인 이름으로 수정해보세요! -->
+            <h1 class="text-3xl sm:text-5xl font-black tracking-tight mb-3">
+                안녕하세요! <span class="theme-text">김OO</span>입니다 👋
+            </h1>
+            <p class="text-lg sm:text-xl text-gray-600 max-w-xl mx-auto font-medium">
+                <!-- 💡 자신의 슬로건이나 짧은 소개글로 수정하세요 -->
+                매일 새로운 즐거움을 찾아가는 꿈 많은 중학생입니다!
+            </p>
+        </header>
+
+        <!-- 
+         ==================================================================
+         ❤️ [2] 내가 좋아하는 것 3가지 (카드 섹션)
+         ==================================================================
+        -->
+        <section class="my-12">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-gray-700 inline-block pb-2 border-b-4 theme-border">
+                    내가 좋아하는 3가지
+                </h2>
+            </div>
+
+            <!-- 카드 3개가 들어가는 그리드 레이아웃 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- -------------------------------------------------------- -->
+                <!-- 📌 카드 1번 -->
+                <!-- -------------------------------------------------------- -->
+                <div class="bg-white rounded-2xl p-6 shadow-md card-hover text-center border border-gray-100 flex flex-col items-center">
+                    <!-- 아이콘 박스 (💡 fa-gamepad 부분에서 원하는 아이콘으로 변경 가능) -->
+                    <div class="w-16 h-16 rounded-2xl bg-indigo-50 text-indigo-500 flex items-center justify-center text-3xl mb-4">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <!-- 카드 제목 -->
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">게임 플레이</h3>
+                    <!-- 카드 설명 -->
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        친구들과 같이 팀을 이루어 전략 게임을 하는 것을 좋아해요! 협동해서 이길 때 스트레스가 확 풀려요.
+                    </p>
+                </div>
+
+                <!-- -------------------------------------------------------- -->
+                <!-- 📌 카드 2번 -->
+                <!-- -------------------------------------------------------- -->
+                <div class="bg-white rounded-2xl p-6 shadow-md card-hover text-center border border-gray-100 flex flex-col items-center">
+                    <!-- 아이콘 박스 (💡 fa-music 부분 변경 가능) -->
+                    <div class="w-16 h-16 rounded-2xl bg-pink-50 text-pink-500 flex items-center justify-center text-3xl mb-4">
+                        <i class="fa-solid fa-music"></i>
+                    </div>
+                    <!-- 카드 제목 -->
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">음악 감상</h3>
+                    <!-- 카드 설명 -->
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        공부할 때나 등하교할 때 K-POP과 신나는 팝송을 들어요. 노래를 들으면 기분이 나아져요.
+                    </p>
+                </div>
+
+                <!-- -------------------------------------------------------- -->
+                <!-- 📌 카드 3번 -->
+                <!-- -------------------------------------------------------- -->
+                <div class="bg-white rounded-2xl p-6 shadow-md card-hover text-center border border-gray-100 flex flex-col items-center">
+                    <!-- 아이콘 박스 (💡 fa-utensils 부분 변경 가능) -->
+                    <div class="w-16 h-16 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center text-3xl mb-4">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <!-- 카드 제목 -->
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">맛있는 음식</h3>
+                    <!-- 카드 설명 -->
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        떡볶이랑 매콤한 닭갈비를 정말 좋아해요! 주말에 맛집을 찾아다니는 것이 제 큰 소소한 행복입니다.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 
+         ==================================================================
+         🎉 [3] "반가워요!" 반응형 버튼 영역
+         ==================================================================
+        -->
+        <section class="text-center my-12">
+            <button id="greetingBtn" onclick="handleGreeting()" class="theme-bg theme-bg-hover text-white text-xl font-bold py-4 px-10 rounded-full shadow-lg transform active:scale-95 transition-all duration-200 animate-bounce-subtle inline-flex items-center gap-3">
+                <i class="fa-solid fa-hand-wave"></i>
+                <span>반가워요! 클릭해 보세요</span>
+            </button>
+        </section>
+    </main>
+
+    <!-- 푸터 (하단 설명) -->
+    <footer class="text-center text-gray-400 text-sm py-4">
+        <p>© 2026 나만의 자기소개 페이지 | Made with ❤️</p>
+    </footer>
+
+    <!-- 
+     ==================================================================
+     💬 [4] 버튼 클릭 시 나타나는 모달 팝업창
+     ==================================================================
+    -->
+    <div id="modal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl transform transition-all border border-gray-100">
+            <div class="text-5xl mb-4">🎉</div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">방문해 주셔서 감사합니다!</h3>
+            <p class="text-gray-600 mb-6">
+                저의 웹페이지를 보러 와주셔서 너무 고마워요.<br>오늘 하루도 좋은 일만 가득하세요!
+            </p>
+            <button onclick="closeModal()" class="w-full theme-bg theme-bg-hover text-white font-bold py-3 rounded-xl shadow transition">
+                닫기
+            </button>
+        </div>
+    </div>
+
+    <!-- 
+     ==================================================================
+     ⚡ [5] 자바스크립트 동작 구현 (폭죽 효과 및 팝업창 띄우기)
+     ==================================================================
+    -->
+    <script>
+        // "반가워요!" 버튼을 눌렀을 때 실행되는 함수
+        function handleGreeting() {
+            // 1. 화려한 폭죽(파티클) 애니메이션 터뜨리기
+            confetti({
+                particleCount: 100,  // 폭죽 조각 개수
+                spread: 70,          // 퍼지는 범위
+                origin: { y: 0.6 }   // 터지는 높이 위치
+            });
+
+            // 2. 잠시 후 축하 메시지 팝업창 열기 (0.3초 뒤)
+            setTimeout(() => {
+                const modal = document.getElementById('modal');
+                modal.classList.remove('hidden');
+            }, 300);
+        }
+
+        // 팝업창의 "닫기" 버튼을 누르면 창을 닫는 함수
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
