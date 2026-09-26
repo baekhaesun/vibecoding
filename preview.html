@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>우리 반 책 추천 📚</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Pretendard", "Noto Sans KR", sans-serif;
+      background: #fff8ee;
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      padding: 45px 20px 30px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 38px;
+    }
+
+    header p {
+      margin-top: 12px;
+      color: #777;
+      font-size: 17px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .form-box {
+      background: white;
+      padding: 30px;
+      border-radius: 22px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-size: 17px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #eee;
+      border-radius: 12px;
+      font-size: 16px;
+      margin-bottom: 22px;
+      outline: none;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #ffb45c;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      background: #ff9f43;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 16px;
+      border-radius: 13px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #f58b25;
+    }
+
+    button:disabled {
+      background: #bbb;
+      cursor: not-allowed;
+    }
+
+    #message {
+      text-align: center;
+      margin-top: 16px;
+      font-weight: bold;
+    }
+
+    .book-title {
+      margin-top: 45px;
+      text-align: center;
+    }
+
+    #bookList {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin: 25px 0 60px;
+    }
+
+    .book-card {
+      background: white;
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+    }
+
+    .book-card h3 {
+      margin-top: 0;
+      color: #e67e22;
+    }
+
+    .reason {
+      line-height: 1.6;
+    }
+
+    .time {
+      margin-top: 15px;
+      color: #999;
+      font-size: 13px;
+    }
+
+    .empty {
+      text-align: center;
+      color: #999;
+      grid-column: 1 / -1;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>📚 우리 반 책 추천</h1>
+  <p>친구들에게 추천하고 싶은 책을 소개해 주세요!</p>
+</header>
+
+<div class="container">
+
+  <div class="form-box">
+
+    <label for="title">📖 책 제목</label>
+    <input
+      id="title"
+      type="text"
+      placeholder="예) 어린 왕자"
+      maxlength="100"
+    >
+
+    <label for="reason">💬 추천하는 이유</label>
+    <textarea
+      id="reason"
+      placeholder="이 책을 친구들에게 추천하는 이유를 적어주세요."
+      maxlength="500"
+    ></textarea>
+
+    <button id="saveButton" onclick="saveBook()">
+      💾 추천 책 저장하기
+    </button>
+
+    <div id="message"></div>
+
+  </div>
+
+
+  <h2 class="book-title">🌟 친구들이 추천한 책</h2>
+
+  <div id="bookList">
+    <div class="empty">책 목록을 불러오는 중입니다...</div>
+  </div>
+
+</div>
+
+
+<script>
+
+  // ⭐ 여기에 Apps Script 웹 앱 주소를 넣으세요.
+  const SCRIPT_URL = "여기에_웹앱_URL을_넣으세요";
+
+
+  // ------------------------------------------------
+  // 책 저장
+  // ------------------------------------------------
+
+  async function saveBook() {
+
+    const title = document.getElementById("title").value.trim();
+    const reason = document.getElementById("reason").value.trim();
+
+    const message = document.getElementById("message");
+    const button = document.getElementById("saveButton");
+
+
+    if (!title) {
+      alert("책 제목을 입력해주세요.");
+      return;
+    }
+
+    if (!reason) {
+      alert("추천 이유를 입력해주세요.");
+      return;
+    }
+
+
+    button.disabled = true;
+    button.textContent = "저장 중... ⏳";
+
+    message.textContent = "";
+
+
+    try {
+
+      await fetch(SCRIPT_URL, {
+
+        method: "POST",
+
+        // Apps Script로 JSON 전송
+        body: JSON.stringify({
+          title: title,
+          reason: reason
+        })
+
+      });
+
+
+      message.textContent = "🎉 책 추천이 저장되었습니다!";
+
+      document.getElementById("title").value = "";
+      document.getElementById("reason").value = "";
+
+
+      // 저장 후 목록 다시 불러오기
+      setTimeout(loadBooks, 700);
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      message.textContent =
+        "😢 저장하지 못했습니다. 선생님께 알려주세요.";
+
+    } finally {
+
+      button.disabled = false;
+      button.textContent = "💾 추천 책 저장하기";
+
+    }
+
+  }
+
+
+
+  // ------------------------------------------------
+  // 구글 시트의 책 목록 불러오기
+  // ------------------------------------------------
+
+  async function loadBooks() {
+
+    const bookList = document.getElementById("bookList");
+
+
+    try {
+
+      const response = await fetch(SCRIPT_URL);
+
+      const books = await response.json();
+
+
+      if (!books.length) {
+
+        bookList.innerHTML =
+          '<div class="empty">아직 추천된 책이 없습니다. 첫 번째 책을 추천해 보세요! 😊</div>';
+
+        return;
+      }
+
+
+      bookList.innerHTML = "";
+
+
+      // 최근 입력한 책이 위에 나오도록
+      books.reverse();
+
+
+      books.forEach(book => {
+
+        const card = document.createElement("div");
+
+        card.className = "book-card";
+
+
+        // XSS 방지를 위해 textContent 사용
+        const title = document.createElement("h3");
+        title.textContent = "📕 " + book.title;
+
+        const reason = document.createElement("div");
+        reason.className = "reason";
+        reason.textContent = book.reason;
+
+        const time = document.createElement("div");
+        time.className = "time";
+        time.textContent = "🕐 " + book.time;
+
+
+        card.appendChild(title);
+        card.appendChild(reason);
+        card.appendChild(time);
+
+        bookList.appendChild(card);
+
+      });
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      bookList.innerHTML =
+        '<div class="empty">책 목록을 불러오지 못했습니다.</div>';
+
+    }
+
+  }
+
+
+  // 페이지를 열면 자동으로 목록 불러오기
+  loadBooks();
+
+</script>
+
+</body>
+</html>
