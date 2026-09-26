@@ -1,71 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>바이브 코딩 첫걸음</title>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: #f4f7ff;
-      padding: 40px;
-    }
-
-    h1 {
-      color: #4a5bd5;
-    }
-
-    .card {
-      background: white;
-      width: 500px;
-      max-width: 90%;
-      margin: 20px auto;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px #cccccc;
-    }
-
-    button {
-      padding: 12px 25px;
-      font-size: 16px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>바이브 코딩 첫걸음 | 6차시 여행</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
-  <h1>🤖 바이브 코딩 첫걸음</h1>
-
-  <p>
-    AI와 대화하며 내가 상상한 것을 웹페이지로 만들어 봅시다!
-  </p>
-
-  <div class="card">
-    <h2>💬 ① 말한다</h2>
-    <p>무엇을 만들고 싶은지 AI에게 설명합니다.</p>
-  </div>
-
-  <div class="card">
-    <h2>▶️ ② 실행한다</h2>
-    <p>AI가 만든 코드를 직접 실행해 봅니다.</p>
-  </div>
-
-  <div class="card">
-    <h2>🔧 ③ 고친다</h2>
-    <p>문제를 찾고 AI와 대화하며 더 좋게 고칩니다.</p>
-  </div>
-
-  <button onclick="startCoding()">바이브 코딩 시작! 🚀</button>
-
-  <script>
-    function startCoding() {
-      alert("AI와 함께 상상을 현실로 만들어 봅시다! 🚀");
-    }
-  </script>
-
+  <main class="home-shell">
+    <header class="hero">
+      <span class="eyebrow">중학교 1학년 · 6차시 프로젝트</span>
+      <div class="hero-icon" aria-hidden="true">🤖✨</div>
+      <h1>바이브 코딩 첫걸음</h1>
+      <p>AI와 이야기하며 상상을 웹페이지로 만들어 봐요.<br>만들고, 눌러 보고, 다시 고치면 돼요!</p>
+      <a class="start-button" href="1.html">1차시부터 시작하기 →</a>
+    </header>
+    <section class="journey" aria-labelledby="journey-title">
+      <div class="section-heading"><div><span class="eyebrow">OUR LITTLE JOURNEY</span><h2 id="journey-title">어떤 걸 만들어 볼까요?</h2></div><p>카드를 누르면 해당 차시로 이동해요.</p></div>
+      <div class="lesson-grid">
+        <a class="lesson-card peach" href="1.html"><span class="lesson-number">01</span><span class="lesson-emoji" aria-hidden="true">🪄</span><h3>AI와 첫 웹페이지</h3><p>내가 좋아하는 것으로 첫 화면 만들기</p><span class="card-arrow">1차시 보러 가기 →</span></a>
+        <a class="lesson-card lavender" href="2.html"><span class="lesson-number">02</span><span class="lesson-emoji" aria-hidden="true">👆</span><h3>웹페이지 움직이기</h3><p>버튼을 누르면 반응하는 페이지</p><span class="card-arrow">2차시 보러 가기 →</span></a>
+        <a class="lesson-card mint" href="3.html"><span class="lesson-number">03</span><span class="lesson-emoji" aria-hidden="true">📒</span><h3>Google Sheets 저장</h3><p>입력한 내용을 안전하게 기록하기</p><span class="card-arrow">3차시 보러 가기 →</span></a>
+        <a class="lesson-card yellow" href="4.html"><span class="lesson-number">04</span><span class="lesson-emoji" aria-hidden="true">🧑‍🤝‍🧑</span><h3>우리 반 공동 웹앱</h3><p>친구들과 함께 만드는 추천 목록</p><span class="card-arrow">4차시 보러 가기 →</span></a>
+        <a class="lesson-card blue" href="5.html"><span class="lesson-number">05</span><span class="lesson-emoji" aria-hidden="true">📍</span><h3>우리 지역 지도</h3><p>동네에서 발견한 장소 소개하기</p><span class="card-arrow">5차시 보러 가기 →</span></a>
+        <a class="lesson-card pink" href="6.html"><span class="lesson-number">06</span><span class="lesson-emoji" aria-hidden="true">🌿</span><h3>읽걷쓰 AI 공동지도</h3><p>읽고 걷고 쓴 이야기를 한 지도에</p><span class="card-arrow">6차시 보러 가기 →</span></a>
+      </div>
+    </section>
+    <footer class="site-footer">💬 말한다 <span>→</span> ▶️ 실행한다 <span>→</span> 🔧 고친다</footer>
+  </main>
 </body>
 </html>
