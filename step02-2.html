@@ -177,6 +177,31 @@
       50% { transform: translateY(-7px) scale(1.02); }
     }
 
+  
+    /* 마우스를 따라 나타나는 별·반짝이 효과 */
+    .mouse-sparkle {
+      position: fixed;
+      z-index: 10000;
+      pointer-events: none;
+      user-select: none;
+      transform: translate(-50%, -50%);
+      animation: mouseSparkle 850ms ease-out forwards;
+    }
+
+    @keyframes mouseSparkle {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(.55) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(
+          calc(-50% + var(--drift-x)),
+          calc(-50% + var(--drift-y))
+        ) scale(1.45) rotate(140deg);
+      }
+    }
+
   </style>
 </head>
 
@@ -261,6 +286,33 @@
         setTimeout(() => piece.remove(), 2300);
       }
     }
+  </script>
+
+
+  <script>
+    // 마우스를 움직이면 별과 반짝이가 살짝 흩날립니다.
+    const sparkleIcons = ["✨", "⭐", "✦", "💫", "⋆"];
+    let lastSparkleTime = 0;
+
+    document.addEventListener("mousemove", (event) => {
+      const now = Date.now();
+      if (now - lastSparkleTime < 45) return;
+      lastSparkleTime = now;
+
+      const sparkle = document.createElement("span");
+      sparkle.className = "mouse-sparkle";
+      sparkle.textContent =
+        sparkleIcons[Math.floor(Math.random() * sparkleIcons.length)];
+
+      sparkle.style.left = event.clientX + "px";
+      sparkle.style.top = event.clientY + "px";
+      sparkle.style.fontSize = (12 + Math.random() * 12) + "px";
+      sparkle.style.setProperty("--drift-x", ((Math.random() - .5) * 55) + "px");
+      sparkle.style.setProperty("--drift-y", (-20 - Math.random() * 45) + "px");
+
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 900);
+    });
   </script>
 
 </body>
