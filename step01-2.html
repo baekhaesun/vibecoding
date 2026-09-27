@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>반짝이는 나를 소개합니다</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #fff0f6, #f0f5ff);
+      color: #4a4050;
+      padding: 30px 20px;
+    }
+
+    .card {
+      width: 90%;
+      max-width: 650px;
+      background: white;
+      padding: 45px 35px;
+      border-radius: 30px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(100, 90, 150, 0.15);
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #9b6f96;
+      margin-bottom: 30px;
+    }
+
+    .main-message {
+      background: #fff3f8;
+      padding: 25px;
+      border-radius: 22px;
+    }
+
+    .main-message h2 {
+      color: #d56b9d;
+    }
+
+    .keywords {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 25px 0;
+    }
+
+    .keyword {
+      padding: 10px 18px;
+      border-radius: 30px;
+      background: #eee6ff;
+      font-weight: bold;
+    }
+
+    .idol {
+      padding: 20px;
+      line-height: 1.8;
+    }
+
+    .dream {
+      margin-top: 20px;
+      padding: 30px;
+      background: #f3f7ff;
+      border-radius: 25px;
+    }
+
+    /* 과잠 일러스트 */
+    .jacket {
+      position: relative;
+      width: 180px;
+      height: 150px;
+      margin: 30px auto 20px;
+    }
+
+    .jacket-body {
+      position: absolute;
+      left: 40px;
+      top: 5px;
+      width: 100px;
+      height: 135px;
+      background: #163b70;
+      border-radius: 20px 20px 12px 12px;
+      border: 4px solid #102c55;
+    }
+
+    .sleeve {
+      position: absolute;
+      top: 15px;
+      width: 55px;
+      height: 115px;
+      background: #f5f5f5;
+      border: 4px solid #102c55;
+    }
+
+    .left {
+      left: 8px;
+      transform: rotate(12deg);
+      border-radius: 25px 10px 15px 25px;
+    }
+
+    .right {
+      right: 8px;
+      transform: rotate(-12deg);
+      border-radius: 10px 25px 25px 15px;
+    }
+
+    .collar {
+      position: absolute;
+      top: 5px;
+      left: 67px;
+      width: 46px;
+      height: 22px;
+      background: white;
+      border: 4px solid #102c55;
+      border-radius: 0 0 20px 20px;
+      z-index: 3;
+    }
+
+    .snu {
+      position: absolute;
+      top: 55px;
+      left: 0;
+      width: 100%;
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .year {
+      position: absolute;
+      top: 90px;
+      left: 0;
+      width: 100%;
+      color: #dce8ff;
+      font-size: 13px;
+    }
+
+    .dream h2 {
+      color: #315c9b;
+    }
+
+    .dream-text {
+      font-size: 19px;
+      line-height: 1.8;
+    }
+
+    .footer {
+      margin-top: 30px;
+      color: #999;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="card">
+
+    <div style="font-size:40px;">✨</div>
+
+    <h1>반짝이는 나를 소개합니다</h1>
+
+    <p class="subtitle">
+      중학교 1학년, 나를 표현하는 이야기
+    </p>
+
+    <section class="main-message">
+      <h2>💗 내가 가장 보여주고 싶은 모습</h2>
+
+      <p>
+        나는 <strong>예쁘다는 말을 많이 듣는다.</strong><br>
+        그래서 이것은 나를 표현하는 중요한 모습 중 하나이다.
+      </p>
+    </section>
+
+    <div class="keywords">
+      <span class="keyword">🏫 중학생</span>
+      <span class="keyword">✨ 엄청 예쁨</span>
+      <span class="keyword">🎤 아이돌을 좋아함</span>
+      <span class="keyword">📚 공부를 잘함</span>
+    </div>
+
+    <section class="idol">
+      <h3>🎧 내가 행복해지는 순간</h3>
+
+      <p>
+        나는 아이돌을 좋아한다.<br>
+        아이돌을 보고 있으면 행복하다.
+      </p>
+    </section>
+
+    <section class="dream">
+
+      <h2>🎓 나의 꿈</h2>
+
+      <div class="jacket">
+        <div class="sleeve left"></div>
+        <div class="sleeve right"></div>
+
+        <div class="jacket-body">
+          <div class="snu">SNU</div>
+          <div class="year">MY DREAM</div>
+        </div>
+
+        <div class="collar"></div>
+      </div>
+
+      <p class="dream-text">
+        나는 <strong>공부를 잘한다.</strong><br>
+        그리고 나중에 꼭
+        <strong>서울대학교에 가고 싶다.</strong>
+      </p>
+
+      <p>💙 언젠가 이 과잠을 입는 날을 꿈꾸며!</p>
+
+    </section>
+
+    <p class="footer">
+      이것이 지금 내가 소개하고 싶은 나의 모습이다.
+    </p>
+
+  </main>
+
+</body>
+</html>
