@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="ko" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOID_HACKER_RED - Middle School 1st Grade Coder & Gamer</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;700&family=Orbitron:wght@400;600;800;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            black: '#0a0d14',
+                            dark: '#121824',
+                            card: 'rgba(18, 24, 36, 0.85)',
+                            border: '#1e293b',
+                            red: '#ff2a6d',
+                            cyan: '#05d9e8',
+                            purple: '#7b2cbf',
+                            green: '#00ff87',
+                            yellow: '#facc15'
+                        }
+                    },
+                    fontFamily: {
+                        orbitron: ['Orbitron', 'sans-serif'],
+                        mono: ['"Fira Code"', 'monospace'],
+                        sans: ['"Noto Sans KR"', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'neon-red': '0 0 15px rgba(255, 42, 109, 0.4)',
+                        'neon-cyan': '0 0 15px rgba(5, 217, 232, 0.4)',
+                        'neon-green': '0 0 15px rgba(0, 255, 135, 0.4)',
+                        'neon-purple': '0 0 15px rgba(123, 44, 191, 0.4)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Cyberpunk Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0d14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff2a6d;
+        }
+
+        /* Scanline Overlay Effect */
+        .scanline-overlay {
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0, 0, 0, 0.25) 50%,
+                rgba(0, 0, 0, 0.25)
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+
+        /* Glassmorphism Panel */
+        .cyber-panel {
+            background: rgba(18, 24, 36, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(5, 217, 232, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .cyber-panel:hover {
+            border-color: rgba(255, 42, 109, 0.4);
+        }
+
+        /* Matrix Canvas */
+        #matrixCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        /* Glitch Animation Keyframes */
+        @keyframes glitchText {
+            0% { text-shadow: 2px 0 #ff2a6d, -2px 0 #05d9e8; }
+            25% { text-shadow: -2px 0 #ff2a6d, 2px 0 #05d9e8; }
+            50% { text-shadow: 2px -1px #ff2a6d, -1px 2px #05d9e8; }
+            75% { text-shadow: -1px 2px #ff2a6d, 2px -1px #05d9e8; }
+            100% { text-shadow: 2px 0 #ff2a6d, -2px 0 #05d9e8; }
+        }
+
+        .glitch-hover:hover {
+            animation: glitchText 0.2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-cyber-black text-gray-200 font-sans selection:bg-cyber-red selection:text-white relative overflow-x-hidden min-h-screen flex flex-col">
+
+    <!-- Matrix Rain Canvas Background -->
+    <canvas id="matrixCanvas"></canvas>
+
+    <!-- Scanline TV Layer -->
+    <div class="scanline-overlay fixed inset-0 z-40"></div>
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-50 cyber-panel border-b border-slate-800 px-4 py-3">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            
+            <!-- Logo & Title -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-cyber-red/10 border border-cyber-red flex items-center justify-center text-cyber-red shadow-neon-red">
+                    <i class="fa-solid fa-gamepad text-xl"></i>
+                </div>
+                <div>
+                    <div class="font-orbitron font-black text-base sm:text-lg tracking-wider text-white flex items-center gap-2">
+                        <span>VOID_HACKER_RED</span>
+                        <span class="text-xs text-cyber-cyan font-mono px-2 py-0.5 rounded bg-cyber-cyan/10 border border-cyber-cyan/30">v3.0</span>
+                    </div>
+                    <div class="text-xs text-slate-400 font-mono flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-cyber-green animate-ping"></span>
+                        <span class="text-cyber-green font-bold">STATUS: ONLINE</span>
+                        <span class="text-slate-600">|</span>
+                        <span class="text-cyber-cyan">LV.01 DEV</span>
+                        <span class="text-slate-600">|</span>
+                        <span class="text-cyber-yellow">SYS_STATUS: OPTIMAL</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Controls -->
+            <div class="flex items-center gap-3">
+                <button id="soundToggleBtn" onclick="toggleAudio()" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-gray-300 hover:text-cyber-cyan hover:border-cyber-cyan transition-colors flex items-center gap-2">
+                    <i id="soundIcon" class="fa-solid fa-volume-xmark text-cyber-red"></i>
+                    <span id="soundText" class="font-mono">AUDIO: OFF</span>
+                </button>
+                <button onclick="toggleMatrix()" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-gray-300 hover:text-cyber-green hover:border-cyber-green transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-code text-cyber-green"></i>
+                    <span class="hidden sm:inline font-mono">MATRIX BG</span>
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 py-8 relative z-10 flex-grow w-full space-y-10">
+
+        <!-- ================= HERO BANNER SECTION ================= -->
+        <section class="cyber-panel p-6 sm:p-10 rounded-2xl border-l-4 border-l-cyber-red relative overflow-hidden">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                
+                <!-- Profile Identity & Badge -->
+                <div class="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
+                    <div class="relative group">
+                        <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl border-2 border-cyber-red p-1 shadow-neon-red bg-slate-950 flex items-center justify-center relative overflow-hidden">
+                            <i class="fa-solid fa-user-ninja text-6xl text-cyber-red group-hover:scale-110 transition-transform duration-300"></i>
+                            <div class="absolute inset-0 bg-gradient-to-t from-cyber-red/20 to-transparent"></div>
+                        </div>
+                        <span class="absolute -bottom-2 -right-2 bg-cyber-green text-black font-orbitron font-extrabold text-xs px-2.5 py-1 rounded-full shadow-neon-green">
+                            중1
+                        </span>
+                    </div>
+
+                    <div class="space-y-3 max-w-xl">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyber-purple/20 border border-cyber-purple/40 text-cyber-purple font-mono text-xs font-bold">
+                            <i class="fa-solid fa-terminal"></i> STUDENT PORTFOLIO
+                        </div>
+                        <h1 class="font-orbitron font-black text-2xl sm:text-4xl text-white tracking-wide leading-tight glitch-hover">
+                            중학교 1학년 <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan via-white to-cyber-red">// 코딩 & 게임 마스터</span>
+                        </h1>
+                        <p class="text-sm sm:text-base text-gray-300 leading-relaxed font-light">
+                            "남들이 <span class="text-cyber-cyan font-bold">'왜 코딩하고 게임해?'</span>라고 물어본다면? 답은 간단해. <br class="hidden sm:inline"/>
+                            <span class="text-cyber-yellow font-semibold underline decoration-cyber-yellow/40">그냥 즐겁고, 딱 내 학년이니까!</span>"
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Dynamic Stat Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-3 w-full lg:w-64">
+                    <div class="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800 flex justify-between items-center">
+                        <div>
+                            <div class="text-xs text-gray-400 font-mono">CODE EXP</div>
+                            <div class="font-orbitron text-lg font-bold text-cyber-cyan">9,999+ Lines</div>
+                        </div>
+                        <i class="fa-solid fa-code-commit text-cyber-cyan text-xl"></i>
+                    </div>
+
+                    <div class="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800 flex justify-between items-center">
+                        <div>
+                            <div class="text-xs text-gray-400 font-mono">GAMING LEVEL</div>
+                            <div class="font-orbitron text-lg font-bold text-cyber-red">MAX GRADE</div>
+                        </div>
+                        <i class="fa-solid fa-trophy text-cyber-red text-xl"></i>
+                    </div>
+
+                    <div class="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800 flex justify-between items-center">
+                        <div>
+                            <div class="text-xs text-gray-400 font-mono">GRADE / STATUS</div>
+                            <div class="font-orbitron text-lg font-bold text-cyber-green">중학교 1학년</div>
+                        </div>
+                        <i class="fa-solid fa-graduation-cap text-cyber-green text-xl"></i>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= ABOUT ME / STORY SECTION ================= -->
+        <section class="space-y-4">
+            <div class="flex items-center gap-3 border-b border-slate-800 pb-3">
+                <i class="fa-solid fa-id-card text-cyber-cyan text-xl"></i>
+                <h2 class="font-orbitron text-xl font-bold text-white tracking-wider">// ABOUT ME : 솔직하고 위트 있는 자기소개</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Card 1: Gamer Profile -->
+                <div class="cyber-panel p-6 rounded-2xl hover:border-cyber-red transition-all group">
+                    <div class="w-12 h-12 rounded-xl bg-cyber-red/10 border border-cyber-red text-cyber-red flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform shadow-neon-red">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <h3 class="font-orbitron font-bold text-lg text-white mb-2 group-hover:text-cyber-red transition-colors">🎮 GAMER PROFILE</h3>
+                    <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                        게임은 그냥 노는 게 아니라 나만의 전략과 세계관을 넓히는 시간! FPS, RPG, 샌드박스까지 가리지 않고 정복하는 하드코어 게이머입니다.
+                    </p>
+                    <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-gray-400">
+                        <span>MAIN ROLE</span>
+                        <span class="text-cyber-red font-bold">STRATEGIST</span>
+                    </div>
+                </div>
+
+                <!-- Card 2: Coder Profile -->
+                <div class="cyber-panel p-6 rounded-2xl hover:border-cyber-cyan transition-all group">
+                    <div class="w-12 h-12 rounded-xl bg-cyber-cyan/10 border border-cyber-cyan text-cyber-cyan flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform shadow-neon-cyan">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h3 class="font-orbitron font-bold text-lg text-white mb-2 group-hover:text-cyber-cyan transition-colors">💻 CODER PROFILE</h3>
+                    <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                        내가 만든 로직이 눈앞에서 작동할 때의 쾌감! HTML, CSS, JS, Python 가리지 않고 버그를 해결하는 재미에 푹 빠져 있습니다.
+                    </p>
+                    <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-gray-400">
+                        <span>PASSION</span>
+                        <span class="text-cyber-cyan font-bold">BUG HUNTER</span>
+                    </div>
+                </div>
+
+                <!-- Card 3: Middle School Life -->
+                <div class="cyber-panel p-6 rounded-2xl hover:border-cyber-green transition-all group">
+                    <div class="w-12 h-12 rounded-xl bg-cyber-green/10 border border-cyber-green text-cyber-green flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform shadow-neon-green">
+                        <i class="fa-solid fa-school"></i>
+                    </div>
+                    <h3 class="font-orbitron font-bold text-lg text-white mb-2 group-hover:text-cyber-green transition-colors">🏫 MIDDLE SCHOOL LIFE</h3>
+                    <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                        중학교 1학년, 자유학기제와 함께 내 적성과 상상력을 자유롭게 코딩으로 구현하는 중! 무궁무진한 가능성을 넓혀가고 있어요.
+                    </p>
+                    <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-gray-400">
+                        <span>GRADE</span>
+                        <span class="text-cyber-green font-bold">1ST GRADE</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= INTERACTIVE TERMINAL CONSOLE ================= -->
+        <section class="space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-terminal text-cyber-green text-xl"></i>
+                    <h2 class="font-orbitron text-xl font-bold text-white tracking-wider">// HACKER_TERMINAL v3.0</h2>
+                </div>
+                <span class="text-xs font-mono text-gray-400 hidden sm:inline">TYPE OR CLICK COMMAND PRESETS BELOW</span>
+            </div>
+
+            <div class="cyber-panel rounded-2xl overflow-hidden border border-slate-800 shadow-2xl">
+                <!-- Terminal Header -->
+                <div class="bg-slate-900 px-4 py-3 flex items-center justify-between border-b border-slate-800">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+                        <span class="ml-2 text-xs font-mono text-gray-400">void_hacker_shell.sh (interactive)</span>
+                    </div>
+                    <span class="text-xs font-mono text-cyber-green font-bold animate-pulse">● INTERACTIVE</span>
+                </div>
+
+                <!-- Terminal Output Window -->
+                <div id="terminalScreen" class="p-5 bg-black/90 font-mono text-xs sm:text-sm h-80 overflow-y-auto space-y-3 leading-relaxed">
+                    <div class="text-cyber-cyan">
+                        VOID_HACKER_RED Terminal Shell v3.0<br/>
+                        Welcome! Type <span class="text-cyber-yellow">'help'</span> or click the command presets below to interact.
+                    </div>
+                </div>
+
+                <!-- Preset Buttons Bar -->
+                <div class="bg-slate-950 p-2 border-t border-slate-800 flex flex-wrap gap-2 text-xs font-mono">
+                    <button onclick="runPreset('help')" class="px-2.5 py-1 bg-slate-900 border border-slate-700 text-cyber-cyan rounded hover:bg-cyber-cyan/20 transition-colors">help</button>
+                    <button onclick="runPreset('about')" class="px-2.5 py-1 bg-slate-900 border border-slate-700 text-cyber-green rounded hover:bg-cyber-green/20 transition-colors">about</button>
+                    <button onclick="runPreset('skills')" class="px-2.5 py-1 bg-slate-900 border border-slate-700 text-cyber-purple rounded hover:bg-cyber-purple/20 transition-colors">skills</button>
+                    <button onclick="runPreset('favorite_games')" class="px-2.5 py-1 bg-slate-900 border border-slate-700 text-cyber-red rounded hover:bg-cyber-red/20 transition-colors">favorite_games</button>
+                    <button onclick="runPreset('code_stack')" class="px-2.5 py-1 bg-slate-900 border border-slate-700 text-cyber-yellow rounded hover:bg-cyber-yellow/20 transition-colors">code_stack</button>
+                    <button onclick="runPreset('clear')" class="px-2.5 py-1 bg-slate-900 border border-slate-700 text-gray-400 rounded hover:bg-gray-700 transition-colors">clear</button>
+                </div>
+
+                <!-- Input Field -->
+                <div class="bg-slate-950 p-3 border-t border-slate-800 flex items-center gap-2">
+                    <span class="text-cyber-green font-mono font-bold">user@void-hacker:~#</span>
+                    <input type="text" id="termInput" onkeydown="handleTermKey(event)" placeholder="Enter command..." class="w-full bg-transparent border-none text-xs sm:text-sm font-mono text-white focus:outline-none">
+                    <button onclick="execTermCmd()" class="px-4 py-1.5 bg-cyber-green/20 border border-cyber-green/40 text-cyber-green rounded text-xs font-mono font-bold hover:bg-cyber-green/30 transition-colors">
+                        EXEC
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SKILLS & GAME ARSENAL MATRIX ================= -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            
+            <!-- Coding Skills -->
+            <div class="cyber-panel p-6 rounded-2xl space-y-4">
+                <div class="flex items-center gap-3 border-b border-slate-800 pb-3">
+                    <i class="fa-solid fa-code-branch text-cyber-cyan text-xl"></i>
+                    <h3 class="font-orbitron text-lg font-bold text-white">// CODING SKILLS MATRIX</h3>
+                </div>
+
+                <div class="space-y-4 font-mono text-xs sm:text-sm">
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-gray-300">HTML5 / CSS3 (Web Design)</span>
+                            <span class="text-cyber-cyan font-bold">90%</span>
+                        </div>
+                        <div class="w-full bg-slate-950 h-2.5 rounded-full overflow-hidden border border-slate-800">
+                            <div class="bg-cyber-cyan h-full rounded-full transition-all duration-1000 shadow-neon-cyan" style="width: 90%;"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-gray-300">JavaScript (Interactive Logic)</span>
+                            <span class="text-cyber-green font-bold">80%</span>
+                        </div>
+                        <div class="w-full bg-slate-950 h-2.5 rounded-full overflow-hidden border border-slate-800">
+                            <div class="bg-cyber-green h-full rounded-full transition-all duration-1000 shadow-neon-green" style="width: 80%;"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-gray-300">Python (Scripting & Automation)</span>
+                            <span class="text-cyber-purple font-bold">75%</span>
+                        </div>
+                        <div class="w-full bg-slate-950 h-2.5 rounded-full overflow-hidden border border-slate-800">
+                            <div class="bg-cyber-purple h-full rounded-full transition-all duration-1000 shadow-neon-purple" style="width: 75%;"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-gray-300">Game Logic & Algorithm</span>
+                            <span class="text-cyber-red font-bold">85%</span>
+                        </div>
+                        <div class="w-full bg-slate-950 h-2.5 rounded-full overflow-hidden border border-slate-800">
+                            <div class="bg-cyber-red h-full rounded-full transition-all duration-1000 shadow-neon-red" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gaming Stats -->
+            <div class="cyber-panel p-6 rounded-2xl space-y-4">
+                <div class="flex items-center gap-3 border-b border-slate-800 pb-3">
+                    <i class="fa-solid fa-crosshair text-cyber-red text-xl"></i>
+                    <h3 class="font-orbitron text-lg font-bold text-white">// GAMING STATS & SPECS</h3>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center font-mono">
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex flex-col justify-center items-center">
+                        <div class="text-xs text-gray-400 mb-1">AIM & APM</div>
+                        <div class="font-orbitron text-2xl font-black text-cyber-cyan mb-1">S-TIER</div>
+                        <div class="text-[10px] text-gray-500">빠른 반응속도</div>
+                    </div>
+
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex flex-col justify-center items-center">
+                        <div class="text-xs text-gray-400 mb-1">STRATEGY</div>
+                        <div class="font-orbitron text-2xl font-black text-cyber-purple mb-1">SS-TIER</div>
+                        <div class="text-[10px] text-gray-500">문제 해결 능력</div>
+                    </div>
+
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex flex-col justify-center items-center">
+                        <div class="text-xs text-gray-400 mb-1">PERSISTENCE</div>
+                        <div class="font-orbitron text-2xl font-black text-cyber-red mb-1">SSS-TIER</div>
+                        <div class="text-[10px] text-gray-500">끝까지 포기 안함</div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 text-xs text-gray-300 flex justify-between items-center font-mono">
+                    <span>PREFERRED GENRE:</span>
+                    <span class="text-cyber-yellow font-bold">FPS / SANDBOX / ACTION RPG</span>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ================= QUEST & EXP BOOSTER WIDGET ================= -->
+        <section class="cyber-panel p-6 sm:p-8 rounded-2xl text-center space-y-4 border-2 border-cyber-purple/30">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyber-green/10 border border-cyber-green/30 text-cyber-green font-mono text-xs font-bold">
+                <i class="fa-solid fa-bolt"></i> MINI QUEST WIDGET
+            </div>
+            
+            <h3 class="font-orbitron font-bold text-xl sm:text-2xl text-white">LEVEL UP & EXP BOOSTER</h3>
+            <p class="text-xs sm:text-sm text-gray-400 max-w-md mx-auto">
+                버튼을 클릭하여 경험치를 획득하고 개발자 스탯을 레벨업 해보세요! (사운드를 켜면 더욱 재밌습니다)
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+                <div class="bg-slate-950 px-6 py-3 rounded-xl border border-slate-800 font-mono text-left">
+                    <div class="text-xs text-gray-500">CURRENT EXP</div>
+                    <div class="font-orbitron text-xl font-bold text-cyber-green"><span id="expVal">0</span> / 1000 EXP</div>
+                </div>
+
+                <button onclick="gainExp()" class="px-8 py-3.5 bg-gradient-to-r from-cyber-purple via-cyber-red to-cyber-cyan text-white font-orbitron font-extrabold text-sm rounded-xl shadow-neon-purple hover:scale-105 active:scale-95 transition-all">
+                    <i class="fa-solid fa-[#00ff87] fa-plus text-lg mr-2"></i> GAIN +100 EXP
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="cyber-panel border-t border-slate-800 py-6 px-4 relative z-10 text-center text-xs text-gray-500 font-mono">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div>
+                © 2026 <span class="text-cyber-red font-bold">VOID_HACKER_RED</span>. All Systems Operational.
+            </div>
+            <div class="text-gray-400">
+                Crafted with <i class="fa-solid fa-heart text-cyber-red"></i> Code & Gaming Spirit
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Matrix Canvas Background
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const matrixChars = '01가나다라마바사아자차카타파하VOID_HACKER_RED_MIDDLE_SCHOOL_GRADE_1';
+        const fontSize = 14;
+        let columns = Math.floor(canvas.width / fontSize);
+        let drops = Array(columns).fill(1);
+        let isMatrixVisible = true;
+
+        function drawMatrix() {
+            if (!isMatrixVisible) return;
+            ctx.fillStyle = 'rgba(10, 13, 20, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#00ff87';
+            ctx.font = fontSize + 'px "Fira Code"';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 33);
+
+        function toggleMatrix() {
+            isMatrixVisible = !isMatrixVisible;
+            if (!isMatrixVisible) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            playSound(600, 0.05);
+        }
+
+        // Audio Synthesizer Effect (Web Audio API)
+        let audioCtx = null;
+        let soundEnabled = false;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function playSound(freq, duration = 0.05, type = 'sine') {
+            if (!soundEnabled) return;
+            try {
+                initAudio();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        function toggleAudio() {
+            soundEnabled = !soundEnabled;
+            const icon = document.getElementById('soundIcon');
+            const text = document.getElementById('soundText');
+
+            if (soundEnabled) {
+                icon.className = 'fa-solid fa-volume-high text-cyber-green';
+                text.innerText = 'AUDIO: ON';
+                playSound(880, 0.1, 'square');
+            } else {
+                icon.className = 'fa-solid fa-volume-xmark text-cyber-red';
+                text.innerText = 'AUDIO: OFF';
+            }
+        }
+
+        // EXP Booster Logic
+        let currentExp = 0;
+        function gainExp() {
+            currentExp += 100;
+            document.getElementById('expVal').innerText = currentExp;
+            playSound(1200 + (currentExp % 500), 0.08, 'triangle');
+
+            if (currentExp % 1000 === 0) {
+                playSound(1800, 0.2, 'square');
+                alert(`🎉 LEVEL UP! 축하합니다! 경험치 ${currentExp} EXP 달성!`);
+            }
+        }
+
+        // Terminal Interactive Console
+        function handleTermKey(e) {
+            if (e.key === 'Enter') {
+                execTermCmd();
+            }
+        }
+
+        function runPreset(cmdStr) {
+            document.getElementById('termInput').value = cmdStr;
+            execTermCmd();
+        }
+
+        function execTermCmd() {
+            const input = document.getElementById('termInput');
+            const cmd = input.value.trim().toLowerCase();
+            const screen = document.getElementById('terminalScreen');
+            if (!cmd) return;
+
+            playSound(900, 0.03);
+
+            // User input echo
+            const userLine = document.createElement('div');
+            userLine.className = 'text-cyber-green font-bold';
+            userLine.innerHTML = `user@void-hacker:~# ${escapeHtml(cmd)}`;
+            screen.appendChild(userLine);
+
+            const resLine = document.createElement('div');
+            resLine.className = 'text-gray-300';
+
+            switch (cmd) {
+                case 'help':
+                    resLine.innerHTML = `
+                        사용 가능한 명령어 목록:<br/>
+                        &nbsp;&nbsp;<span class="text-cyber-yellow">help</span> - 명령어 전체 목록 보기<br/>
+                        &nbsp;&nbsp;<span class="text-cyber-yellow">about</span> - 학생 개발자 자기소개 상세보기<br/>
+                        &nbsp;&nbsp;<span class="text-cyber-yellow">skills</span> - 코딩 및 게임 스탯 조회<br/>
+                        &nbsp;&nbsp;<span class="text-cyber-yellow">favorite_games</span> - 즐겨하는 추천 게임들<br/>
+                        &nbsp;&nbsp;<span class="text-cyber-yellow">code_stack</span> - 주력 사용 프로그래밍 언어<br/>
+                        &nbsp;&nbsp;<span class="text-cyber-yellow">clear</span> - 터미널 화면 지우기
+                    `;
+                    break;
+                case 'about':
+                    resLine.innerHTML = `
+                        [OPERATOR PROFILE]<br/>
+                        - 신분: 중학교 1학년 학생 개발자 & 게이머<br/>
+                        - 신조: "남들이 왜 하냐고 물어보면? 즐겁고 지금 내 학년이니까!"<br/>
+                        - 모토: 버그 완벽 해결 & 게임 플레이 전략 극대화
+                    `;
+                    break;
+                case 'skills':
+                    resLine.innerHTML = `
+                        [STATS MATRIX]<br/>
+                        - Web Frontend (HTML/CSS/JS): 85% [S-Tier]<br/>
+                        - Scripting (Python): 75% [A-Tier]<br/>
+                        - FPS & Aiming APM: S-Tier<br/>
+                        - Problem Solving: SS-Tier
+                    `;
+                    break;
+                case 'favorite_games':
+                    resLine.innerHTML = `
+                        [RECOMMENDED GAMES]<br/>
+                        1. Valorant & Overwatch (FPS 피지컬 & 팀플레이)<br/>
+                        2. Minecraft (샌드박스 코딩 & 마인크래프트 레드스톤)<br/>
+                        3. Steam / Indie Action RPG (전략적 플레이)
+                    `;
+                    break;
+                case 'code_stack':
+                    resLine.innerHTML = `
+                        [DEVELOPMENT STACK]<br/>
+                        HTML5, CSS3, JavaScript (ES6+), Python 3.x, Tailwind CSS
+                    `;
+                    break;
+                case 'clear':
+                    screen.innerHTML = '';
+                    input.value = '';
+                    return;
+                default:
+                    resLine.className = 'text-cyber-red';
+                    resLine.innerHTML = `'${escapeHtml(cmd)}' 알 수 없는 명령어입니다. 'help'를 입력해 보세요.`;
+            }
+
+            screen.appendChild(resLine);
+            screen.scrollTop = screen.scrollHeight;
+            input.value = '';
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+    </script>
+</body>
+</html>

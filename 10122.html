@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전종현 자기소개 - 에너자이저 중학생</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans KR', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            blue: '#2563EB',
+                            lightblue: '#60A5FA',
+                            dark: '#0F172A',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #F8FAFC;
+            color: #334155;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #2563EB, #06B6D4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 glass-card">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="font-black text-xl tracking-tight text-slate-800">
+                <i class="fa-solid fa-bolt text-yellow-400 mr-1"></i> JONGHYEON
+            </div>
+            <div class="hidden sm:flex space-x-6 text-sm font-semibold text-slate-600">
+                <a href="#about" class="hover:text-blue-600 transition-colors">소개</a>
+                <a href="#traits" class="hover:text-blue-600 transition-colors">특징</a>
+                <a href="#energy" class="hover:text-blue-600 transition-colors">에너지 룸</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="flex-grow pt-24 pb-12 px-6 flex flex-col items-center justify-center relative overflow-hidden" id="about">
+        <!-- Background decorative elements -->
+        <div class="absolute top-20 left-10 w-64 h-64 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-float"></div>
+        <div class="absolute top-40 right-10 w-72 h-72 bg-cyan-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-float" style="animation-delay: 1.5s;"></div>
+
+        <div class="relative z-10 max-w-4xl w-full mx-auto flex flex-col md:flex-row items-center gap-12 mt-10">
+            
+            <!-- Avatar Area -->
+            <div class="w-64 h-64 md:w-80 md:h-80 shrink-0 relative">
+                <div class="absolute inset-0 bg-gradient-to-tr from-blue-500 to-cyan-400 rounded-full animate-pulse-fast opacity-20 blur-xl"></div>
+                <div class="relative w-full h-full bg-white rounded-full p-2 shadow-2xl border-4 border-white">
+                    <div class="w-full h-full bg-slate-100 rounded-full overflow-hidden flex items-center justify-center">
+                        <!-- Custom SVG Avatar (Black horn-rimmed glasses, Sporty look) -->
+                        <svg viewBox="0 0 100 100" class="w-full h-full mt-4" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Body/Sporty Shirt -->
+                            <path d="M 15 100 Q 15 70 50 65 Q 85 70 85 100" fill="#2563EB" />
+                            <path d="M 40 65 L 50 75 L 60 65" fill="#1E40AF" /> <!-- Shirt detail -->
+                            
+                            <!-- Neck -->
+                            <rect x="42" y="50" width="16" height="20" fill="#FCD34D" />
+                            
+                            <!-- Head -->
+                            <circle cx="50" cy="40" r="22" fill="#FDE047" />
+                            
+                            <!-- Hair (Neat, active style) -->
+                            <path d="M 25 35 Q 35 10 50 15 Q 65 10 75 35 Q 70 20 50 20 Q 30 20 25 35 Z" fill="#1F2937" />
+                            <path d="M 27 35 Q 27 45 25 50 Q 30 40 27 35 Z" fill="#1F2937" />
+                            <path d="M 73 35 Q 73 45 75 50 Q 70 40 73 35 Z" fill="#1F2937" />
+
+                            <!-- Eyes -->
+                            <circle cx="41" cy="38" r="2.5" fill="#1F2937" />
+                            <circle cx="59" cy="38" r="2.5" fill="#1F2937" />
+                            
+                            <!-- Black Horn-rimmed Glasses (검은색 뿔테 안경) -->
+                            <!-- Left lens -->
+                            <rect x="32" y="32" width="18" height="12" rx="3" fill="none" stroke="#111827" stroke-width="3" />
+                            <!-- Right lens -->
+                            <rect x="50" y="32" width="18" height="12" rx="3" fill="none" stroke="#111827" stroke-width="3" />
+                            <!-- Bridge -->
+                            <line x1="48" y1="36" x2="52" y2="36" stroke="#111827" stroke-width="3" />
+                            <!-- Temples (Legs of glasses) -->
+                            <line x1="28" y1="36" x2="32" y2="36" stroke="#111827" stroke-width="3" />
+                            <line x1="68" y1="36" x2="72" y2="36" stroke="#111827" stroke-width="3" />
+
+                            <!-- Smile -->
+                            <path d="M 43 48 Q 50 54 57 48" fill="none" stroke="#B45309" stroke-width="2.5" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                </div>
+                <!-- Floating Badge -->
+                <div class="absolute -bottom-4 -right-4 bg-white px-4 py-2 rounded-2xl shadow-lg border border-slate-100 flex items-center gap-2 animate-float" style="animation-delay: 0.5s;">
+                    <span class="relative flex h-3 w-3">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </span>
+                    <span class="font-bold text-sm text-slate-700">에너지 100%</span>
+                </div>
+            </div>
+
+            <!-- Text Content -->
+            <div class="text-center md:text-left flex-1">
+                <div class="inline-block bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full text-sm mb-4">
+                    <i class="fa-solid fa-school mr-1"></i> 인천검단가온중학교 1학년
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-4 text-slate-800 leading-tight">
+                    안녕하세요!<br>
+                    활동적인 중학생,<br>
+                    <span class="text-gradient">전종현</span>입니다.
+                </h1>
+                <p class="text-lg text-slate-500 mb-8 leading-relaxed max-w-xl mx-auto md:mx-0">
+                    가만히 앉아있는 것보다 몸을 움직이고 땀 흘리는 것을 훨씬 좋아합니다. 평범한 일상 속에서도 늘 에너지가 넘치고, 운동을 통해 활력을 얻고 있어요!
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Traits Section -->
+    <section class="py-16 bg-slate-50" id="traits">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl font-black text-center mb-12 text-slate-800">저를 표현하는 <span class="text-blue-600">3가지</span> 단어</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Trait 1 -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-shadow duration-300 border border-slate-100 group">
+                    <div class="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-person-running text-2xl text-orange-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-800">운동 마니아</h3>
+                    <p class="text-slate-500 leading-relaxed">
+                        거창한 체육대회가 아니더라도 괜찮아요. 평소에 가볍게 뛰거나 몸을 쓰는 모든 활동을 정말 좋아합니다. 제 에너지의 원동력이에요!
+                    </p>
+                </div>
+
+                <!-- Trait 2 -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-shadow duration-300 border border-slate-100 group">
+                    <div class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-glasses text-2xl text-slate-700"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-800">검은색 뿔테</h3>
+                    <p class="text-slate-500 leading-relaxed">
+                        저의 트레이드마크인 검은색 뿔테 안경! 안경을 쓰고도 누구보다 날쌔고 활기차게 움직일 수 있답니다.
+                    </p>
+                </div>
+
+                <!-- Trait 3 -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-shadow duration-300 border border-slate-100 group">
+                    <div class="w-14 h-14 bg-cyan-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-book-open text-2xl text-cyan-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-800">가온중 1학년</h3>
+                    <p class="text-slate-500 leading-relaxed">
+                        인천검단가온중학교에 입학한 1학년입니다. 새로운 친구들과 함께 뛰어놀고 학교 생활을 하는 매일매일이 즐겁습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Energy Section -->
+    <section class="py-20 bg-white" id="energy">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-black mb-4 text-slate-800">오늘의 활동량 게이지</h2>
+            <p class="text-slate-500 mb-10">버튼을 눌러 전종현의 일상 에너지를 채워주세요!</p>
+            
+            <div class="glass-card rounded-3xl p-8 max-w-2xl mx-auto relative overflow-hidden">
+                <!-- Progress Bar Background -->
+                <div class="w-full h-8 bg-slate-100 rounded-full overflow-hidden mb-6 relative">
+                    <!-- Progress Fill -->
+                    <div id="energy-bar" class="h-full bg-gradient-to-r from-blue-400 to-cyan-400 w-[20%] transition-all duration-500 ease-out flex items-center justify-end pr-2">
+                        <i class="fa-solid fa-bolt text-white text-xs"></i>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between items-center mb-8 px-2 text-sm font-bold text-slate-400">
+                    <span>휴식 중 💤</span>
+                    <span id="energy-text" class="text-blue-500 text-lg">20%</span>
+                    <span>풀 에너지! 🔥</span>
+                </div>
+
+                <button id="boost-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg shadow-blue-500/30 transition-all transform hover:scale-105 active:scale-95 flex items-center justify-center mx-auto gap-2">
+                    <i class="fa-solid fa-shoe-prints"></i> 활동 에너지 채우기
+                </button>
+                
+                <p id="energy-msg" class="mt-6 text-slate-600 font-medium h-6">몸 풀기 시작! 가볍게 움직여볼까요?</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-10 text-center">
+        <div class="max-w-6xl mx-auto px-6">
+            <p class="font-bold text-white mb-2">인천검단가온중학교 1학년 전종현</p>
+            <p class="text-sm">항상 활기차고 건강하게 생활하겠습니다!</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('boost-btn');
+            const bar = document.getElementById('energy-bar');
+            const text = document.getElementById('energy-text');
+            const msg = document.getElementById('energy-msg');
+            
+            let energy = 20;
+            
+            const messages = [
+                { threshold: 20, text: "몸 풀기 시작! 가볍게 움직여볼까요?" },
+                { threshold: 40, text: "걷기 시작했어요. 기분이 상쾌해집니다!" },
+                { threshold: 60, text: "가볍게 뛰는 중! 땀이 살짝 나네요 💦" },
+                { threshold: 80, text: "운동 최고조! 에너지가 넘칩니다 🏃‍♂️💨" },
+                { threshold: 100, text: "오늘 하루도 완벽하게 에너지를 불태웠습니다! 🔥" }
+            ];
+
+            btn.addEventListener('click', () => {
+                if (energy < 100) {
+                    energy += 20;
+                    if (energy > 100) energy = 100;
+                    
+                    // Update UI
+                    bar.style.width = `${energy}%`;
+                    text.textContent = `${energy}%`;
+                    
+                    // Add cool effect to button
+                    btn.classList.add('bg-cyan-500');
+                    setTimeout(() => btn.classList.remove('bg-cyan-500'), 200);
+
+                    // Update Message
+                    const currentMsg = messages.reverse().find(m => energy >= m.threshold);
+                    if(currentMsg) {
+                        msg.textContent = currentMsg.text;
+                    }
+                    messages.reverse(); // reset order
+
+                    // Change bar color when full
+                    if(energy === 100) {
+                        bar.classList.remove('from-blue-400', 'to-cyan-400');
+                        bar.classList.add('from-orange-400', 'to-red-500');
+                        btn.innerHTML = '<i class="fa-solid fa-check"></i> 에너지 완충 완료';
+                        btn.classList.replace('bg-blue-600', 'bg-slate-300');
+                        btn.classList.replace('hover:bg-blue-700', 'hover:bg-slate-400');
+                        btn.classList.remove('shadow-blue-500/30');
+                        btn.style.pointerEvents = 'none'; // disable button
+                        
+                        // Confetti effect using simple DOM elements
+                        createConfetti();
+                    }
+                }
+            });
+
+            function createConfetti() {
+                for(let i=0; i<30; i++) {
+                    const conf = document.createElement('div');
+                    conf.className = 'absolute w-2 h-2 rounded-full z-50';
+                    conf.style.backgroundColor = ['#EF4444', '#F59E0B', '#10B981', '#3B82F6'][Math.floor(Math.random()*4)];
+                    conf.style.left = '50%';
+                    conf.style.top = '50%';
+                    conf.style.transition = 'all 1s ease-out';
+                    
+                    document.getElementById('energy').appendChild(conf);
+                    
+                    // Animate outward
+                    setTimeout(() => {
+                        const angle = Math.random() * Math.PI * 2;
+                        const velocity = 50 + Math.random() * 100;
+                        conf.style.transform = `translate(${Math.cos(angle)*velocity}px, ${Math.sin(angle)*velocity}px)`;
+                        conf.style.opacity = '0';
+                    }, 10);
+                    
+                    // Remove
+                    setTimeout(() => conf.remove(), 1000);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

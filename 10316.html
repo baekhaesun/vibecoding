@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="ko" class="dark"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이현민 - 개인 프로필</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans KR', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: 'var(--color-brand-50)',
+                            100: 'var(--color-brand-100)',
+                            400: 'var(--color-brand-400)',
+                            500: 'var(--color-brand-500)',
+                            600: 'var(--color-brand-600)',
+                            700: 'var(--color-brand-700)',
+                            glow: 'var(--color-brand-glow)',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --color-brand-50: #eff6ff;
+            --color-brand-100: #dbeafe;
+            --color-brand-400: #60a5fa;
+            --color-brand-500: #3b82f6;
+            --color-brand-600: #2563eb;
+            --color-brand-700: #1d4ed8;
+            --color-brand-glow: rgba(59, 130, 246, 0.45);
+        }
+
+        .theme-cyber-green {
+            --color-brand-50: #f0fdf4;
+            --color-brand-100: #dcfce7;
+            --color-brand-400: #4ade80;
+            --color-brand-500: #22c55e;
+            --color-brand-600: #16a34a;
+            --color-brand-700: #15803d;
+            --color-brand-glow: rgba(34, 197, 94, 0.45);
+        }
+
+        .theme-neon-purple {
+            --color-brand-50: #faf5ff;
+            --color-brand-100: #f3e8ff;
+            --color-brand-400: #c084fc;
+            --color-brand-500: #a855f7;
+            --color-brand-600: #9333ea;
+            --color-brand-700: #7e22ce;
+            --color-brand-glow: rgba(168, 85, 247, 0.45);
+        }
+
+        .theme-sunset-orange {
+            --color-brand-50: #fff7ed;
+            --color-brand-100: #ffedd5;
+            --color-brand-400: #fb923c;
+            --color-brand-500: #f97316;
+            --color-brand-600: #ea580c;
+            --color-brand-700: #c2410c;
+            --color-brand-glow: rgba(249, 115, 22, 0.45);
+        }
+
+        /* 야행성 전용 모드 */
+        .night-owl-mode {
+            --color-brand-50: #1e1b4b;
+            --color-brand-100: #312e81;
+            --color-brand-400: #818cf8;
+            --color-brand-500: #6366f1;
+            --color-brand-600: #4f46e5;
+            --color-brand-700: #4338ca;
+            --color-brand-glow: rgba(99, 102, 241, 0.65);
+        }
+
+        /* 캔버스 배경 */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* 고급 글래스모피즘 */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s ease;
+        }
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* 마우스 호버 레이저 회전 테두리 이펙트 */
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, var(--color-brand-glow), transparent);
+            transition: left 0.6s ease;
+            pointer-events: none;
+        }
+        .glass-card:hover::before {
+            left: 100%;
+        }
+
+        /* 글로우 박스 */
+        .glow-box {
+            box-shadow: 0 0 30px -5px var(--color-brand-glow);
+        }
+
+        /* 회전 테두리 아바타 */
+        .avatar-glow-ring {
+            position: relative;
+        }
+        .avatar-glow-ring::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 28px;
+            background: conic-gradient(from 0deg, var(--color-brand-500), transparent, var(--color-brand-400), transparent, var(--color-brand-500));
+            z-index: -1;
+            animation: rotateRing 6s linear infinite;
+        }
+        @keyframes rotateRing {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 편집 모드 활성화 점선 테두리 */
+        .editable-active [contenteditable="true"] {
+            outline: 2px dashed var(--color-brand-500) !important;
+            outline-offset: 3px;
+            border-radius: 6px;
+            cursor: text;
+        }
+        .editable-active [contenteditable="true"]:hover {
+            background-color: rgba(59, 130, 246, 0.15);
+        }
+
+        /* 3D 카드 뒤집기 애니메이션 */
+        .flip-card {
+            perspective: 1000px;
+        }
+        .flip-card-inner {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* 커스텀 스크롤바 */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(100, 116, 139, 0.4);
+            border-radius: 10px;
+        }
+    </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:Noto Sans KR, sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0px}.-bottom-12{bottom:-3rem}.-bottom-2{bottom:-0.5rem}.-right-12{right:-3rem}.-right-2{right:-0.5rem}.top-0{top:0px}.z-10{z-index:10}.z-40{z-index:40}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.mr-1{margin-right:0.25rem}.mt-1{margin-top:0.25rem}.mt-12{margin-top:3rem}.mt-2{margin-top:0.5rem}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-10{height:2.5rem}.h-12{height:3rem}.h-2{height:0.5rem}.h-3{height:0.75rem}.h-32{height:8rem}.h-36{height:9rem}.h-4{height:1rem}.h-56{height:14rem}.h-full{height:100%}.max-h-48{max-height:12rem}.min-h-screen{min-height:100vh}.w-1\/3{width:33.333333%}.w-10{width:2.5rem}.w-12{width:3rem}.w-3{width:0.75rem}.w-32{width:8rem}.w-4{width:1rem}.w-56{width:14rem}.w-full{width:100%}.max-w-4xl{max-width:56rem}.max-w-md{max-width:28rem}.max-w-xl{max-width:36rem}.flex-1{flex:1 1 0%}.flex-shrink-0{flex-shrink:0}@keyframes bounce{0%, 100%{transform:translateY(-25%);animation-timing-function:cubic-bezier(0.8,0,1,1)}50%{transform:none;animation-timing-function:cubic-bezier(0,0,0.2,1)}}.animate-bounce{animation:bounce 1s infinite}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}.cursor-pointer{cursor:pointer}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.grid-cols-5{grid-template-columns:repeat(5, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:0.25rem}.gap-1\.5{gap:0.375rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-6{gap:1.5rem}.space-x-1 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.25rem * var(--tw-space-x-reverse));margin-left:calc(0.25rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-1\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.375rem * var(--tw-space-x-reverse));margin-left:calc(0.375rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-2 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.5rem * var(--tw-space-x-reverse));margin-left:calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-1 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.overflow-x-hidden{overflow-x:hidden}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-\[22px\]{border-radius:22px}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-md{border-radius:0.375rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-emerald-500\/20{border-color:rgb(16 185 129 / 0.2)}.border-indigo-500\/20{border-color:rgb(99 102 241 / 0.2)}.border-indigo-500\/30{border-color:rgb(99 102 241 / 0.3)}.border-slate-200{--tw-border-opacity:1;border-color:rgb(226 232 240 / var(--tw-border-opacity, 1))}.border-slate-300\/30{border-color:rgb(203 213 225 / 0.3)}.border-slate-700{--tw-border-opacity:1;border-color:rgb(51 65 85 / var(--tw-border-opacity, 1))}.border-transparent{border-color:transparent}.bg-blue-500{--tw-bg-opacity:1;background-color:rgb(59 130 246 / var(--tw-bg-opacity, 1))}.bg-blue-500\/15{background-color:rgb(59 130 246 / 0.15)}.bg-brand-500{background-color:var(--color-brand-500)}.bg-emerald-500{--tw-bg-opacity:1;background-color:rgb(16 185 129 / var(--tw-bg-opacity, 1))}.bg-emerald-500\/15{background-color:rgb(16 185 129 / 0.15)}.bg-indigo-500\/15{background-color:rgb(99 102 241 / 0.15)}.bg-indigo-500\/20{background-color:rgb(99 102 241 / 0.2)}.bg-orange-500{--tw-bg-opacity:1;background-color:rgb(249 115 22 / var(--tw-bg-opacity, 1))}.bg-purple-500{--tw-bg-opacity:1;background-color:rgb(168 85 247 / var(--tw-bg-opacity, 1))}.bg-purple-500\/15{background-color:rgb(168 85 247 / 0.15)}.bg-slate-100{--tw-bg-opacity:1;background-color:rgb(241 245 249 / var(--tw-bg-opacity, 1))}.bg-slate-200{--tw-bg-opacity:1;background-color:rgb(226 232 240 / var(--tw-bg-opacity, 1))}.bg-slate-200\/70{background-color:rgb(226 232 240 / 0.7)}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.bg-slate-950\/80{background-color:rgb(2 6 23 / 0.8)}.bg-emerald-600{--tw-bg-opacity:1;background-color:rgb(5 150 105 / var(--tw-bg-opacity, 1))}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.bg-gradient-to-tr{background-image:linear-gradient(to top right, var(--tw-gradient-stops))}.from-amber-600{--tw-gradient-from:#d97706 var(--tw-gradient-from-position);--tw-gradient-to:rgb(217 119 6 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-brand-500{--tw-gradient-from:var(--color-brand-500) var(--tw-gradient-from-position);--tw-gradient-to:rgb(255 255 255 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-indigo-700{--tw-gradient-from:#4338ca var(--tw-gradient-from-position);--tw-gradient-to:rgb(67 56 202 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-slate-800{--tw-gradient-from:#1e293b var(--tw-gradient-from-position);--tw-gradient-to:rgb(30 41 59 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.to-amber-500{--tw-gradient-to:#f59e0b var(--tw-gradient-to-position)}.to-indigo-500{--tw-gradient-to:#6366f1 var(--tw-gradient-to-position)}.to-slate-700{--tw-gradient-to:#334155 var(--tw-gradient-to-position)}.bg-clip-text{-webkit-background-clip:text;background-clip:text}.object-cover{object-fit:cover}.p-1{padding:0.25rem}.p-2{padding:0.5rem}.p-2\.5{padding:0.625rem}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.pb-16{padding-bottom:4rem}.pr-1{padding-right:0.25rem}.pt-2{padding-top:0.5rem}.pt-3{padding-top:0.75rem}.pt-6{padding-top:1.5rem}.text-center{text-align:center}.font-sans{font-family:Noto Sans KR, sans-serif}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-black{font-weight:900}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.font-semibold{font-weight:600}.leading-relaxed{line-height:1.625}.tracking-tight{letter-spacing:-0.025em}.text-amber-500{--tw-text-opacity:1;color:rgb(245 158 11 / var(--tw-text-opacity, 1))}.text-blue-500{--tw-text-opacity:1;color:rgb(59 130 246 / var(--tw-text-opacity, 1))}.text-brand-500{color:var(--color-brand-500)}.text-brand-600{color:var(--color-brand-600)}.text-emerald-500{--tw-text-opacity:1;color:rgb(16 185 129 / var(--tw-text-opacity, 1))}.text-emerald-600{--tw-text-opacity:1;color:rgb(5 150 105 / var(--tw-text-opacity, 1))}.text-indigo-400{--tw-text-opacity:1;color:rgb(129 140 248 / var(--tw-text-opacity, 1))}.text-purple-500{--tw-text-opacity:1;color:rgb(168 85 247 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.text-slate-700{--tw-text-opacity:1;color:rgb(51 65 85 / var(--tw-text-opacity, 1))}.text-slate-800{--tw-text-opacity:1;color:rgb(30 41 59 / var(--tw-text-opacity, 1))}.text-slate-900{--tw-text-opacity:1;color:rgb(15 23 42 / var(--tw-text-opacity, 1))}.text-transparent{color:transparent}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.accent-brand-500{accent-color:var(--color-brand-500)}.opacity-80{opacity:0.8}.shadow{--tw-shadow:0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_10px_rgba\(99\2c 102\2c 241\2c 0\.2\)\]{--tw-shadow:0 0 10px rgba(99,102,241,0.2);--tw-shadow-colored:0 0 10px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_10px_var\(--color-brand-500\)\]{--tw-shadow:0 0 10px var(--color-brand-500);--tw-shadow-colored:0 0 10px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.ring-2{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.ring-transparent{--tw-ring-color:transparent}.ring-offset-1{--tw-ring-offset-width:1px}.blur-3xl{--tw-blur:blur(64px);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.file\:mr-3::file-selector-button{margin-right:0.75rem}.file\:rounded-xl::file-selector-button{border-radius:0.75rem}.file\:border-0::file-selector-button{border-width:0px}.file\:bg-brand-500::file-selector-button{background-color:var(--color-brand-500)}.file\:px-4::file-selector-button{padding-left:1rem;padding-right:1rem}.file\:py-2::file-selector-button{padding-top:0.5rem;padding-bottom:0.5rem}.file\:text-xs::file-selector-button{font-size:0.75rem;line-height:1rem}.file\:font-bold::file-selector-button{font-weight:700}.file\:text-white::file-selector-button{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:scale-105:hover{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:scale-110:hover{--tw-scale-x:1.1;--tw-scale-y:1.1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:border-brand-500:hover{border-color:var(--color-brand-500)}.hover\:bg-brand-500:hover{background-color:var(--color-brand-500)}.hover\:bg-brand-600:hover{background-color:var(--color-brand-600)}.hover\:bg-indigo-500\/30:hover{background-color:rgb(99 102 241 / 0.3)}.hover\:bg-slate-300:hover{--tw-bg-opacity:1;background-color:rgb(203 213 225 / var(--tw-bg-opacity, 1))}.hover\:text-brand-500:hover{color:var(--color-brand-500)}.hover\:text-red-500:hover{--tw-text-opacity:1;color:rgb(239 68 68 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:ring-blue-400:hover{--tw-ring-opacity:1;--tw-ring-color:rgb(96 165 250 / var(--tw-ring-opacity, 1))}.hover\:ring-emerald-400:hover{--tw-ring-opacity:1;--tw-ring-color:rgb(52 211 153 / var(--tw-ring-opacity, 1))}.hover\:ring-orange-400:hover{--tw-ring-opacity:1;--tw-ring-color:rgb(251 146 60 / var(--tw-ring-opacity, 1))}.hover\:ring-purple-400:hover{--tw-ring-opacity:1;--tw-ring-color:rgb(192 132 252 / var(--tw-ring-opacity, 1))}.hover\:file\:bg-brand-600::file-selector-button:hover{background-color:var(--color-brand-600)}.focus\:border-brand-500:focus{border-color:var(--color-brand-500)}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.active\:scale-95:active{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.dark\:border-slate-700\/30:is(.dark *){border-color:rgb(51 65 85 / 0.3)}.dark\:border-slate-800:is(.dark *){--tw-border-opacity:1;border-color:rgb(30 41 59 / var(--tw-border-opacity, 1))}.dark\:bg-slate-800:is(.dark *){--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.dark\:bg-slate-800\/60:is(.dark *){background-color:rgb(30 41 59 / 0.6)}.dark\:bg-slate-800\/70:is(.dark *){background-color:rgb(30 41 59 / 0.7)}.dark\:bg-slate-800\/80:is(.dark *){background-color:rgb(30 41 59 / 0.8)}.dark\:bg-slate-950:is(.dark *){--tw-bg-opacity:1;background-color:rgb(2 6 23 / var(--tw-bg-opacity, 1))}.dark\:text-brand-400:is(.dark *){color:var(--color-brand-400)}.dark\:text-emerald-400:is(.dark *){--tw-text-opacity:1;color:rgb(52 211 153 / var(--tw-text-opacity, 1))}.dark\:text-slate-100:is(.dark *){--tw-text-opacity:1;color:rgb(241 245 249 / var(--tw-text-opacity, 1))}.dark\:text-slate-300:is(.dark *){--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.dark\:text-slate-400:is(.dark *){--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.dark\:text-slate-600:is(.dark *){--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.dark\:text-white:is(.dark *){--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.dark\:hover\:bg-slate-700:hover:is(.dark *){--tw-bg-opacity:1;background-color:rgb(51 65 85 / var(--tw-bg-opacity, 1))}@media (min-width: 640px){.sm\:col-span-2{grid-column:span 2 / span 2}.sm\:inline{display:inline}.sm\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}}@media (min-width: 768px){.md\:col-span-1{grid-column:span 1 / span 1}.md\:h-36{height:9rem}.md\:w-36{width:9rem}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:justify-start{justify-content:flex-start}.md\:text-left{text-align:left}.md\:text-4xl{font-size:2.25rem;line-height:2.5rem}.md\:text-base{font-size:1rem;line-height:1.5rem}}</style></head>
+<body class="bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen font-sans transition-colors duration-300 pb-16 relative overflow-x-hidden editable-active">
+
+    <!-- 인터랙티브 파티클 Canvas 배경 -->
+    <canvas id="bg-canvas" width="948" height="828"></canvas>
+
+    <!-- 상단 네비게이션 헤더 -->
+    <header class="sticky top-0 z-40 glass-card border-b border-slate-200 dark:border-slate-800 px-4 py-3 shadow-sm">
+        <div class="max-w-4xl mx-auto flex flex-wrap justify-between items-center gap-3">
+            <div class="flex items-center space-x-2">
+                <span class="w-3 h-3 rounded-full bg-brand-500 animate-pulse shadow-[0_0_10px_var(--color-brand-500)]"></span>
+                <span class="font-black text-lg tracking-tight bg-gradient-to-r from-brand-500 to-indigo-500 bg-clip-text text-transparent">이현민의 프로필</span>
+                <span class="text-[10px] px-2 py-0.5 rounded-md bg-brand-500/20 text-brand-500 font-extrabold">EFFECT LEVEL 2</span>
+            </div>
+            
+            <!-- 제어 툴바 -->
+            <div class="flex items-center flex-wrap gap-2">
+                <!-- 편집 모드 -->
+                <button id="edit-mode-btn" onclick="toggleEditMode(event)" class="px-3 py-1.5 rounded-xl bg-emerald-600 text-white font-bold text-xs flex items-center space-x-1.5 shadow hover:bg-brand-600 transition-all active:scale-95">
+                    <i class="fas fa-pen-to-square"></i>
+                    <span id="edit-mode-label">편집 완료</span>
+                </button>
+
+                <!-- 야행성 모드 스위치 -->
+                <button onclick="toggleNightOwl(event)" class="px-2.5 py-1.5 rounded-xl bg-indigo-500/20 text-indigo-400 font-bold text-xs border border-indigo-500/30 hover:bg-indigo-500/30 transition-all flex items-center space-x-1">
+                    <i class="fas fa-moon"></i>
+                    <span class="hidden sm:inline">야행성 모드</span>
+                </button>
+
+                <!-- 초기화 -->
+                <button onclick="resetData(event)" class="px-2.5 py-1.5 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-red-500 font-bold text-xs flex items-center space-x-1 transition-all" title="원래대로 복구">
+                    <i class="fas fa-rotate-left"></i>
+                    <span class="hidden sm:inline">초기화</span>
+                </button>
+
+                <!-- 효과음 토글 -->
+                <button id="sound-btn" onclick="toggleSound(event)" class="p-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-brand-500 transition-colors" title="소리 켜기/끄기">
+                    <i id="sound-icon" class="fas fa-volume-up text-sm"></i>
+                </button>
+
+                <!-- 테마 색상 팔레트 -->
+                <div class="flex items-center space-x-1 bg-slate-200 dark:bg-slate-800 p-1 rounded-xl">
+                    <button onclick="setTheme('default', event)" class="w-4 h-4 rounded-full bg-blue-500 ring-2 ring-offset-1 ring-transparent hover:ring-blue-400 transition-all" title="블루"></button>
+                    <button onclick="setTheme('theme-cyber-green', event)" class="w-4 h-4 rounded-full bg-emerald-500 ring-2 ring-offset-1 ring-transparent hover:ring-emerald-400 transition-all" title="그린"></button>
+                    <button onclick="setTheme('theme-neon-purple', event)" class="w-4 h-4 rounded-full bg-purple-500 ring-2 ring-offset-1 ring-transparent hover:ring-purple-400 transition-all" title="퍼플"></button>
+                    <button onclick="setTheme('theme-sunset-orange', event)" class="w-4 h-4 rounded-full bg-orange-500 ring-2 ring-offset-1 ring-transparent hover:ring-orange-400 transition-all" title="오렌지"></button>
+                </div>
+
+                <!-- 다크/라이트 토글 -->
+                <button onclick="toggleDarkMode(event)" class="p-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-brand-500 transition-colors" title="다크 모드 변경">
+                    <i id="theme-icon" class="fas fa-moon text-sm"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 메인 컨텐츠 영역 -->
+    <main class="max-w-4xl mx-auto px-4 pt-6 space-y-6 relative z-10">
+
+        <!-- 편집 진행 배너 -->
+        <div id="edit-banner" class="bg-brand-500/15 border border-brand-500/30 text-brand-600 dark:text-brand-400 p-3 rounded-2xl text-xs font-bold flex justify-between items-center animate-fade-in">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-lightbulb text-base animate-bounce"></i>
+                <span><strong>편집 모드 ON:</strong> 점선 테두리가 표시된 글자를 직접 클릭해 수정하세요!</span>
+            </div>
+            <button onclick="toggleEditMode(event)" class="bg-brand-500 text-white px-3 py-1 rounded-lg text-xs font-bold hover:bg-brand-600">완료하기</button>
+        </div>
+
+        <!-- 1. 프로필 메인 카드 (3D 틸트 효과 적용) -->
+        <section class="glass-card rounded-3xl p-6 relative overflow-hidden glow-box tilt-card" style="transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1);">
+            <div class="absolute -right-12 -bottom-12 w-56 h-56 bg-brand-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="flex flex-col md:flex-row items-center gap-6 relative z-10">
+                <!-- 아바타 (네온 회전 링) -->
+                <div class="relative group avatar-glow-ring">
+                    <div class="w-32 h-32 md:w-36 md:h-36 rounded-3xl bg-slate-900 p-1 shadow-2xl overflow-hidden">
+                        <img id="profile-img" src="https://api.dicebear.com/7.x/bottts/svg?seed=GameBoy&amp;backgroundColor=b6e3f4" alt="프로필 사진" class="w-full h-full object-cover rounded-[22px] bg-slate-900">
+                    </div>
+                    <button onclick="openAvatarModal(event)" class="absolute -bottom-2 -right-2 bg-slate-900 text-white p-2.5 rounded-2xl border border-slate-700 shadow-md hover:bg-brand-500 hover:scale-110 transition-all" title="프로필 변경">
+                        <i class="fas fa-camera text-sm"></i>
+                    </button>
+                </div>
+
+                <!-- 인적 사항 -->
+                <div class="flex-1 text-center md:text-left space-y-2">
+                    <div class="flex flex-wrap items-center justify-center md:justify-start gap-2">
+                        <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-brand-500/15 text-brand-600 dark:text-brand-400 border border-brand-500/20">
+                            <i class="fas fa-mars text-brand-500 mr-1"></i>인간 남성
+                        </span>
+                        <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                            <i class="fas fa-graduation-cap mr-1"></i><span id="editable-school" contenteditable="true" onblur="saveData()">중학생</span>
+                        </span>
+                        <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-indigo-500/15 text-indigo-400 border border-indigo-500/20 shadow-[0_0_10px_rgba(99,102,241,0.2)]">
+                            <i class="fas fa-laptop-code mr-1"></i>정보 러버
+                        </span>
+                    </div>
+
+                    <!-- 이름 -->
+                    <h1 class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+                        <span id="editable-name" contenteditable="true" onblur="saveData()">이현민</span>
+                    </h1>
+
+                    <!-- 소개글 -->
+                    <p class="text-slate-600 dark:text-slate-300 font-medium text-sm md:text-base max-w-xl">
+                        "<span id="editable-bio" contenteditable="true" onblur="saveData()">잘래</span>"
+                    </p>
+
+                    <!-- 태그 -->
+                    <div class="pt-2 flex flex-wrap justify-center md:justify-start gap-1.5 text-xs font-semibold text-slate-500 dark:text-slate-400">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-200/70 dark:bg-slate-800/70 border border-slate-300/30 dark:border-slate-700/30">#정보덕후</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-200/70 dark:bg-slate-800/70 border border-slate-300/30 dark:border-slate-700/30">#카레매니아</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-200/70 dark:bg-slate-800/70 border border-slate-300/30 dark:border-slate-700/30">#야행성</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-200/70 dark:bg-slate-800/70 border border-slate-300/30 dark:border-slate-700/30">#체육_축구_안좋아함</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 실시간 상태 & 기분 반응 선택기 -->
+        <section class="glass-card rounded-3xl p-5 space-y-3 tilt-card" style="transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1);">
+            <h3 class="font-bold text-sm text-slate-500 dark:text-slate-400 flex items-center space-x-2">
+                <i class="fas fa-face-smile text-brand-500"></i>
+                <span>오늘 현민이의 실시간 상태</span>
+            </h3>
+            <div class="grid grid-cols-5 gap-2">
+                <button onclick="setMood('코딩 및 프로그래밍 중 💻', event)" class="mood-btn p-3 rounded-2xl bg-slate-100 dark:bg-slate-800/60 hover:bg-brand-500/20 hover:scale-105 border border-transparent hover:border-brand-500/50 flex flex-col items-center gap-1 transition-all">
+                    <span class="text-2xl animate-pulse">💻</span>
+                    <span class="text-xs font-bold">정보탐구</span>
+                </button>
+                <button onclick="setMood('카레 생각하는 중 🍛', event)" class="mood-btn p-3 rounded-2xl bg-slate-100 dark:bg-slate-800/60 hover:bg-brand-500/20 hover:scale-105 border border-transparent hover:border-brand-500/50 flex flex-col items-center gap-1 transition-all">
+                    <span class="text-2xl">🍛</span>
+                    <span class="text-xs font-bold">카레생각</span>
+                </button>
+                <button onclick="setMood('야행성 에너지 활성 🌙', event)" class="mood-btn p-3 rounded-2xl bg-slate-100 dark:bg-slate-800/60 hover:bg-brand-500/20 hover:scale-105 border border-transparent hover:border-brand-500/50 flex flex-col items-center gap-1 transition-all">
+                    <span class="text-2xl">🌙</span>
+                    <span class="text-xs font-bold">야행성</span>
+                </button>
+                <button onclick="setMood('낮 잠자는 중 💤', event)" class="mood-btn p-3 rounded-2xl bg-slate-100 dark:bg-slate-800/60 hover:bg-brand-500/20 hover:scale-105 border border-transparent hover:border-brand-500/50 flex flex-col items-center gap-1 transition-all">
+                    <span class="text-2xl">💤</span>
+                    <span class="text-xs font-bold">낮잠충전</span>
+                </button>
+                <button onclick="setMood('체육시간 피하기 🙅‍♂️', event)" class="mood-btn p-3 rounded-2xl bg-slate-100 dark:bg-slate-800/60 hover:bg-brand-500/20 hover:scale-105 border border-transparent hover:border-brand-500/50 flex flex-col items-center gap-1 transition-all">
+                    <span class="text-2xl">🙅‍♂️</span>
+                    <span class="text-xs font-bold">휴식선호</span>
+                </button>
+            </div>
+            <div class="mt-2 text-center py-2 px-4 bg-brand-500/10 rounded-xl border border-brand-500/20 text-xs font-extrabold text-brand-600 dark:text-brand-400">
+                현재 상태: <span id="current-mood-text">밤에 활력이 샘솟는 중 🌙</span>
+            </div>
+        </section>
+
+        <!-- 3. 상세 정보 카드리스트 (3D 틸트) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <!-- 정보 과목 선호 -->
+            <div class="glass-card rounded-3xl p-5 space-y-3 tilt-card hover:border-brand-500/40" style="transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1);">
+                <div class="flex items-center justify-between">
+                    <div class="w-10 h-10 rounded-2xl bg-blue-500/15 text-blue-500 flex items-center justify-center font-bold text-lg">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <span class="text-xs font-extrabold text-slate-400">FAVORITE</span>
+                </div>
+                <h3 class="font-extrabold text-slate-900 dark:text-white text-base">최애 과목 &amp; 취향</h3>
+                <p id="editable-subject" contenteditable="true" onblur="saveData()" class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed"><strong>정보</strong></p>
+            </div>
+
+            <!-- 주말 라이프 스타일 -->
+            <div class="glass-card rounded-3xl p-5 space-y-3 tilt-card hover:border-brand-500/40" style="transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1);">
+                <div class="flex items-center justify-between">
+                    <div class="w-10 h-10 rounded-2xl bg-purple-500/15 text-purple-500 flex items-center justify-center font-bold text-lg">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <span class="text-xs font-extrabold text-slate-400">WEEKEND</span>
+                </div>
+                <h3 class="font-extrabold text-slate-900 dark:text-white text-base">주말 루틴</h3>
+                <p id="editable-hobby" contenteditable="true" onblur="saveData()" class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed"><strong>잘래</strong></p>
+            </div>
+
+            <!-- 미래 목표 -->
+            <div class="glass-card rounded-3xl p-5 space-y-3 tilt-card hover:border-brand-500/40" style="transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1);">
+                <div class="flex items-center justify-between">
+                    <div class="w-10 h-10 rounded-2xl bg-emerald-500/15 text-emerald-500 flex items-center justify-center font-bold text-lg">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <span class="text-xs font-extrabold text-slate-400">GOAL</span>
+                </div>
+                <h3 class="font-extrabold text-slate-900 dark:text-white text-base">미래의 목표</h3>
+                <p id="editable-dream" contenteditable="true" onblur="saveData()" class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">잘래</p>
+            </div>
+        </div>
+
+        <!-- 4. 인터랙티브 능률 / 관심사 슬라이더 -->
+        <section class="glass-card rounded-3xl p-6 space-y-4 tilt-card" style="transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1);">
+            <div class="flex justify-between items-center">
+                <h3 class="font-extrabold text-slate-900 dark:text-white text-base flex items-center space-x-2">
+                    <i class="fas fa-sliders text-brand-500"></i>
+                    <span>현민이의 성향 &amp; 관심사 그래프</span>
+                </h3>
+                <span class="text-xs text-slate-400">드래그해서 조절해보세요!</span>
+            </div>
+
+            <div class="space-y-4">
+                <!-- 정보/IT 선호도 -->
+                <div class="space-y-1">
+                    <div class="flex justify-between text-xs font-bold">
+                        <span>💻 정보 / 프로그래밍 선호도</span>
+                        <span id="val-1" class="text-brand-500">100%</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="100" oninput="updateSkill(1, this.value, event)" class="w-full accent-brand-500 h-2 bg-slate-200 dark:bg-slate-800 rounded-lg cursor-pointer">
+                </div>
+
+                <!-- 카레 좋아함 -->
+                <div class="space-y-1">
+                    <div class="flex justify-between text-xs font-bold">
+                        <span>🍛 카레 애호도</span>
+                        <span id="val-2" class="text-brand-500">98%</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="98" oninput="updateSkill(2, this.value, event)" class="w-full accent-brand-500 h-2 bg-slate-200 dark:bg-slate-800 rounded-lg cursor-pointer">
+                </div>
+
+                <!-- 심야 에너자이저 -->
+                <div class="space-y-1">
+                    <div class="flex justify-between text-xs font-bold">
+                        <span>🌙 심야 시간 집중력</span>
+                        <span id="val-3" class="text-brand-500">95%</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="95" oninput="updateSkill(3, this.value, event)" class="w-full accent-brand-500 h-2 bg-slate-200 dark:bg-slate-800 rounded-lg cursor-pointer">
+                </div>
+
+                <!-- 체육/축구 선호도 -->
+                <div class="space-y-1">
+                    <div class="flex justify-between text-xs font-bold">
+                        <span>⚽ 체육 &amp; 축구 관심도</span>
+                        <span id="val-4" class="text-brand-500">5%</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="5" oninput="updateSkill(4, this.value, event)" class="w-full accent-brand-500 h-2 bg-slate-200 dark:bg-slate-800 rounded-lg cursor-pointer">
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 3D 뒤집기 TMI 카드 -->
+        <section class="space-y-3">
+            <div class="flex justify-between items-center">
+                <h3 class="font-extrabold text-slate-900 dark:text-white text-base flex items-center space-x-2">
+                    <i class="fas fa-circle-question text-brand-500"></i>
+                    <span>현민이의 TMI 카드 (클릭해서 뒤집기)</span>
+                </h3>
+                <span class="text-xs text-brand-500 font-bold">카드를 눌러보세요!</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <!-- 카드 1 (음식) -->
+                <div onclick="flipCard(this, event)" class="flip-card h-36 cursor-pointer flipped">
+                    <div class="flip-card-inner relative w-full h-full">
+                        <div class="flip-card-front absolute w-full h-full glass-card rounded-2xl p-4 flex flex-col justify-between items-center text-center border-brand-500/30">
+                            <i class="fas fa-bowl-rice text-2xl text-amber-500 animate-bounce"></i>
+                            <span class="font-bold text-sm">가장 좋아하는 음식은?</span>
+                            <span class="text-[10px] text-slate-400">클릭하여 정답 보기</span>
+                        </div>
+                        <div class="flip-card-back absolute w-full h-full bg-gradient-to-tr from-amber-600 to-amber-500 text-white rounded-2xl p-4 flex flex-col justify-center items-center text-center font-bold shadow-lg">
+                            <span class="text-xs opacity-80">최애 음식</span>
+                            <p id="tmi-1" contenteditable="true" onblur="saveData()" class="text-sm mt-1">다먹음(오이,토마토 빼고)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 카드 2 (음악) -->
+                <div onclick="flipCard(this, event)" class="flip-card h-36 cursor-pointer flipped">
+                    <div class="flip-card-inner relative w-full h-full">
+                        <div class="flip-card-front absolute w-full h-full glass-card rounded-2xl p-4 flex flex-col justify-between items-center text-center border-brand-500/30">
+                            <i class="fas fa-volume-xmark text-2xl text-slate-400"></i>
+                            <span class="font-bold text-sm">자주 듣는 노래는?</span>
+                            <span class="text-[10px] text-slate-400">클릭하여 정답 보기</span>
+                        </div>
+                        <div class="flip-card-back absolute w-full h-full bg-gradient-to-tr from-slate-800 to-slate-700 text-white rounded-2xl p-4 flex flex-col justify-center items-center text-center font-bold shadow-lg">
+                            <span class="text-xs opacity-80">음악 취향</span>
+                            <p id="tmi-2" contenteditable="true" onblur="saveData()" class="text-sm mt-1">평소에 노래는 안 들어요 🔇</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 카드 3 (주말) -->
+                <div onclick="flipCard(this, event)" class="flip-card h-36 cursor-pointer sm:col-span-2 md:col-span-1">
+                    <div class="flip-card-inner relative w-full h-full">
+                        <div class="flip-card-front absolute w-full h-full glass-card rounded-2xl p-4 flex flex-col justify-between items-center text-center border-brand-500/30">
+                            <i class="fas fa-clock text-2xl text-indigo-400"></i>
+                            <span class="font-bold text-sm">주말 스타일은?</span>
+                            <span class="text-[10px] text-slate-400">클릭하여 정답 보기</span>
+                        </div>
+                        <div class="flip-card-back absolute w-full h-full bg-gradient-to-tr from-indigo-700 to-indigo-500 text-white rounded-2xl p-4 flex flex-col justify-center items-center text-center font-bold shadow-lg">
+                            <span class="text-xs opacity-80">생활 패턴</span>
+                            <p id="tmi-3" contenteditable="true" onblur="saveData()" class="text-sm mt-1">잘래</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. 방명록 섹션 -->
+        <section class="glass-card rounded-3xl p-6 space-y-4 tilt-card" style="transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1);">
+            <h3 class="font-extrabold text-slate-900 dark:text-white text-base flex items-center space-x-2">
+                <i class="fas fa-pen-nib text-brand-500"></i>
+                <span>현민이에게 메시지 남기기</span>
+            </h3>
+
+            <form onsubmit="addGuestbook(event)" class="flex gap-2">
+                <input id="gb-name" type="text" placeholder="작성자 이름" required="" class="w-1/3 px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-transparent focus:border-brand-500 text-xs font-semibold focus:outline-none">
+                <input id="gb-msg" type="text" placeholder="응원 메시지를 남겨주세요!" required="" class="flex-1 px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-transparent focus:border-brand-500 text-xs font-semibold focus:outline-none">
+                <button type="submit" class="px-4 py-2 bg-brand-500 text-white font-bold text-xs rounded-xl hover:bg-brand-600 transition-all flex-shrink-0 active:scale-95">
+                    등록
+                </button>
+            </form>
+
+            <div id="guestbook-list" class="space-y-2 max-h-48 overflow-y-auto pr-1"><p class="text-xs text-slate-400 text-center py-2">아직 남겨진 메시지가 없습니다!</p></div>
+        </section>
+
+    </main>
+
+    <!-- 하단 푸터 -->
+    <footer class="mt-12 text-center text-xs font-semibold text-slate-400 dark:text-slate-600 relative z-10">
+        <p>© 2026 이현민 개인 프로필 웹 앱 | 이펙트 강화 버전</p>
+    </footer>
+
+    <!-- 아바타 변경 모달 -->
+    <div id="avatar-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card rounded-3xl max-w-md w-full p-6 space-y-5 border border-slate-700 shadow-2xl">
+            <div class="flex justify-between items-center">
+                <h3 class="font-extrabold text-slate-900 dark:text-white text-base">캐릭터 선택 / 사진 업로드</h3>
+                <button onclick="closeAvatarModal(event)" class="text-slate-400 hover:text-white"><i class="fas fa-xmark text-lg"></i></button>
+            </div>
+
+            <div class="space-y-2">
+                <span class="text-xs font-bold text-slate-400">추천 아바타 선택:</span>
+                <div class="grid grid-cols-3 gap-3">
+                    <button onclick="selectAvatar('https://api.dicebear.com/7.x/bottts/svg?seed=GameBoy&amp;backgroundColor=b6e3f4', event)" class="p-2 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:border-brand-500 border border-transparent flex flex-col items-center gap-1 transition-all">
+                        <img src="https://api.dicebear.com/7.x/bottts/svg?seed=GameBoy&amp;backgroundColor=b6e3f4" class="w-12 h-12 rounded-xl">
+                        <span class="text-[11px] font-bold">개발 로봇</span>
+                    </button>
+                    <button onclick="selectAvatar('https://api.dicebear.com/7.x/bottts/svg?seed=SmartBoy&amp;backgroundColor=ffd5dc', event)" class="p-2 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:border-brand-500 border border-transparent flex flex-col items-center gap-1 transition-all">
+                        <img src="https://api.dicebear.com/7.x/bottts/svg?seed=SmartBoy&amp;backgroundColor=ffd5dc" class="w-12 h-12 rounded-xl">
+                        <span class="text-[11px] font-bold">스마트 학생</span>
+                    </button>
+                    <button onclick="selectAvatar('https://api.dicebear.com/7.x/bottts/svg?seed=NightCat&amp;backgroundColor=c0a0e9', event)" class="p-2 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:border-brand-500 border border-transparent flex flex-col items-center gap-1 transition-all">
+                        <img src="https://api.dicebear.com/7.x/bottts/svg?seed=NightCat&amp;backgroundColor=c0a0e9" class="w-12 h-12 rounded-xl">
+                        <span class="text-[11px] font-bold">야행성 로봇</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="space-y-2 border-t border-slate-200 dark:border-slate-800 pt-3">
+                <span class="text-xs font-bold text-slate-400">내 컴퓨터에서 이미지 불러오기:</span>
+                <input type="file" id="file-input" accept="image/*" onchange="uploadImage(event)" class="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-brand-500 file:text-white hover:file:bg-brand-600">
+            </div>
+
+            <button onclick="closeAvatarModal(event)" class="w-full py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 font-bold text-xs hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">닫기</button>
+        </div>
+    </div>
+
+    <!-- 스크립트 및 인터랙티브 효과 로직 -->
+    <script>
+        // --- 1. Canvas 배경 인터랙티브 파티클 이펙트 ---
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null, radius: 120 };
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            const count = Math.floor((canvas.width * canvas.height) / 12000);
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.8,
+                    vy: (Math.random() - 0.5) * 0.8,
+                    size: Math.random() * 2 + 1,
+                    color: 'rgba(99, 102, 241, 0.4)'
+                });
+            }
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, index) => {
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                // 마우스와의 거리 계산 및 반응
+                if (mouse.x !== null) {
+                    const dx = mouse.x - p.x;
+                    const dy = mouse.y - p.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < mouse.radius) {
+                        p.x -= dx * 0.02;
+                        p.y -= dy * 0.02;
+                    }
+                }
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+
+                // 파티클 간 연결 선
+                for (let j = index + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const dx = p.x - p2.x;
+                    const dy = p.y - p2.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 90) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(99, 102, 241, ${1 - dist / 90 * 0.8})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(animateCanvas);
+        }
+
+        window.addEventListener('resize', initCanvas);
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        // --- 2. 스파클 폭죽 파티클 이펙트 ---
+        function createSparkles(x, y) {
+            for (let i = 0; i < 16; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.style.position = 'fixed';
+                sparkle.style.left = x + 'px';
+                sparkle.style.top = y + 'px';
+                sparkle.style.width = '6px';
+                sparkle.style.height = '6px';
+                sparkle.style.borderRadius = '50%';
+                sparkle.style.backgroundColor = ['#60a5fa', '#a855f7', '#34d399', '#fbbf24'][Math.floor(Math.random() * 4)];
+                sparkle.style.pointerEvents = 'none';
+                sparkle.style.zIndex = '9999';
+                
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 80 + 20;
+                const vx = Math.cos(angle) * speed;
+                const vy = Math.sin(angle) * speed;
+
+                document.body.appendChild(sparkle);
+
+                sparkle.animate([
+                    { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+                    { transform: `translate(${vx}px, ${vy}px) scale(0)`, opacity: 0 }
+                ], {
+                    duration: 600 + Math.random() * 300,
+                    easing: 'cubic-bezier(0,0,0.2,1)'
+                }).onfinish = () => sparkle.remove();
+            }
+        }
+
+        // --- 3. Web Audio 사운드 신디사이저 ---
+        let soundEnabled = true;
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playSynthesizedSound(freq = 520, type = 'sine', duration = 0.08) {
+            if (!soundEnabled) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch(e) {}
+        }
+
+        // --- 4. 3D 카드 틸트 이펙트 ---
+        function initTiltCards() {
+            document.querySelectorAll('.tilt-card').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    card.style.transform = `perspective(1000px) rotateX(${-y / 25}deg) rotateY(${x / 25}deg) scale(1.01)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                });
+            });
+        }
+
+        // --- 5. 앱 제어 및 로직 ---
+        let isEditMode = false;
+
+        window.onload = function() {
+            initCanvas();
+            animateCanvas();
+            initTiltCards();
+            loadSavedData();
+            renderGuestbook();
+        };
+
+        function toggleEditMode(e) {
+            if(e) createSparkles(e.clientX, e.clientY);
+            playSynthesizedSound(650, 'triangle', 0.1);
+            isEditMode = !isEditMode;
+            document.body.classList.toggle('editable-active', isEditMode);
+
+            const ids = ['editable-name', 'editable-school', 'editable-bio', 'editable-hobby', 'editable-subject', 'editable-dream', 'tmi-1', 'tmi-2', 'tmi-3'];
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.contentEditable = isEditMode ? "true" : "false";
+            });
+
+            const banner = document.getElementById('edit-banner');
+            const label = document.getElementById('edit-mode-label');
+            const btn = document.getElementById('edit-mode-btn');
+
+            if (isEditMode) {
+                banner.classList.remove('hidden');
+                label.innerText = '편집 완료';
+                btn.classList.replace('bg-brand-500', 'bg-emerald-600');
+            } else {
+                banner.classList.add('hidden');
+                label.innerText = '편집 시작';
+                btn.classList.replace('bg-emerald-600', 'bg-brand-500');
+                saveData();
+            }
+        }
+
+        function toggleNightOwl(e) {
+            if(e) createSparkles(e.clientX, e.clientY);
+            playSynthesizedSound(400, 'sine', 0.15);
+            document.body.classList.toggle('night-owl-mode');
+        }
+
+        function saveData() {
+            const data = {
+                name: document.getElementById('editable-name').innerText,
+                school: document.getElementById('editable-school').innerText,
+                bio: document.getElementById('editable-bio').innerText,
+                hobby: document.getElementById('editable-hobby').innerText,
+                subject: document.getElementById('editable-subject').innerText,
+                dream: document.getElementById('editable-dream').innerText,
+                tmi1: document.getElementById('tmi-1').innerText,
+                tmi2: document.getElementById('tmi-2').innerText,
+                tmi3: document.getElementById('tmi-3').innerText,
+                avatar: document.getElementById('profile-img').src,
+                mood: document.getElementById('current-mood-text').innerText
+            };
+            localStorage.setItem('hyunmin_profile_data_v2', JSON.stringify(data));
+        }
+
+        function loadSavedData() {
+            const saved = localStorage.getItem('hyunmin_profile_data_v2');
+            if (!saved) return;
+            try {
+                const data = JSON.parse(saved);
+                if(data.name) document.getElementById('editable-name').innerText = data.name;
+                if(data.school) document.getElementById('editable-school').innerText = data.school;
+                if(data.bio) document.getElementById('editable-bio').innerText = data.bio;
+                if(data.hobby) document.getElementById('editable-hobby').innerText = data.hobby;
+                if(data.subject) document.getElementById('editable-subject').innerText = data.subject;
+                if(data.dream) document.getElementById('editable-dream').innerText = data.dream;
+                if(data.tmi1) document.getElementById('tmi-1').innerText = data.tmi1;
+                if(data.tmi2) document.getElementById('tmi-2').innerText = data.tmi2;
+                if(data.tmi3) document.getElementById('tmi-3').innerText = data.tmi3;
+                if(data.avatar) document.getElementById('profile-img').src = data.avatar;
+                if(data.mood) document.getElementById('current-mood-text').innerText = data.mood;
+            } catch(e) {}
+        }
+
+        function resetData(e) {
+            if(e) createSparkles(e.clientX, e.clientY);
+            playSynthesizedSound(300, 'sawtooth', 0.2);
+            if(confirm('모든 설정값을 초기 상태로 원상복구하시겠습니까?')) {
+                localStorage.removeItem('hyunmin_profile_data_v2');
+                location.reload();
+            }
+        }
+
+        function setTheme(themeName, e) {
+            if(e) createSparkles(e.clientX, e.clientY);
+            playSynthesizedSound(580, 'sine', 0.08);
+            document.body.className = document.body.className.replace(/theme-\S+/g, '');
+            if (themeName !== 'default') {
+                document.body.classList.add(themeName);
+            }
+        }
+
+        function toggleDarkMode(e) {
+            if(e) createSparkles(e.clientX, e.clientY);
+            playSynthesizedSound(450, 'sine', 0.08);
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.className = 'fas fa-sun text-sm';
+            } else {
+                html.classList.add('dark');
+                icon.className = 'fas fa-moon text-sm';
+            }
+        }
+
+        function toggleSound(e) {
+            soundEnabled = !soundEnabled;
+            const icon = document.getElementById('sound-icon');
+            icon.className = soundEnabled ? 'fas fa-volume-up text-sm' : 'fas fa-volume-xmark text-sm';
+            if (soundEnabled && e) {
+                createSparkles(e.clientX, e.clientY);
+                playSynthesizedSound(700, 'sine', 0.1);
+            }
+        }
+
+        function setMood(moodStr, e) {
+            if(e) createSparkles(e.clientX, e.clientY);
+            playSynthesizedSound(600, 'triangle', 0.08);
+            document.getElementById('current-mood-text').innerText = moodStr;
+            saveData();
+        }
+
+        function updateSkill(num, val, e) {
+            document.getElementById('val-' + num).innerText = val + '%';
+            playSynthesizedSound(300 + parseInt(val) * 3, 'sine', 0.02);
+        }
+
+        function flipCard(cardEl, e) {
+            if(e) createSparkles(e.clientX, e.clientY);
+            playSynthesizedSound(420, 'square', 0.08);
+            cardEl.classList.toggle('flipped');
+        }
+
+        function openAvatarModal(e) {
+            if(e) createSparkles(e.clientX, e.clientY);
+            playSynthesizedSound(500, 'sine', 0.08);
+            document.getElementById('avatar-modal').classList.remove('hidden');
+        }
+        function closeAvatarModal(e) {
+            playSynthesizedSound(380, 'sine', 0.08);
+            document.getElementById('avatar-modal').classList.add('hidden');
+        }
+        function selectAvatar(url, e) {
+            if(e) createSparkles(e.clientX, e.clientY);
+            playSynthesizedSound(750, 'triangle', 0.1);
+            document.getElementById('profile-img').src = url;
+            saveData();
+            closeAvatarModal();
+        }
+        function uploadImage(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    selectAvatar(evt.target.result, e);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // 방명록 로직
+        function getGuestbook() {
+            return JSON.parse(localStorage.getItem('hyunmin_gb_v2') || '[]');
+        }
+        function renderGuestbook() {
+            const list = getGuestbook();
+            const container = document.getElementById('guestbook-list');
+            if (list.length === 0) {
+                container.innerHTML = '<p class="text-xs text-slate-400 text-center py-2">아직 남겨진 메시지가 없습니다!</p>';
+                return;
+            }
+            container.innerHTML = list.map((item, idx) => `
+                <div class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800/60 text-xs flex justify-between items-center border border-slate-200/50 dark:border-slate-700/50">
+                    <div>
+                        <strong class="text-brand-500">${escapeHtml(item.name)}</strong>: 
+                        <span class="text-slate-700 dark:text-slate-300">${escapeHtml(item.msg)}</span>
+                    </div>
+                    <button onclick="deleteGb(${idx}, event)" class="text-slate-400 hover:text-red-500 ml-2"><i class="fas fa-trash-can"></i></button>
+                </div>
+            `).join('');
+        }
+        function addGuestbook(e) {
+            e.preventDefault();
+            createSparkles(e.clientX, e.clientY);
+            playSynthesizedSound(650, 'triangle', 0.12);
+            const name = document.getElementById('gb-name').value.trim();
+            const msg = document.getElementById('gb-msg').value.trim();
+            if(!name || !msg) return;
+
+            const list = getGuestbook();
+            list.unshift({ name, msg });
+            localStorage.setItem('hyunmin_gb_v2', JSON.stringify(list));
+
+            document.getElementById('gb-name').value = '';
+            document.getElementById('gb-msg').value = '';
+            renderGuestbook();
+        }
+        function deleteGb(idx, e) {
+            if(e) createSparkles(e.clientX, e.clientY);
+            playSynthesizedSound(280, 'sawtooth', 0.1);
+            const list = getGuestbook();
+            list.splice(idx, 1);
+            localStorage.setItem('hyunmin_gb_v2', JSON.stringify(list));
+            renderGuestbook();
+        }
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+    </script>
+
+</body></html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 정체성 이야기 | 자기소개</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Noto Sans KR) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans KR', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            blue: '#2563eb',
+                            sky: '#0284c7',
+                            dark: '#0f172a',
+                            light: '#f8fafc',
+                            accent: '#f59e0b'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-gentle': 'bounce 2s infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-bg {
+            background: radial-gradient(circle at 50% 20%, rgba(37, 99, 235, 0.1) 0%, rgba(248, 250, 252, 1) 70%);
+        }
+        .card-glow:hover {
+            box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.15), 0 8px 10px -6px rgba(37, 99, 235, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-brand-light text-slate-800 font-sans antialiased selection:bg-brand-blue selection:text-white min-h-screen flex flex-col justify-between">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-100">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="bg-brand-blue text-white text-xs px-2.5 py-1 rounded-full font-bold tracking-wider">PORTFOLIO</span>
+                <span class="font-bold text-slate-900 text-lg">나를 소개합니다</span>
+            </div>
+            <nav class="hidden sm:flex space-x-6 text-sm font-semibold text-slate-600">
+                <a href="#about" class="hover:text-brand-blue transition">정체성 3가지</a>
+                <a href="#focus" class="hover:text-brand-blue transition">핵심: 중학생</a>
+                <a href="#reason" class="hover:text-brand-blue transition">소개 이유</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section class="hero-bg py-16 md:py-24 px-4 text-center">
+            <div class="max-w-3xl mx-auto space-y-6">
+                <!-- Grade Badge -->
+                <div class="inline-flex items-center space-x-2 bg-blue-50 border border-blue-200 text-brand-blue px-4 py-2 rounded-full text-sm font-semibold shadow-sm">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>인천검단가온중학교 1학년</span>
+                </div>
+
+                <!-- Main Title with Interactive Buttons -->
+                <div class="space-y-4">
+                    <h1 class="text-2xl md:text-3xl font-extrabold text-slate-800">안녕하세요!</h1>
+                    <div class="flex flex-wrap items-center justify-center gap-3 md:gap-4 py-2">
+                        <!-- '사람' Button -->
+                        <button onclick="openModal('person-modal')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-5 py-2.5 rounded-2xl font-bold text-lg md:text-xl transition-all duration-300 transform hover:scale-110 active:scale-95 shadow-sm border border-slate-300/60 flex items-center space-x-2">
+                            <i class="fa-solid fa-user text-slate-500"></i>
+                            <span>사람</span>
+                        </button>
+
+                        <!-- '중학생' Button (Larger, Colored) -->
+                        <button onclick="openModal('school-modal')" class="bg-gradient-to-r from-brand-blue to-blue-600 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 rounded-3xl font-extrabold text-2xl md:text-3xl transition-all duration-300 transform hover:scale-110 active:scale-95 shadow-xl shadow-blue-500/30 border-2 border-amber-300 flex items-center space-x-3 ring-4 ring-blue-100">
+                            <i class="fa-solid fa-graduation-cap text-amber-300 text-2xl md:text-3xl animate-bounce-gentle"></i>
+                            <span>중학생</span>
+                            <span class="text-xs bg-amber-400 text-slate-900 font-black px-2 py-0.5 rounded-full uppercase tracking-wider ml-1">Click!</span>
+                        </button>
+
+                        <!-- '남자' Button -->
+                        <button onclick="openModal('male-modal')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-5 py-2.5 rounded-2xl font-bold text-lg md:text-xl transition-all duration-300 transform hover:scale-110 active:scale-95 shadow-sm border border-slate-300/60 flex items-center space-x-2">
+                            <i class="fa-solid fa-mars text-slate-500"></i>
+                            <span>남자</span>
+                        </button>
+                    </div>
+                    <p class="text-xs text-slate-500 font-medium">✨ '중학생' 버튼을 누르면 인천검단가온중학교 소개를 볼 수 있어요!</p>
+                </div>
+
+                <!-- Subtitle -->
+                <p class="text-lg md:text-xl text-slate-600 font-medium max-w-xl mx-auto pt-2">
+                    솔직함과 성장 가능성을 품은 저의 이야기를 들어보시겠어요?
+                </p>
+
+                <!-- Quick CTA -->
+                <div class="pt-2">
+                    <a href="#focus" class="inline-flex items-center space-x-2 bg-slate-900 hover:bg-slate-800 text-white font-bold px-6 py-3.5 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200">
+                        <span>나의 핵심 키워드 보기</span>
+                        <i class="fa-solid fa-arrow-down animate-bounce-gentle"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Identity Cards Section (3 Main Keywords) -->
+        <section id="about" class="max-w-5xl mx-auto px-4 py-16">
+            <div class="text-center mb-12">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-brand-blue mb-2">IDENTITY KEYWORDS</h2>
+                <h3 class="text-2xl md:text-3xl font-bold text-slate-900">나를 정의하는 3가지 요소</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1: 사람 -->
+                <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm transition-all duration-300 card-glow flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 bg-amber-50 text-amber-500 rounded-2xl flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-md">기본 정체성</span>
+                        <h4 class="text-2xl font-bold text-slate-900 mt-3 mb-2">사람</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            생각하고, 느끼며, 타인과 공감하고 성장해나가는 존엄한 한 인간으로서의 저를 의미합니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2: 중학생 -->
+                <div class="bg-gradient-to-b from-brand-blue to-blue-700 text-white p-8 rounded-3xl shadow-xl transition-all duration-300 card-glow transform md:-translate-y-3 relative overflow-hidden flex flex-col justify-between border-2 border-amber-400">
+                    <!-- Highlight Badge -->
+                    <div class="absolute top-4 right-4 bg-amber-400 text-slate-900 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider shadow">
+                        <i class="fa-solid fa-star mr-1"></i> 가장 나다운 모습
+                    </div>
+
+                    <div>
+                        <div class="w-14 h-14 bg-white/20 backdrop-blur-md text-white rounded-2xl flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-school"></i>
+                        </div>
+                        <span class="text-xs font-bold text-blue-100 bg-white/20 px-2.5 py-1 rounded-md">현재의 삶 / 핵심</span>
+                        <h4 class="text-3xl font-extrabold mt-3 mb-2">중학생 <span class="text-amber-300 text-xl font-normal">(1학년)</span></h4>
+                        <p class="text-blue-100 text-sm leading-relaxed">
+                            새로운 배움과 도전이 시작되는 시기! 초등학교를 지나 청소년으로서의 첫걸음을 내딛고 있는 저의 가장 중요한 현재 모습입니다.
+                        </p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-white/20 flex flex-wrap items-center justify-between text-xs text-blue-100 gap-2">
+                        <span>#성장 #배움 #청소년</span>
+                        <span class="bg-white/20 text-amber-300 font-bold px-2.5 py-1 rounded-full border border-amber-300/40">#인천검단가온중</span>
+                    </div>
+                </div>
+
+                <!-- Card 3: 남자 -->
+                <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm transition-all duration-300 card-glow flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 bg-sky-50 text-sky-600 rounded-2xl flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-mars"></i>
+                        </div>
+                        <span class="text-xs font-bold text-sky-600 bg-sky-50 px-2.5 py-1 rounded-md">고유한 특성</span>
+                        <h4 class="text-2xl font-bold text-slate-900 mt-3 mb-2">남자</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            나만의 개성과 당당함을 가지고 솔직하게 세상을 살아가는 소년으로서의 정체성입니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Focus Section: Why Middle Schooler is Most Important -->
+        <section id="focus" class="bg-white py-16 border-y border-slate-100">
+            <div class="max-w-4xl mx-auto px-4">
+                <div class="bg-slate-900 text-white rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+                    <div class="absolute -right-10 -bottom-10 opacity-10 text-white text-9xl">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                    </div>
+
+                    <div class="relative z-10 space-y-6">
+                        <div class="inline-flex items-center space-x-2 text-amber-400 text-sm font-bold">
+                            <i class="fa-solid fa-bullseye"></i>
+                            <span>핵심 포인트</span>
+                        </div>
+                        <h3 class="text-2xl md:text-4xl font-extrabold leading-tight">
+                            "왜 <span class="text-amber-400">중학생</span>이라는 점을<br class="hidden sm:block"> 가장 보여주고 싶을까요?"
+                        </h3>
+                        <p class="text-slate-300 text-base md:text-lg leading-relaxed font-light">
+                            초등학교를 졸업하고 청소년이라는 새로운 세상으로 진입한 <strong class="text-white font-semibold">인천검단가온중학교 1학년</strong>은 
+                            매일 새로운 도전을 겪으며 빠르게 성장하는 시기입니다. 
+                            <br><br>
+                            사람이자 남자라는 기본 바탕 위에, <span class="underline decoration-amber-400 underline-offset-4 font-semibold text-white">지금 현재 나의 목표, 배움, 그리고 일상의 중심</span>이 바로 '중학생'이라는 정체성에 담겨있기 때문입니다.
+                        </p>
+
+                        <!-- Dynamic Switcher -->
+                        <div class="pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <span class="text-xs text-slate-400">버튼을 눌러 저의 현재 상태를 확인해보세요!</span>
+                            <div class="flex space-x-2 bg-slate-800 p-1 rounded-xl w-full sm:w-auto">
+                                <button onclick="setTab('person')" id="btn-person" class="tab-btn px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">사람</button>
+                                <button onclick="setTab('student')" id="btn-student" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold text-white bg-brand-blue transition shadow">중학생 (선택됨)</button>
+                                <button onclick="setTab('male')" id="btn-male" class="tab-btn px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">남자</button>
+                            </div>
+                        </div>
+
+                        <!-- Dynamic Tab Message Box -->
+                        <div id="tab-content" class="bg-slate-800/80 p-4 rounded-xl text-sm text-slate-200 border border-slate-700">
+                            🎓 <strong>[중학생 mode]</strong> 인천검단가온중학교에서 새로운 과목, 새로운 친구들과 함께 성장하고 있는 중1입니다!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reason Section -->
+        <section id="reason" class="max-w-4xl mx-auto px-4 py-16">
+            <div class="text-center mb-10">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-brand-blue mb-2">MY STATEMENT</h2>
+                <h3 class="text-2xl md:text-3xl font-bold text-slate-900">제가 저를 이렇게 표현하는 이유</h3>
+            </div>
+
+            <div class="bg-gradient-to-r from-blue-50 via-sky-50 to-amber-50 p-8 rounded-3xl border border-slate-200/60 shadow-sm text-center">
+                <i class="fa-solid fa-quote-left text-3xl text-brand-blue opacity-40 mb-4 block"></i>
+                <p class="text-xl md:text-2xl font-bold text-slate-800 leading-snug max-w-2xl mx-auto">
+                    "나는 사람이고 중학생이고 남자이기 때문입니다."
+                </p>
+                <div class="w-12 h-1 bg-brand-blue mx-auto my-6 rounded-full"></div>
+                <p class="text-slate-600 text-sm max-w-lg mx-auto">
+                    복잡한 수식어 대신, 있는 그대로의 진솔한 내 모습을 명확하게 표현하고자 했습니다. 과장 없이 솔직하게 나의 위치와 모습을 인정하고 다가가겠습니다.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal: 인천검단가온중학교 소개 (School Modal) -->
+    <div id="school-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl transform scale-95 transition-all duration-300 relative border border-slate-100">
+            <button onclick="closeModal('school-modal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="flex items-center space-x-3 mb-4">
+                <div class="w-12 h-12 bg-blue-100 text-brand-blue rounded-2xl flex items-center justify-center text-xl font-bold">
+                    <i class="fa-solid fa-school"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-brand-blue bg-blue-50 px-2.5 py-0.5 rounded-full">나의 학교</span>
+                    <h3 class="text-2xl font-bold text-slate-900">인천검단가온중학교</h3>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-slate-600 text-sm leading-relaxed my-6">
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                    <p class="font-semibold text-slate-800 mb-1">🏫 배움과 성장의 공간</p>
+                    <p>인천광역시 서구 검단신도시에 위치한 인천검단가온중학교는 학생들이 꿈을 키우고 서로 존중하며 함께 성장하는 배움터입니다.</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 text-center">
+                    <div class="p-3 bg-blue-50/60 rounded-xl border border-blue-100">
+                        <span class="block text-xs text-slate-500 font-medium">현재 학년</span>
+                        <span class="font-extrabold text-brand-blue text-base">중학교 1학년</span>
+                    </div>
+                    <div class="p-3 bg-amber-50/60 rounded-xl border border-amber-100">
+                        <span class="block text-xs text-slate-500 font-medium">핵심 키워드</span>
+                        <span class="font-extrabold text-amber-600 text-base">도전 & 성장</span>
+                    </div>
+                </div>
+
+                <p class="text-xs text-slate-500 text-center pt-2">
+                    "중학교 1학년으로서 검단가온중에서 매일 새로운 가치와 배움을 쌓아가고 있습니다!"
+                </p>
+            </div>
+
+            <button onclick="closeModal('school-modal')" class="w-full bg-brand-blue hover:bg-blue-700 text-white font-bold py-3.5 rounded-2xl transition shadow-lg shadow-blue-500/20">
+                확인했습니다
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal: 사람 (Person Modal) -->
+    <div id="person-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl transform scale-95 transition-all duration-300 relative">
+            <button onclick="closeModal('person-modal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center space-y-3 py-4">
+                <div class="w-16 h-16 bg-amber-100 text-amber-500 rounded-2xl flex items-center justify-center text-3xl mx-auto">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900">사람</h3>
+                <p class="text-slate-600 text-sm">타인을 배려하고 감정을 공유하며 함께 살아가는 따뜻한 한 사람입니다.</p>
+            </div>
+            <button onclick="closeModal('person-modal')" class="w-full bg-slate-900 text-white font-bold py-3 rounded-xl">닫기</button>
+        </div>
+    </div>
+
+    <!-- Modal: 남자 (Male Modal) -->
+    <div id="male-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl transform scale-95 transition-all duration-300 relative">
+            <button onclick="closeModal('male-modal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center space-y-3 py-4">
+                <div class="w-16 h-16 bg-sky-100 text-sky-600 rounded-2xl flex items-center justify-center text-3xl mx-auto">
+                    <i class="fa-solid fa-mars"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900">남자</h3>
+                <p class="text-slate-600 text-sm">당당하고 씩씩하게 자신만의 멋을 찾아 나아가는 소년입니다.</p>
+            </div>
+            <button onclick="closeModal('male-modal')" class="w-full bg-slate-900 text-white font-bold py-3 rounded-xl">닫기</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-8 text-center text-xs text-slate-500">
+        <div class="max-w-5xl mx-auto px-4 space-y-2">
+            <p class="font-semibold text-slate-700">인천검단가온중학교 1학년 학생의 자기소개 웹페이지</p>
+            <p>본 페이지는 사용자가 제공한 사실(사람, 중학생, 남자, 인천검단가온중)만을 기반으로 제작되었습니다.</p>
+            <p class="text-slate-400 mt-4">&copy; Self Introduction Page. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        function setTab(type) {
+            const btnPerson = document.getElementById('btn-person');
+            const btnStudent = document.getElementById('btn-student');
+            const btnMale = document.getElementById('btn-male');
+            const tabContent = document.getElementById('tab-content');
+
+            [btnPerson, btnStudent, btnMale].forEach(btn => {
+                btn.className = "tab-btn px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition";
+            });
+
+            if(type === 'person') {
+                btnPerson.className = "tab-btn px-4 py-2 rounded-lg text-xs font-bold text-white bg-amber-500 transition shadow";
+                tabContent.innerHTML = "🙋‍♂️ <strong>[사람 mode]</strong> 생각을 나누고 배려하며 함께 살아가는 따뜻한 사람입니다.";
+            } else if(type === 'student') {
+                btnStudent.className = "tab-btn px-4 py-2 rounded-lg text-xs font-bold text-white bg-brand-blue transition shadow";
+                tabContent.innerHTML = "🎓 <strong>[중학생 mode]</strong> 인천검단가온중학교에서 새로운 과목, 새로운 친구들과 함께 성장하고 있는 중1입니다!";
+            } else if(type === 'male') {
+                btnMale.className = "tab-btn px-4 py-2 rounded-lg text-xs font-bold text-white bg-sky-600 transition shadow";
+                tabContent.innerHTML = "👦 <strong>[남자 mode]</strong> 씩씩하고 당당하게 나만의 길을 나아가는 중1 소년입니다.";
+            }
+        }
+
+        // Modal Handlers
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if(modal) {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modal.children[0].classList.remove('scale-95');
+                modal.children[0].classList.add('scale-100');
+            }
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if(modal) {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                modal.children[0].classList.remove('scale-100');
+                modal.children[0].classList.add('scale-95');
+            }
+        }
+    </script>
+</body>
+</html>

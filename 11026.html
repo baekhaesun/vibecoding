@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 정체성 소개 | 중1 남학생</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Noto Sans KR) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans KR', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0f172a',
+                            card: '#1e293b',
+                            accent: '#38bdf8',
+                            glow: '#0284c7',
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-short': 'bounceShort 1s infinite',
+                    },
+                    keyframes: {
+                        bounceShort: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-6px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #f8fafc;
+            font-family: 'Noto Sans KR', sans-serif;
+            overflow-x: hidden;
+        }
+        .glow-effect {
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.35);
+        }
+        .glow-text {
+            text-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+        }
+        .card-border {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .highlight-card {
+            border: 2px solid #38bdf8;
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.25);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-sky-500 selection:text-white">
+
+    <!-- Header / Navbar -->
+    <header class="w-full py-6 px-6 border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid font-black text-sky-400 text-xl fa-user-astronaut"></i>
+                <span class="font-bold text-lg tracking-wider text-slate-200">IDENTITY PROFILE</span>
+            </div>
+            <div class="text-xs bg-sky-950 text-sky-300 font-semibold px-3 py-1.5 rounded-full border border-sky-800">
+                <i class="fa-solid fa-graduation-cap mr-1"></i> 중학교 1학년
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-4xl mx-auto px-6 py-12 flex-grow flex flex-col justify-center w-full">
+
+        <!-- Hero Section: Main Title & Core Hook -->
+        <section class="text-center mb-16">
+            <div class="inline-block mb-4 px-4 py-1.5 bg-slate-800/80 rounded-full text-slate-300 text-sm font-medium border border-slate-700">
+                나를 정의하는 3가지 키워드
+            </div>
+            <h1 class="text-4xl md:text-6xl font-black tracking-tight mb-6 leading-tight">
+                안녕하세요! <br class="sm:hidden">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-blue-400 to-indigo-400 glow-text">
+                    [중학생, 남자, 사람]
+                </span>입니다.
+            </h1>
+            <p class="text-slate-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+                나를 가장 잘 표현할 수 있는 키워드 세 가지를 직접 골라보았습니다.<br class="hidden md:inline">
+                그중에서도 저를 가장 명확하게 드러내는 핵심 키워드를 함께 소개합니다!
+            </p>
+        </section>
+
+        <!-- Key Highlight Section: Primary Identity (남자) -->
+        <section class="mb-14">
+            <div class="relative bg-slate-900/90 rounded-3xl p-8 md:p-10 highlight-card transition-all duration-300 hover:scale-[1.01]">
+                <!-- Badge for Main Focus -->
+                <div class="absolute -top-4 left-8 bg-gradient-to-r from-sky-500 to-blue-600 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg flex items-center gap-1.5">
+                    <i class="fa-solid fa-star text-amber-300"></i>
+                    <span>가장 강조하고 싶은 나의 모습</span>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center gap-8 mt-2">
+                    <!-- Icon Display -->
+                    <div class="w-28 h-28 md:w-36 md:h-36 rounded-2xl bg-gradient-to-br from-sky-500/20 to-blue-600/30 flex items-center justify-center border border-sky-400/40 shrink-0 glow-effect">
+                        <i class="fa-solid fa-mars text-6xl md:text-7xl text-sky-400 animate-pulse-slow"></i>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="flex-1 text-center md:text-left">
+                        <div class="flex items-center justify-center md:justify-start gap-3 mb-2">
+                            <h2 class="text-3xl font-black text-white">남자</h2>
+                            <span class="bg-sky-500/20 text-sky-300 text-xs font-bold px-2.5 py-1 rounded-md border border-sky-500/30">KEY 01</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-sky-400 mb-3">
+                            "성별이 남자라서 골랐다"
+                        </h3>
+                        <p class="text-slate-300 leading-relaxed text-sm md:text-base bg-slate-800/50 p-4 rounded-xl border border-slate-700/50">
+                            제가 저를 표현할 때 **가장 자신 있게 뽑은 정체성**입니다. <br>
+                            솔직하고 에너지 넘치는 나의 있는 그대로의 모습을 대표하는 가장 중요한 키워드입니다!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Secondary Identities Section Grid (중학생 & 사람) -->
+        <section class="mb-12">
+            <h3 class="text-xl font-bold text-slate-300 mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-shapes text-sky-400"></i>
+                나를 구성하는 또 다른 두 가지
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Secondary Card 1: 중학생 -->
+                <div class="bg-slate-900/60 rounded-2xl p-6 card-border hover:border-slate-600 transition-all duration-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center">
+                                <i class="fa-solid fa-school text-indigo-400 text-xl"></i>
+                            </div>
+                            <span class="bg-slate-800 text-slate-400 text-xs font-semibold px-2.5 py-1 rounded-md">KEY 02</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-1">중학생</h4>
+                        <p class="text-xs font-semibold text-indigo-400 mb-3">"중학교 1학년이라서 골랐다"</p>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            올해 중학교 1학년에 올라와 새로운 환경에서 배우고 성장해 나가고 있는 정체성입니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Secondary Card 2: 사람 -->
+                <div class="bg-slate-900/60 rounded-2xl p-6 card-border hover:border-slate-600 transition-all duration-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-teal-500/10 border border-teal-500/30 flex items-center justify-center">
+                                <i class="fa-solid fa-user-large text-teal-400 text-xl"></i>
+                            </div>
+                            <span class="bg-slate-800 text-slate-400 text-xs font-semibold px-2.5 py-1 rounded-md">KEY 03</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-1">사람</h4>
+                        <p class="text-xs font-semibold text-teal-400 mb-3">"사람이라서 골랐다"</p>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            생각하고, 느끼고, 다른 사람들과 소통하며 함께 살아가는 존재로서 선택한 가장 근본적인 정체성입니다.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Interactive Quote Card -->
+        <section class="bg-gradient-to-r from-slate-900 via-sky-950/40 to-slate-900 rounded-2xl p-6 text-center border border-sky-900/50">
+            <p class="text-slate-300 font-medium text-sm md:text-base">
+                <i class="fa-solid fa-quote-left text-sky-500 mr-2 opacity-60"></i>
+                중학교 1학년이자, 주관을 가진 남자, 그리고 사람으로서 매일 한 걸음씩 성장하겠습니다!
+                <i class="fa-solid fa-quote-right text-sky-500 ml-2 opacity-60"></i>
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-6 border-t border-slate-800/80 text-center text-xs text-slate-500">
+        <div class="max-w-4xl mx-auto px-6">
+            <p>© 자기소개 웹페이지 | 제공된 사실만을 바탕으로 제작되었습니다.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자신감 뿜뿜! 중1 자기소개</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Black Han Sans & Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brightSky: '#00A8FF',
+                        sunnyYellow: '#FFC312',
+                        vibrantOrange: '#FF7979',
+                        energeticOrange: '#FF5252',
+                        lightBg: '#F4F7FC',
+                    },
+                    fontFamily: {
+                        heading: ['"Black Han Sans"', 'sans-serif'],
+                        body: ['"Noto Sans KR"', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-slow': 'bounce 2s infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #F4F7FC;
+            color: #2D3748;
+            overflow-x: hidden;
+        }
+        .font-heading {
+            font-family: 'Black Han Sans', sans-serif;
+        }
+        .pop-card-shadow {
+            box-shadow: 0 10px 30px -5px rgba(0, 168, 255, 0.15), 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        .pop-card-shadow-orange {
+            box-shadow: 0 10px 30px -5px rgba(255, 82, 82, 0.25), 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        .gradient-border-light {
+            position: relative;
+            background: #FFFFFF;
+            border-radius: 1.25rem;
+        }
+        .gradient-border-light::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(135deg, #FF5252, #FFC312, #00A8FF);
+            border-radius: 1.4rem;
+            z-index: -1;
+            opacity: 0.9;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .gradient-border-light:hover::before {
+            opacity: 1;
+            transform: scale(1.01);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-brightSky selection:text-white bg-gradient-to-b from-sky-50 via-white to-sky-100/50">
+
+    <!-- Header / Navbar -->
+    <header class="w-full py-5 px-6 max-w-5xl mx-auto flex justify-between items-center z-10">
+        <div class="flex items-center gap-2">
+            <span class="bg-gradient-to-r from-brightSky to-blue-600 text-white font-heading text-sm sm:text-base px-4 py-1.5 rounded-full uppercase tracking-wider shadow-md">
+                ⚡ M.S 1st Grade
+            </span>
+        </div>
+        <div class="text-xs sm:text-sm font-bold text-sky-800 bg-white/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-sky-200 shadow-sm flex items-center gap-1.5">
+            <i class="fa-solid fa-bolt text-sunnyYellow animate-pulse-fast text-base"></i> 100% 에너지 충전 완료
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="w-full max-w-4xl mx-auto px-4 py-6 flex-grow flex flex-col justify-center items-center gap-8">
+
+        <!-- Hero Title Section -->
+        <section class="text-center space-y-4">
+            <div class="inline-block animate-bounce-slow">
+                <span class="bg-white text-brightSky border-2 border-brightSky/30 text-sm md:text-base px-5 py-2 rounded-full font-bold shadow-md inline-flex items-center gap-2">
+                    ✨ 세상을 향해 외치는 밝은 성격의 남학생!
+                </span>
+            </div>
+            
+            <h1 class="font-heading text-5xl sm:text-6xl md:text-7xl tracking-wide leading-tight text-slate-800">
+                자신감 <span class="text-transparent bg-clip-text bg-gradient-to-r from-energeticOrange via-amber-500 to-brightSky">뿜뿜!</span><br>
+                나를 소개합니다
+            </h1>
+
+            <p class="text-slate-600 text-base md:text-lg max-w-xl mx-auto font-medium leading-relaxed">
+                언제 어디서나 활기차고 당당하게! 에너지 가득한 중학교 1학년 소년의 이야기입니다.
+            </p>
+        </section>
+
+        <!-- Confidence Gauge Widget -->
+        <section class="w-full bg-white/90 border border-sky-100 rounded-2xl p-6 pop-card-shadow max-w-2xl backdrop-blur-sm">
+            <div class="flex justify-between items-center mb-3">
+                <span class="font-bold text-slate-700 text-base sm:text-lg flex items-center gap-2">
+                    <i class="fa-solid fa-fire text-energeticOrange text-xl animate-pulse-fast"></i> 나의 현재 자신감 지수
+                </span>
+                <span id="confidenceNumber" class="font-heading text-3xl text-brightSky transition-transform duration-200">0%</span>
+            </div>
+            
+            <!-- Progress Bar -->
+            <div class="w-full bg-sky-100 h-6 rounded-full overflow-hidden p-1 border border-sky-200 relative shadow-inner">
+                <div id="confidenceBar" class="bg-gradient-to-r from-sunnyYellow via-energeticOrange to-brightSky h-full rounded-full transition-all duration-1000 ease-out w-0 shadow-md"></div>
+            </div>
+            
+            <div class="mt-4 flex items-center justify-between">
+                <span class="text-xs font-semibold text-slate-400">버튼을 눌러 자신감을 더 채워보세요!</span>
+                <button onclick="boostConfidence()" class="bg-gradient-to-r from-brightSky to-blue-500 hover:from-blue-500 hover:to-brightSky text-white font-bold text-sm px-4 py-2 rounded-xl transition-all duration-200 active:scale-95 shadow-md flex items-center gap-2">
+                    <i class="fa-solid fa-rocket text-sunnyYellow"></i> 자신감 부스터!
+                </button>
+            </div>
+        </section>
+
+        <!-- Dynamic Identity Cards Grid -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+            
+            <!-- Card 1: Middle Schooler -->
+            <div class="bg-white border border-sky-100 rounded-2xl p-6 flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 pop-card-shadow">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-sky-100 border border-sky-200 flex items-center justify-center text-brightSky text-2xl mb-4 shadow-sm">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <span class="text-xs font-bold text-brightSky tracking-wider uppercase">Identity 01</span>
+                    <h3 class="font-heading text-2xl text-slate-800 mt-1 mb-3">중학교 1학년</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        새로운 출발선에 선 <strong class="text-slate-900 font-bold">중학생 남학생</strong>입니다! 매일 새로움에 도전하며 활기차게 학교 생활을 즐기고 있습니다.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                    <span class="text-xs text-slate-400">신입생 파워</span>
+                    <span class="text-xs font-bold text-brightSky bg-sky-50 px-2.5 py-1 rounded-md border border-sky-200">중학생</span>
+                </div>
+            </div>
+
+            <!-- Card 2: Presentation Confidence (Core Highlight) -->
+            <div class="gradient-border-light p-6 flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 md:col-span-1 pop-card-shadow-orange">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-red-100 border border-red-200 flex items-center justify-center text-energeticOrange text-2xl mb-4 shadow-sm">
+                        <i class="fa-solid fa-microphone-lines"></i>
+                    </div>
+                    <span class="text-xs font-bold text-energeticOrange tracking-wider uppercase">Core Highlight</span>
+                    <h3 class="font-heading text-2xl text-slate-800 mt-1 mb-3">발표는 나의 행복!</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        남들 앞에 서서 내 생각과 의견을 시원하게 전하는 순간! <strong class="text-energeticOrange font-bold">발표할 때가 항상 너무 행복할 만큼</strong> 자신감이 차오릅니다!
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                    <span class="text-xs text-slate-400">발표 모드 ON</span>
+                    <span class="text-xs font-bold text-white bg-energeticOrange px-2.5 py-1 rounded-md shadow-sm">자신감 뿜뿜</span>
+                </div>
+            </div>
+
+            <!-- Card 3: Cute Charm Story -->
+            <div class="bg-white border border-sky-100 rounded-2xl p-6 flex flex-col justify-between hover:-translate-y-2 transition-all duration-300 pop-card-shadow">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-amber-100 border border-amber-200 flex items-center justify-center text-amber-500 text-2xl mb-4 shadow-sm">
+                        <i class="fa-solid fa-face-smile-beam"></i>
+                    </div>
+                    <span class="text-xs font-bold text-amber-500 tracking-wider uppercase">Identity 02</span>
+                    <h3 class="font-heading text-2xl text-slate-800 mt-1 mb-3">귀여운 호감형 매력</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        이전 학교에서도 <strong class="text-slate-900 font-bold">친구들과 선생님들께 귀엽다는 소리</strong>를 많이 들었습니다. 넘치는 자신감과 특유의 친근함이 매력입니다!
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                    <span class="text-xs text-slate-400">이전 학교 인증</span>
+                    <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-md border border-amber-200">귀염둥이</span>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Dynamic Quote Banner -->
+        <section class="w-full bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-500 rounded-2xl p-8 text-center text-white relative overflow-hidden shadow-lg">
+            <div class="absolute -right-8 -bottom-8 text-8xl text-white/10 font-heading pointer-events-none select-none">
+                HAPPY
+            </div>
+            <h2 class="font-heading text-2xl sm:text-3xl mb-3 drop-shadow-sm">
+                "언제나 당당하게, 또 기분 좋게 표현하는 나!"
+            </h2>
+            <p class="text-sky-100 text-sm sm:text-base max-w-lg mx-auto font-medium">
+                중학교 1학년으로서 맞이할 다양한 매일매일을 귀여움과 엄청난 자신감으로 밝게 빛내겠습니다!
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-6 text-center text-slate-400 text-xs border-t border-sky-100 bg-white/50">
+        <p>자신감 뿜뿜 중1 남학생의 자기소개 페이지</p>
+    </footer>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        // Confidence Bar Logic
+        let confidenceValue = 100;
+        
+        function updateGauge(val) {
+            const bar = document.getElementById('confidenceBar');
+            const num = document.getElementById('confidenceNumber');
+            
+            const displayVal = Math.min(val, 200);
+            bar.style.width = Math.min(displayVal, 100) + '%';
+            num.innerText = displayVal + '%';
+            
+            if (displayVal > 100) {
+                num.classList.remove('text-brightSky');
+                num.classList.add('text-energeticOrange', 'animate-pulse');
+            }
+        }
+
+        function boostConfidence() {
+            confidenceValue += 20;
+            updateGauge(confidenceValue);
+            
+            const num = document.getElementById('confidenceNumber');
+            num.classList.add('scale-125');
+            setTimeout(() => {
+                num.classList.remove('scale-125');
+            }, 200);
+        }
+
+        // Trigger gauge filling animation on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                updateGauge(100);
+            }, 300);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ko" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLAYER PROFILE - 중1 게이머 자기소개</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gaming: {
+                            cyan: '#00f3ff',
+                            purple: '#b026ff',
+                            neon: '#39ff14',
+                            dark: '#0B0F19',
+                            card: '#161F33',
+                            border: '#2A3655'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans KR', 'sans-serif']
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 15px rgba(0, 243, 255, 0.4), inset 0 0 15px rgba(0, 243, 255, 0.2)' },
+                            '50%': { boxShadow: '0 0 30px rgba(0, 243, 255, 0.8), inset 0 0 25px rgba(0, 243, 255, 0.4)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-8px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;800;900&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #0B0F19;
+            color: #E2E8F0;
+            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Glassmorphism Effect */
+        .glass-card {
+            background: rgba(22, 31, 51, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .light .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        /* Spotlight Mode Overlay */
+        #spotlight-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+        #spotlight-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .highlight-focus {
+            z-index: 50 !important;
+            transform: scale(1.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Neon Border Animations */
+        .neon-border-primary {
+            border: 2px solid #00f3ff;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0F19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2A3655;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f3ff;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-gaming-cyan selection:text-black">
+
+    <!-- Ambient Grid Canvas Background -->
+    <canvas id="bg-canvas" class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none opacity-40"></canvas>
+
+    <!-- Fireworks Canvas Overlay -->
+    <canvas id="fireworks-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-50"></canvas>
+
+    <!-- Spotlight Dimmer Overlay -->
+    <div id="spotlight-overlay" class="fixed inset-0 bg-black/80 z-40 flex flex-col items-center justify-center p-4">
+        <div class="text-gaming-cyan text-sm font-orbitron tracking-widest mb-2 animate-bounce">
+            <i class="fa-solid fa-crosshair mr-1"></i> FOCUS MODE ACTIVE
+        </div>
+        <p class="text-white text-lg font-bold mb-6 text-center">핵심 정체성: 중학교 1학년 [중학생]</p>
+        <button onclick="toggleSpotlight()" class="px-6 py-2 bg-gaming-cyan/20 border border-gaming-cyan text-gaming-cyan rounded-full hover:bg-gaming-cyan hover:text-black transition-all font-bold">
+            <i class="fa-solid fa-xmark mr-1"></i> 포커스 해제
+        </button>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="w-full border-b border-gray-800 dark:border-gaming-border/50 backdrop-blur-md sticky top-0 z-30 bg-gaming-dark/80">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Logo / Tag -->
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-gaming-cyan to-gaming-purple flex items-center justify-center text-black font-extrabold font-orbitron shadow-lg shadow-gaming-cyan/20">
+                    M1
+                </div>
+                <div>
+                    <span class="font-orbitron font-extrabold text-lg tracking-wider text-white dark:text-white">PLAYER CARD</span>
+                    <span class="text-xs text-gaming-cyan block font-mono">STATUS: ONLINE</span>
+                </div>
+            </div>
+
+            <!-- Controls (Sound & Theme Toggle) -->
+            <div class="flex items-center gap-3">
+                <!-- Sound Effects Toggle -->
+                <button id="sound-btn" onclick="toggleSound()" class="p-2.5 rounded-lg bg-gray-800/80 border border-gray-700 text-gray-300 hover:text-gaming-cyan hover:border-gaming-cyan transition-all" title="사운드 효과 켜기/끄기">
+                    <i id="sound-icon" class="fa-solid fa-volume-high text-gaming-cyan"></i>
+                </button>
+
+                <!-- Dark / Light Theme Switcher -->
+                <button onclick="toggleTheme()" class="p-2.5 rounded-lg bg-gray-800/80 border border-gray-700 text-gray-300 hover:text-gaming-purple hover:border-gaming-purple transition-all" title="테마 변경">
+                    <i id="theme-icon" class="fa-solid fa-moon text-gaming-purple"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full space-y-10">
+
+        <!-- Top Profile Banner / Character Header -->
+        <section class="glass-card rounded-2xl p-6 md:p-8 relative overflow-hidden border-l-4 border-l-gaming-cyan shadow-2xl">
+            <!-- Background Glow Blur -->
+            <div class="absolute -right-20 -top-20 w-64 h-64 bg-gaming-cyan/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-20 -bottom-20 w-64 h-64 bg-gaming-purple/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="flex flex-col md:flex-row gap-6 items-center justify-between relative z-10">
+                <!-- Left Avatar & Basic Stats -->
+                <div class="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left">
+                    <div class="relative">
+                        <!-- Animated Level Ring -->
+                        <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-gradient-to-tr from-gaming-cyan via-gaming-purple to-gaming-neon p-1 animate-pulse">
+                            <div class="w-full h-full bg-gaming-dark rounded-xl flex flex-col items-center justify-center p-2 relative overflow-hidden">
+                                <i class="fa-solid fa-gamepad text-3xl sm:text-4xl text-gaming-cyan mb-1 animate-float"></i>
+                                <span class="text-[10px] font-orbitron font-bold text-gray-400">CLASS</span>
+                                <span class="text-xs font-black text-gaming-neon">BOY GAMER</span>
+                            </div>
+                        </div>
+                        <!-- Level Badge -->
+                        <div class="absolute -bottom-2 -right-2 bg-gaming-cyan text-black font-orbitron font-black text-xs px-2 py-0.5 rounded shadow-lg border border-white">
+                            LV. 1
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gaming-cyan/10 border border-gaming-cyan/30 text-gaming-cyan text-xs font-semibold mb-2">
+                            <i class="fa-solid fa-id-card"></i> 자기소개 프로필
+                        </div>
+                        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+                            안녕하세요! <span class="text-transparent bg-clip-text bg-gradient-to-r from-gaming-cyan via-blue-400 to-gaming-purple">중1 게이머</span> 입니다.
+                        </h1>
+                        <p class="text-gray-400 text-sm sm:text-base mt-2 max-w-xl">
+                            나를 가장 잘 나타내는 <strong class="text-gaming-cyan font-bold">3가지 핵심 키워드</strong>로 만들어진 프로필 카드입니다. 즐겁게 확인해보세요!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Action Button: Spotlight Mode Trigger -->
+                <div class="w-full md:w-auto flex flex-col sm:flex-row md:flex-col gap-3 justify-center">
+                    <button id="spotlight-btn" onclick="toggleSpotlight()" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-gradient-to-r from-gaming-cyan to-blue-600 text-black font-extrabold font-orbitron text-sm hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-gaming-cyan/20 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-bolt text-lg"></i>
+                        <span>[중학생] 키워드 집중 조명</span>
+                    </button>
+                    <button onclick="playBuffEffect()" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gaming-card border border-gaming-border text-gray-300 hover:text-white hover:border-gaming-purple transition-all text-xs font-semibold flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles text-gaming-purple"></i>
+                        <span>에너지 버프 발동!</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Identity Keywords Section (3 Main Cards) -->
+        <section class="space-y-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-cubes text-gaming-cyan"></i>
+                    <span>3 CORE KEYWORDS</span>
+                </h2>
+                <span class="text-xs text-gray-400 font-mono">* 가장 중요한 정체성에 ⭐ 표식이 되어있습니다.</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!-- 1. 중학생 CARD (PRIMARY SPOTLIGHT HIGHLIGHT) -->
+                <div id="card-student" onclick="toggleMiddleSchoolDetail()" class="glass-card rounded-2xl p-6 relative transition-all duration-300 hover:-translate-y-1 md:col-span-1 border-2 border-gaming-cyan shadow-xl shadow-gaming-cyan/10 animate-pulse-glow flex flex-col justify-between cursor-pointer group">
+                    
+                    <!-- Top Ribbon -->
+                    <div class="absolute -top-3 right-4 bg-gradient-to-r from-gaming-cyan to-blue-500 text-black font-extrabold text-[11px] px-3 py-1 rounded-full uppercase tracking-wider font-orbitron shadow-md flex items-center gap-1">
+                        <i class="fa-solid fa-star"></i> PRIMARY HIGHLIGHT
+                    </div>
+
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-xl bg-gaming-cyan/20 border border-gaming-cyan flex items-center justify-center text-gaming-cyan text-2xl group-hover:scale-110 transition-transform">
+                                    🏫
+                                </div>
+                                <div>
+                                    <span class="text-xs font-mono text-gaming-cyan uppercase tracking-widest block font-bold">IDENTITY 01</span>
+                                    <h3 class="text-2xl font-black text-white flex items-center gap-2">
+                                        중학생
+                                        <span class="text-xs text-gaming-cyan font-normal font-sans group-hover:underline">(클릭 🎆)</span>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Level Indicator -->
+                        <div class="mb-4 bg-gaming-dark/60 rounded-lg p-2.5 border border-gaming-border/80">
+                            <div class="flex justify-between items-center text-xs font-mono mb-1">
+                                <span class="text-gray-300 font-bold">학년 상태:</span>
+                                <span class="text-gaming-cyan font-bold">LV.1 (중학교 1학년)</span>
+                            </div>
+                            <div class="w-full bg-gray-800 rounded-full h-2 overflow-hidden">
+                                <div class="bg-gradient-to-r from-gaming-cyan to-blue-400 h-2 rounded-full w-full"></div>
+                            </div>
+                        </div>
+
+                        <!-- Core Reason Description (Strictly grounded in user input) -->
+                        <div class="bg-gaming-dark/40 rounded-xl p-3.5 border border-gaming-border/50 text-sm leading-relaxed text-gray-200">
+                            <i class="fa-solid fa-quote-left text-gaming-cyan/40 mr-1"></i>
+                            <span class="font-semibold text-gaming-cyan">중학교 1학년</span>이라서 선택한 나를 표현하는 가장 중요한 핵심 키워드! 새로운 출발점이자 지금의 나를 설명하는 대표 정체성입니다.
+                        </div>
+
+                        <!-- Collapsible Detail Box: 인천검단가온중학교 1학년 -->
+                        <div id="student-detail-box" class="hidden mt-4 p-4 rounded-xl bg-gaming-dark/95 border-2 border-gaming-cyan shadow-lg shadow-gaming-cyan/30 animate-pulse-glow transition-all duration-300">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-bold text-gaming-cyan font-mono flex items-center gap-1">
+                                    <i class="fa-solid fa-graduation-cap"></i> 상세 정보
+                                </span>
+                                <span class="text-[10px] bg-gaming-cyan/20 text-gaming-cyan px-2 py-0.5 rounded font-mono font-bold">ACTIVE 🎉</span>
+                            </div>
+                            <p class="text-lg font-black text-white mb-1">
+                                🏫 <span class="text-gaming-cyan font-orbitron">인천검단가온중학교</span> 1학년
+                            </p>
+                            <p class="text-xs text-gray-300 leading-relaxed">
+                                인천검단가온중학교 1학년으로서 즐겁고 활기차게 학교 생활과 모험을 이어나가고 있습니다! 카드나 축하 버튼을 다시 누르면 축포가 멈춥니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Stat Meter -->
+                    <div class="mt-6 pt-4 border-t border-gaming-border/40">
+                        <div class="flex justify-between text-xs font-mono mb-1">
+                            <span class="text-gray-400">중학생 에너지는?</span>
+                            <span class="text-gaming-cyan font-bold stat-val">100%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 h-2.5 rounded-full overflow-hidden p-0.5 border border-gaming-border">
+                            <div class="stat-bar bg-gaming-cyan h-full rounded-full transition-all duration-1000 w-full shadow-sm shadow-gaming-cyan"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. 남자 CARD -->
+                <div class="glass-card rounded-2xl p-6 relative transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between border border-gaming-border">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-gaming-purple/20 border border-gaming-purple flex items-center justify-center text-gaming-purple text-2xl">
+                                👦
+                            </div>
+                            <div>
+                                <span class="text-xs font-mono text-gaming-purple uppercase tracking-widest block font-bold">IDENTITY 02</span>
+                                <h3 class="text-2xl font-black text-white">남자</h3>
+                            </div>
+                        </div>
+
+                        <!-- Sub Tag -->
+                        <div class="mb-4 bg-gaming-dark/60 rounded-lg p-2.5 border border-gaming-border/80">
+                            <div class="flex justify-between items-center text-xs font-mono">
+                                <span class="text-gray-300 font-bold">특징:</span>
+                                <span class="text-gaming-purple font-bold">솔직하고 자연스러운 모습</span>
+                            </div>
+                        </div>
+
+                        <!-- Core Reason Description -->
+                        <div class="bg-gaming-dark/40 rounded-xl p-3.5 border border-gaming-border/50 text-sm leading-relaxed text-gray-200">
+                            <i class="fa-solid fa-quote-left text-gaming-purple/40 mr-1"></i>
+                            있는 그대로의 나를 담백하게 나타내는 키워드! 거짓 없이 당당한 모습으로 사람들과 소통합니다.
+                        </div>
+                    </div>
+
+                    <!-- Bottom Stat Meter -->
+                    <div class="mt-6 pt-4 border-t border-gaming-border/40">
+                        <div class="flex justify-between text-xs font-mono mb-1">
+                            <span class="text-gray-400">솔직한 정체성</span>
+                            <span class="text-gaming-purple font-bold stat-val">100%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 h-2.5 rounded-full overflow-hidden p-0.5 border border-gaming-border">
+                            <div class="stat-bar bg-gaming-purple h-full rounded-full transition-all duration-1000 w-full shadow-sm shadow-gaming-purple"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. 게임 CARD -->
+                <div class="glass-card rounded-2xl p-6 relative transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between border border-gaming-border">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-gaming-neon/20 border border-gaming-neon flex items-center justify-center text-gaming-neon text-2xl">
+                                🎮
+                            </div>
+                            <div>
+                                <span class="text-xs font-mono text-gaming-neon uppercase tracking-widest block font-bold">IDENTITY 03</span>
+                                <h3 class="text-2xl font-black text-white">게임</h3>
+                            </div>
+                        </div>
+
+                        <!-- Sub Tag -->
+                        <div class="mb-4 bg-gaming-dark/60 rounded-lg p-2.5 border border-gaming-border/80">
+                            <div class="flex justify-between items-center text-xs font-mono">
+                                <span class="text-gray-300 font-bold">취미 및 관심사:</span>
+                                <span class="text-gaming-neon font-bold">게임을 좋아하는 마음</span>
+                            </div>
+                        </div>
+
+                        <!-- Core Reason Description -->
+                        <div class="bg-gaming-dark/40 rounded-xl p-3.5 border border-gaming-border/50 text-sm leading-relaxed text-gray-200">
+                            <i class="fa-solid fa-quote-left text-gaming-neon/40 mr-1"></i>
+                            게임을 좋아하고 즐기는 열정의 키워드! 재미있는 도전을 즐기고 집중하는 시간을 매우 좋아합니다.
+                        </div>
+                    </div>
+
+                    <!-- Bottom Stat Meter -->
+                    <div class="mt-6 pt-4 border-t border-gaming-border/40">
+                        <div class="flex justify-between text-xs font-mono mb-1">
+                            <span class="text-gray-400">게임을 향한 열정</span>
+                            <span class="text-gaming-neon font-bold stat-val">100%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 h-2.5 rounded-full overflow-hidden p-0.5 border border-gaming-border">
+                            <div class="stat-bar bg-gaming-neon h-full rounded-full transition-all duration-1000 w-full shadow-sm shadow-gaming-neon"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Interactive Quest / Stats Summary Box -->
+        <section class="glass-card rounded-2xl p-6 md:p-8 border border-gaming-border">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="space-y-2 text-center md:text-left">
+                    <span class="text-xs font-orbitron text-gaming-cyan tracking-widest font-bold uppercase">CHARACTER SUMMARY</span>
+                    <h3 class="text-xl md:text-2xl font-bold text-white">
+                        중학교 1학년으로서 펼쳐갈 신나는 모험!
+                    </h3>
+                    <p class="text-gray-400 text-sm max-w-xl">
+                        '중학생'이라는 핵심 정체성을 중심에 두고, 좋아하는 게임을 즐기며 멋지게 성장하는 중1 학생의 프로필 카드입니다.
+                    </p>
+                </div>
+
+                <!-- Interactive Skill Badges -->
+                <div class="flex flex-wrap justify-center gap-3">
+                    <div class="px-4 py-2 rounded-xl bg-gaming-dark border border-gaming-cyan/40 text-gaming-cyan text-xs font-bold font-mono flex items-center gap-2">
+                        <i class="fa-solid fa-school"></i> 중학교 1학년
+                    </div>
+                    <div class="px-4 py-2 rounded-xl bg-gaming-dark border border-gaming-purple/40 text-gaming-purple text-xs font-bold font-mono flex items-center gap-2">
+                        <i class="fa-solid fa-mars"></i> 남자
+                    </div>
+                    <div class="px-4 py-2 rounded-xl bg-gaming-dark border border-gaming-neon/40 text-gaming-neon text-xs font-bold font-mono flex items-center gap-2">
+                        <i class="fa-solid fa-gamepad"></i> 게임 애호가
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-gray-800 dark:border-gaming-border/50 py-6 text-center text-xs text-gray-500 font-mono">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div>
+                © 2026 PLAYER PROFILE CARD — 중학교 1학년 자기소개
+            </div>
+            <div class="flex items-center gap-4 text-gray-400">
+                <span class="hover:text-gaming-cyan transition-colors">LEVEL: 1</span>
+                <span>•</span>
+                <span class="hover:text-gaming-cyan transition-colors">KEYWORD: 중학생</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Web Audio API & Interactive JavaScript -->
+    <script>
+        // Sound FX Toggle State
+        let soundEnabled = true;
+        let audioCtx = null;
+        let isDetailActive = false;
+
+        // Fireworks Engine State
+        const fwCanvas = document.getElementById('fireworks-canvas');
+        const fwCtx = fwCanvas ? fwCanvas.getContext('2d') : null;
+        let fwParticles = [];
+        let fwAnimationId = null;
+        let fwInterval = null;
+
+        function resizeFwCanvas() {
+            if (!fwCanvas) return;
+            fwCanvas.width = window.innerWidth;
+            fwCanvas.height = window.innerHeight;
+        }
+
+        class FireworkParticle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.radius = Math.random() * 3.5 + 1.5;
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 7 + 2;
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed;
+                this.alpha = 1;
+                this.decay = Math.random() * 0.02 + 0.015;
+                this.gravity = 0.12;
+            }
+            update() {
+                this.vx *= 0.98;
+                this.vy *= 0.98;
+                this.vy += this.gravity;
+                this.x += this.vx;
+                this.y += this.vy;
+                this.alpha -= this.decay;
+            }
+            draw(ctx) {
+                ctx.save();
+                ctx.globalAlpha = Math.max(0, this.alpha);
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function createBurst(x, y) {
+            const colors = ['#00f3ff', '#b026ff', '#39ff14', '#ff0055', '#ffe600', '#ffffff'];
+            for (let i = 0; i < 45; i++) {
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                fwParticles.push(new FireworkParticle(x, y, color));
+            }
+        }
+
+        function startFireworks() {
+            if (!fwCanvas) return;
+            resizeFwCanvas();
+            fwParticles = [];
+
+            // Spawn random bursts
+            fwInterval = setInterval(() => {
+                const x = Math.random() * (fwCanvas.width * 0.8) + fwCanvas.width * 0.1;
+                const y = Math.random() * (fwCanvas.height * 0.5) + fwCanvas.height * 0.1;
+                createBurst(x, y);
+                playSynthSound(500 + Math.random() * 500, 'triangle', 0.08);
+            }, 250);
+
+            function animateFW() {
+                fwCtx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
+                for (let i = fwParticles.length - 1; i >= 0; i--) {
+                    fwParticles[i].update();
+                    fwParticles[i].draw(fwCtx);
+                    if (fwParticles[i].alpha <= 0) {
+                        fwParticles.splice(i, 1);
+                    }
+                }
+                fwAnimationId = requestAnimationFrame(animateFW);
+            }
+            animateFW();
+        }
+
+        function stopFireworks() {
+            if (fwInterval) clearInterval(fwInterval);
+            if (fwAnimationId) cancelAnimationFrame(fwAnimationId);
+            if (fwCtx) fwCtx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
+            fwParticles = [];
+        }
+
+        // Toggle Middle School Detail Box & Fireworks
+        function toggleMiddleSchoolDetail() {
+            const detailBox = document.getElementById('student-detail-box');
+            isDetailActive = !isDetailActive;
+
+            if (isDetailActive) {
+                detailBox.classList.remove('hidden');
+                playBuffEffect();
+                startFireworks();
+            } else {
+                detailBox.classList.add('hidden');
+                playSynthSound(300, 'sine', 0.15);
+                stopFireworks();
+            }
+        }
+
+        // Initialize Web Audio API Synth Sound
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        // Play Synth Beep / Sound Effects
+        function playSynthSound(freq = 440, type = 'sine', duration = 0.1) {
+            if (!soundEnabled) return;
+            try {
+                initAudio();
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {
+                console.log("Audio play error:", e);
+            }
+        }
+
+        // Sound Level-Up Effect
+        function playBuffEffect() {
+            playSynthSound(523.25, 'triangle', 0.1); // C5
+            setTimeout(() => playSynthSound(659.25, 'triangle', 0.1), 100); // E5
+            setTimeout(() => playSynthSound(783.99, 'triangle', 0.1), 200); // G5
+            setTimeout(() => playSynthSound(1046.50, 'triangle', 0.3), 300); // C6
+
+            // Trigger Visual Animation on Stat Bars
+            const bars = document.querySelectorAll('.stat-bar');
+            bars.forEach(bar => {
+                bar.style.transform = 'scaleX(1.05)';
+                setTimeout(() => {
+                    bar.style.transform = 'scaleX(1)';
+                }, 300);
+            });
+        }
+
+        // Sound Button Toggle
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const soundIcon = document.getElementById('sound-icon');
+            if (soundEnabled) {
+                soundIcon.className = 'fa-solid fa-volume-high text-gaming-cyan';
+                playSynthSound(880, 'sine', 0.1);
+            } else {
+                soundIcon.className = 'fa-solid fa-volume-xmark text-gray-500';
+            }
+        }
+
+        // Dark / Light Theme Toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('theme-icon');
+            playSynthSound(600, 'sine', 0.08);
+
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                document.body.style.backgroundColor = '#f1f5f9';
+                document.body.style.color = '#0f172a';
+                themeIcon.className = 'fa-solid fa-sun text-yellow-500';
+            } else {
+                html.classList.remove('light');
+                html.classList.add('dark');
+                document.body.style.backgroundColor = '#0B0F19';
+                document.body.style.color = '#E2E8F0';
+                themeIcon.className = 'fa-solid fa-moon text-gaming-purple';
+            }
+        }
+
+        // Spotlight Mode Toggle for "중학생" Card
+        function toggleSpotlight() {
+            const overlay = document.getElementById('spotlight-overlay');
+            const studentCard = document.getElementById('card-student');
+            const isActive = overlay.classList.contains('active');
+
+            if (!isActive) {
+                overlay.classList.add('active');
+                studentCard.classList.add('highlight-focus');
+                playSynthSound(587.33, 'square', 0.2); // D5
+            } else {
+                overlay.classList.remove('active');
+                studentCard.classList.remove('highlight-focus');
+                playSynthSound(440, 'sine', 0.1);
+            }
+        }
+
+        // Canvas Particle Grid Background Effect
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.alpha = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                    this.reset();
+                }
+            }
+            draw() {
+                ctx.fillStyle = `rgba(0, 243, 255, ${this.alpha})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.min(Math.floor(window.innerWidth / 20), 60);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateCanvas);
+        }
+
+        // Event Listeners
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            resizeFwCanvas();
+            initParticles();
+        });
+
+        window.onload = function() {
+            resizeCanvas();
+            resizeFwCanvas();
+            initParticles();
+            animateCanvas();
+
+            // Click sounds on interactive elements
+            document.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('mouseenter', () => {
+                    playSynthSound(800, 'sine', 0.03);
+                });
+            });
+        };
+    </script>
+</body>
+</html>

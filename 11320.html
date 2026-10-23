@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>중1 자기소개 | 수학과 게임을 좋아하는 학생</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Pretendard Font -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f3ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#1e1b4b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            word-break: keep-all;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased">
+
+    <!-- MAIN WRAPPER -->
+    <main class="max-w-3xl mx-auto px-5 py-10 sm:py-16 space-y-12 w-full">
+
+        <!-- HERO SECTION -->
+        <header class="text-center space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-indigo-50 border border-indigo-100 rounded-full text-indigo-700 text-sm font-semibold">
+                <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+                중학교 1학년 자기소개
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                수학의 눈으로 세상을 바라보는 <br class="hidden sm:inline" />
+                <span class="text-indigo-600">중1 학생의 이야기</span>
+            </h1>
+            <p class="text-base sm:text-lg text-slate-600 max-w-xl mx-auto leading-relaxed">
+                거창한 천재는 아니지만, 차근차근 문제를 풀어가는 과정과 즐겁게 게임하는 시간을 좋아하는 중학교 1학년입니다.
+            </p>
+        </header>
+
+        <!-- 3 SIMPLE PROFILE CARDS -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Card 1 -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow space-y-3">
+                <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-xl">
+                    🏫
+                </div>
+                <h2 class="font-bold text-lg text-slate-900">중학교 1학년</h2>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    새로운 과목과 환경에 적응하며 나만의 리듬으로 성장해 나가고 있는 중1입니다.
+                </p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow space-y-3">
+                <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl">
+                    🎮
+                </div>
+                <h2 class="font-bold text-lg text-slate-900">게임을 좋아함</h2>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    엄청 뛰어난 프로는 아니지만, 규칙을 파악하고 즐겁게 플레이하는 시간을 좋아해요.
+                </p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow space-y-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl">
+                    📐
+                </div>
+                <h2 class="font-bold text-lg text-slate-900">수학에 관심 있음</h2>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    복잡해 보이는 문제도 차근차근 수식과 논리로 하나씩 풀어가는 재미를 느낍니다.
+                </p>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE MATH METAPHOR SECTION -->
+        <section class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-sm space-y-6">
+            <div>
+                <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <span>➕</span> 나를 설명하는 단순한 수학 수식
+                </h2>
+                <p class="text-sm text-slate-500 mt-1">카드를 클릭해 수식 속 의미를 확인해 보세요.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <!-- Formula 1 -->
+                <button onclick="toggleFormula('f1')" class="text-left w-full p-4 rounded-xl border border-slate-100 bg-slate-50/60 hover:bg-indigo-50/50 hover:border-indigo-200 transition-all group">
+                    <div class="flex items-center justify-between font-mono font-bold text-slate-800 text-base sm:text-lg">
+                        <span>나 = 중1 + 게임 + 수학</span>
+                        <span class="text-xs text-indigo-600 font-sans group-hover:underline">보기</span>
+                    </div>
+                    <div id="f1" class="hidden mt-3 pt-3 border-t border-slate-200/60 text-sm text-slate-600 font-sans">
+                        새로운 환경(중1)에서 즐거움(게임)과 수리적 사고(수학)를 더해 매일 성장해 가고 있습니다.
+                    </div>
+                </button>
+
+                <!-- Formula 2 -->
+                <button onclick="toggleFormula('f2')" class="text-left w-full p-4 rounded-xl border border-slate-100 bg-slate-50/60 hover:bg-indigo-50/50 hover:border-indigo-200 transition-all group">
+                    <div class="flex items-center justify-between font-mono font-bold text-slate-800 text-base sm:text-lg">
+                        <span>게임 ≒ 수학 문제 해결</span>
+                        <span class="text-xs text-indigo-600 font-sans group-hover:underline">보기</span>
+                    </div>
+                    <div id="f2" class="hidden mt-3 pt-3 border-t border-slate-200/60 text-sm text-slate-600 font-sans">
+                        게임에서 스테이지를 깨듯, 수학 문제의 단서를 찾아 답을 구하는 과정은 서로 닮아있다고 느껴요.
+                    </div>
+                </button>
+
+                <!-- Formula 3 -->
+                <button onclick="toggleFormula('f3')" class="text-left w-full p-4 rounded-xl border border-slate-100 bg-slate-50/60 hover:bg-indigo-50/50 hover:border-indigo-200 transition-all group">
+                    <div class="flex items-center justify-between font-mono font-bold text-slate-800 text-base sm:text-lg">
+                        <span>노력 × 시간 = 성취감</span>
+                        <span class="text-xs text-indigo-600 font-sans group-hover:underline">보기</span>
+                    </div>
+                    <div id="f3" class="hidden mt-3 pt-3 border-t border-slate-200/60 text-sm text-slate-600 font-sans">
+                        어려운 난관도 포기하지 않고 시간을 들여 차분히 생각하면 꼭 답을 찾을 수 있다는 걸 믿습니다.
+                    </div>
+                </button>
+
+                <!-- Formula 4 -->
+                <button onclick="toggleFormula('f4')" class="text-left w-full p-4 rounded-xl border border-slate-100 bg-slate-50/60 hover:bg-indigo-50/50 hover:border-indigo-200 transition-all group">
+                    <div class="flex items-center justify-between font-mono font-bold text-slate-800 text-base sm:text-lg">
+                        <span>호기심 = 배움의 시작</span>
+                        <span class="text-xs text-indigo-600 font-sans group-hover:underline">보기</span>
+                    </div>
+                    <div id="f4" class="hidden mt-3 pt-3 border-t border-slate-200/60 text-sm text-slate-600 font-sans">
+                        "왜 그럴까?" 하는 작은 호기심이 수학을 좋아하게 만들고 세상을 더 깊이 이해하게 도와줍니다.
+                    </div>
+                </button>
+            </div>
+        </section>
+
+        <!-- EXPANDED MATH QUIZ SECTION -->
+        <section class="bg-slate-900 text-white p-6 sm:p-8 rounded-2xl shadow-sm space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-indigo-400">Middle School Math Quiz</span>
+                    <h2 class="text-xl font-bold mt-1">중1 수학 개념 퀴즈 (5문항)</h2>
+                </div>
+                <!-- Quiz Progress Bar -->
+                <div class="text-right">
+                    <span id="quiz-progress-text" class="text-xs text-slate-400 font-mono">Q1 / Q5</span>
+                    <div class="w-32 h-1.5 bg-slate-800 rounded-full mt-1 overflow-hidden">
+                        <div id="quiz-progress-bar" class="h-full bg-indigo-500 transition-all duration-300 w-1/5"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Active Card Container -->
+            <div id="quiz-container">
+                <!-- Question card injected via JS -->
+            </div>
+
+            <!-- Quiz Result Card (Hidden Initially) -->
+            <div id="quiz-result" class="hidden text-center py-6 space-y-5">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-500/20 text-indigo-400 text-3xl font-bold">
+                    🎯
+                </div>
+                <div class="space-y-2">
+                    <h3 class="text-2xl font-bold">퀴즈 완료!</h3>
+                    <p id="quiz-score-text" class="text-slate-300 text-base">총 5문제 중 5문제를 맞히셨습니다.</p>
+                    <p id="quiz-feedback-text" class="text-xs text-indigo-300">차근차근 논리를 따라가는 당신은 수학 감각이 훌륭하네요!</p>
+                </div>
+                <button onclick="resetQuiz()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 rounded-xl text-sm font-semibold transition-colors">
+                    퀴즈 다시 풀기 🔄
+                </button>
+            </div>
+        </section>
+
+        <!-- REFLECTION FOOTER STATEMENT -->
+        <section class="text-center bg-indigo-50/50 border border-indigo-100 p-6 rounded-2xl space-y-2">
+            <p class="text-sm font-semibold text-indigo-900">
+                "매일 하나씩 문제를 풀어가며, 차분하게 나만의 해답을 찾아가는 학생이 되겠습니다."
+            </p>
+            <p class="text-xs text-slate-500">
+                중학교 1학년 · 게임을 좋아하는 학생 · 수학을 즐겨보는 학생
+            </p>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">
+        <div class="max-w-3xl mx-auto px-5">
+            <p>© 중1 학생의 자기소개 웹페이지</p>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPT -->
+    <script>
+        // Toggle Math Formula Cards
+        function toggleFormula(id) {
+            const element = document.getElementById(id);
+            element.classList.toggle('hidden');
+        }
+
+        // Quiz Data
+        const quizData = [
+            {
+                question: "12를 소인수분해했을 때 나오는 소인수는 무엇일까요?",
+                options: [
+                    { text: "2, 3", correct: true },
+                    { text: "2, 6", correct: false },
+                    { text: "3, 4", correct: false }
+                ],
+                explanation: "12 = 2² × 3 이므로, 12의 소수인 약수(소인수)는 2와 3입니다."
+            },
+            {
+                question: "음의 정수와 음의 정수를 곱할 때 결과의 부호는 무엇일까요? (-3) × (-4)",
+                options: [
+                    { text: "-12 (음수)", correct: false },
+                    { text: "+12 (양수)", correct: true },
+                    { text: "0", correct: false }
+                ],
+                explanation: "음수와 음수를 곱하면 양수가 됩니다. (-3) × (-4) = +12입니다."
+            },
+            {
+                question: "일차방정식 3x + 5 = 17 의 해(x의 값)는 얼마일까요?",
+                options: [
+                    { text: "x = 3", correct: false },
+                    { text: "x = 4", correct: true },
+                    { text: "x = 5", correct: false }
+                ],
+                explanation: "3x = 17 - 5 = 12 이므로, 양변을 3으로 나누면 x = 4가 됩니다."
+            },
+            {
+                question: "좌표평면에서 x축 위에 있는 점의 특징으로 옳은 것은 무엇일까요?",
+                options: [
+                    { text: "x좌표가 0이다.", correct: false },
+                    { text: "y좌표가 0이다.", correct: true },
+                    { text: "x좌표와 y좌표가 모두 0이다.", correct: false }
+                ],
+                explanation: "x축 위에 위치한 모든 점은 y좌표가 0입니다. 예: (3, 0), (-2, 0)"
+            },
+            {
+                question: "정육면체의 면의 개수는 몇 개일까요?",
+                options: [
+                    { text: "4개", correct: false },
+                    { text: "6개", correct: true },
+                    { text: "8개", correct: false }
+                ],
+                explanation: "정육면체는 6개의 정사각형 면으로 둘러싸인 입체도형입니다."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            const progressText = document.getElementById('quiz-progress-text');
+            const progressBar = document.getElementById('quiz-progress-bar');
+            const quizResult = document.getElementById('quiz-result');
+
+            if (currentQuestion >= quizData.length) {
+                container.classList.add('hidden');
+                quizResult.classList.remove('hidden');
+                document.getElementById('quiz-score-text').innerText = `총 ${quizData.length}문제 중 ${score}문제를 맞히셨습니다.`;
+                progressText.innerText = `완료!`;
+                progressBar.style.width = `100%`;
+                return;
+            }
+
+            container.classList.remove('hidden');
+            quizResult.classList.add('hidden');
+            answered = false;
+
+            // Update Progress
+            progressText.innerText = `Q${currentQuestion + 1} / Q${quizData.length}`;
+            progressBar.style.width = `${((currentQuestion + 1) / quizData.length) * 100}%`;
+
+            const item = quizData[currentQuestion];
+
+            let optionsHTML = item.options.map((opt, idx) => `
+                <button onclick="submitAnswer(${idx})" id="opt-btn-${idx}" class="w-full text-left p-3.5 bg-slate-800 hover:bg-slate-700/80 border border-slate-700 rounded-xl font-medium text-sm transition-colors flex items-center justify-between group">
+                    <span>${opt.text}</span>
+                    <span class="text-xs text-slate-500 group-hover:text-indigo-300 font-mono">선택</span>
+                </button>
+            `).join('');
+
+            container.innerHTML = `
+                <div class="space-y-4">
+                    <div class="space-y-1">
+                        <span class="text-xs font-mono text-indigo-400">문제 ${currentQuestion + 1}</span>
+                        <p class="text-base sm:text-lg font-medium text-slate-100">${item.question}</p>
+                    </div>
+
+                    <div class="space-y-2 pt-2">
+                        ${optionsHTML}
+                    </div>
+
+                    <div id="explanation-box" class="hidden p-4 rounded-xl text-xs sm:text-sm leading-relaxed border mt-3"></div>
+
+                    <div id="next-btn-container" class="hidden text-right pt-2">
+                        <button onclick="nextQuestion()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold transition-colors">
+                            ${currentQuestion === quizData.length - 1 ? '결과 보기 ✨' : '다음 문제 ➡️'}
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function submitAnswer(selectedIndex) {
+            if (answered) return;
+            answered = true;
+
+            const item = quizData[currentQuestion];
+            const isCorrect = item.options[selectedIndex].correct;
+            const expBox = document.getElementById('explanation-box');
+            const nextBtnContainer = document.getElementById('next-btn-container');
+
+            if (isCorrect) {
+                score++;
+                document.getElementById(`opt-btn-${selectedIndex}`).classList.remove('bg-slate-800', 'border-slate-700');
+                document.getElementById(`opt-btn-${selectedIndex}`).classList.add('bg-emerald-900/50', 'border-emerald-500/80', 'text-emerald-200');
+                
+                expBox.className = "p-4 rounded-xl text-xs sm:text-sm leading-relaxed border border-emerald-500/30 bg-emerald-950/40 text-emerald-300";
+                expBox.innerHTML = `<strong>⭕ 정답입니다!</strong><br/>${item.explanation}`;
+            } else {
+                document.getElementById(`opt-btn-${selectedIndex}`).classList.remove('bg-slate-800', 'border-slate-700');
+                document.getElementById(`opt-btn-${selectedIndex}`).classList.add('bg-rose-900/50', 'border-rose-500/80', 'text-rose-200');
+
+                // Highlight correct one
+                item.options.forEach((opt, idx) => {
+                    if (opt.correct) {
+                        document.getElementById(`opt-btn-${idx}`).classList.remove('bg-slate-800');
+                        document.getElementById(`opt-btn-${idx}`).classList.add('bg-emerald-900/30', 'border-emerald-500/50');
+                    }
+                });
+
+                expBox.className = "p-4 rounded-xl text-xs sm:text-sm leading-relaxed border border-rose-500/30 bg-rose-950/40 text-rose-300";
+                expBox.innerHTML = `<strong>❌ 아쉽네요!</strong><br/>${item.explanation}`;
+            }
+
+            expBox.classList.remove('hidden');
+            nextBtnContainer.classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            renderQuiz();
+        }
+
+        function resetQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            renderQuiz();
+        }
+
+        // Initialize on load
+        window.onload = function() {
+            renderQuiz();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>중1 자기소개 - 키는 작지만 가능성은 무한대!</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans KR', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            yellow: '#FFD166',
+                            orange: '#FF9F1C',
+                            blue: '#118AB2',
+                            indigo: '#4338CA',
+                            darkblue: '#073B4C',
+                            green: '#06D6A0',
+                            red: '#EF476F'
+                        }
+                    },
+                    keyframes: {
+                        bounceSlow: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-8px)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-10px) rotate(2deg)' },
+                        }
+                    },
+                    animation: {
+                        'bounce-slow': 'bounceSlow 2.5s infinite',
+                        'float': 'float 4s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom ruler background styling */
+        .ruler-pattern {
+            background-image: repeating-linear-gradient(
+                90deg,
+                #94a3b8,
+                #94a3b8 2px,
+                transparent 2px,
+                transparent 16px
+            );
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col justify-between selection:bg-brand-yellow selection:text-slate-900">
+
+    <!-- Header / Navbar -->
+    <header class="bg-brand-indigo text-white py-4 px-6 shadow-lg sticky top-0 z-50 border-b-4 border-brand-yellow">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-xl bg-brand-yellow flex items-center justify-center text-brand-indigo font-black text-xl shadow">
+                    <i class="fa-solid fa-ruler-combined"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg sm:text-xl font-extrabold tracking-tight leading-none">중1 자기소개 페이지</h1>
+                    <span class="text-[11px] text-indigo-200 font-medium">키는 작아도 가능성은 무한대!</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2 bg-indigo-800/80 border border-indigo-600 px-3 py-1.5 rounded-full text-xs text-indigo-100 shadow-inner">
+                <i class="fa-solid fa-graduation-cap text-brand-yellow"></i>
+                <span class="font-bold">중학교 1학년</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full space-y-8">
+
+        <!-- Hero Section with Custom SVG Character Illustration & Visual Height Scale -->
+        <section class="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border-2 border-slate-200 relative overflow-hidden">
+            <!-- Background Decorative Badge -->
+            <div class="absolute -right-8 -top-8 w-40 h-40 bg-brand-yellow/20 rounded-full blur-2xl pointer-events-none"></div>
+
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
+                
+                <!-- Left Content -->
+                <div class="space-y-4 text-center md:text-left flex-1">
+                    <div class="inline-flex items-center space-x-2 bg-indigo-50 text-brand-indigo px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold border border-indigo-100 shadow-sm">
+                        <i class="fa-solid fa-user-check"></i>
+                        <span>남자 · 중학생 · 중학교 1학년</span>
+                    </div>
+                    
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 leading-tight">
+                        안녕하세요!<br>
+                        <span class="text-brand-indigo underline decoration-brand-yellow decoration-wavy decoration-4">당당한 성장형</span> <br class="sm:hidden">중1입니다!
+                    </h2>
+
+                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed max-w-lg">
+                        올해 막 입학한 <strong class="text-slate-900">중학교 1학년 남학생</strong>입니다.<br>
+                        남들보다 조금 작아도, 누구보다 알차고 가능성 넘치는 저를 소개합니다!
+                    </p>
+
+                    <div class="pt-2 flex flex-wrap gap-2 justify-center md:justify-start">
+                        <span class="bg-slate-100 text-slate-700 text-xs font-extrabold px-3 py-1.5 rounded-lg border border-slate-200">
+                            #중학생
+                        </span>
+                        <span class="bg-slate-100 text-slate-700 text-xs font-extrabold px-3 py-1.5 rounded-lg border border-slate-200">
+                            #남자
+                        </span>
+                        <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-3 py-1.5 rounded-lg border border-amber-300">
+                            #키작음 (특징!)
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Right Visual: Middle School Boy Character SVG with Ruler Backdrop -->
+                <div class="flex-shrink-0 relative flex items-center justify-center p-4 bg-slate-50 rounded-2xl border border-slate-200 shadow-inner w-full md:w-64 h-64">
+                    
+                    <!-- Height Measurement Scale Overlay -->
+                    <div class="absolute left-3 top-3 bottom-3 w-6 flex flex-col justify-between items-center text-[10px] font-mono text-slate-400 border-r-2 border-slate-300 pr-1">
+                        <span>180</span>
+                        <span>170</span>
+                        <span>160</span>
+                        <span class="text-brand-indigo font-bold">150</span>
+                        <span>140</span>
+                    </div>
+
+                    <!-- Middle School Boy Graphic Card -->
+                    <div class="relative z-10 flex flex-col items-center animate-float">
+                        <!-- Custom Middle Schooler Avatar Illustration SVG -->
+                        <svg class="w-32 h-32 drop-shadow-md" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Background Circle -->
+                            <circle cx="60" cy="60" r="56" fill="#FFD166" stroke="#073B4C" stroke-width="4"/>
+                            <!-- Uniform Shirt/Body -->
+                            <path d="M35 105C35 90 45 82 60 82C75 82 85 90 85 105V116H35V105Z" fill="#4338CA"/>
+                            <!-- Collar -->
+                            <path d="M50 82L60 92L70 82" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M60 92V105" stroke="#EF476F" stroke-width="3" stroke-linecap="round"/>
+                            <!-- Head & Neck -->
+                            <rect x="54" y="72" width="12" height="12" fill="#FFD8B4" rx="2"/>
+                            <circle cx="60" cy="52" r="24" fill="#FFD8B4"/>
+                            <!-- Hair -->
+                            <path d="M36 50C36 36 46 28 60 28C74 28 84 36 84 50C84 52 80 44 60 44C40 44 36 52 36 50Z" fill="#1E293B"/>
+                            <path d="M42 36L48 44M60 32V42M78 36L72 44" stroke="#1E293B" stroke-width="3" stroke-linecap="round"/>
+                            <!-- Eyes & Smile -->
+                            <circle cx="50" cy="54" r="3" fill="#0F172A"/>
+                            <circle cx="70" cy="54" r="3" fill="#0F172A"/>
+                            <path d="M52 64C56 68 64 68 68 64" stroke="#0F172A" stroke-width="3" stroke-linecap="round"/>
+                            <!-- Cheeks -->
+                            <circle cx="45" cy="60" r="3" fill="#FF8A8A" opacity="0.6"/>
+                            <circle cx="75" cy="60" r="3" fill="#FF8A8A" opacity="0.6"/>
+                        </svg>
+
+                        <!-- Badge -->
+                        <span class="mt-2 bg-brand-indigo text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow border border-white">
+                            성장 잠재력 100%
+                        </span>
+                    </div>
+
+                    <!-- Growth Arrow -->
+                    <div class="absolute right-3 top-6 text-brand-green animate-bounce-slow flex flex-col items-center">
+                        <i class="fa-solid fa-arrow-up-long text-xl font-black"></i>
+                        <span class="text-[9px] font-bold">성장 중</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Unsplash Imagery Banner Section (Middle School Vibe & Potential) -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Visual Card 1: School Life -->
+            <div class="relative h-44 rounded-2xl overflow-hidden shadow-md group">
+                <img 
+                    src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80" 
+                    alt="Middle School Classroom Vibe" 
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    onerror="this.src='https://placehold.co/800x400/4338CA/FFFFFF?text=Middle+School+Life'"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent flex flex-col justify-end p-4 text-white">
+                    <span class="text-xs text-brand-yellow font-extrabold uppercase tracking-wider"><i class="fa-solid fa-school mr-1"></i> 나의 위치</span>
+                    <h3 class="text-lg font-bold">새로운 시작, 중학교 1학년</h3>
+                    <p class="text-xs text-slate-300">초등학교를 졸업하고 활기찬 중학생이 되었습니다.</p>
+                </div>
+            </div>
+
+            <!-- Visual Card 2: Growth & Sky -->
+            <div class="relative h-44 rounded-2xl overflow-hidden shadow-md group">
+                <img 
+                    src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" 
+                    alt="Infinite High Sky Potential" 
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    onerror="this.src='https://placehold.co/800x400/073B4C/FFFFFF?text=Unlimited+Potential'"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent flex flex-col justify-end p-4 text-white">
+                    <span class="text-xs text-brand-green font-extrabold uppercase tracking-wider"><i class="fa-solid fa-rocket mr-1"></i> 높이 날아오를 가능성</span>
+                    <h3 class="text-lg font-bold">지금보다 내일이 더 기대되는 키</h3>
+                    <p class="text-xs text-slate-300">지금의 작은 키는 더 높이 자라나기 위한 스프링입니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3 Key Traits Detail Grid -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <!-- Keyword 1 -->
+            <div class="bg-white p-6 rounded-2xl shadow-md border-b-4 border-brand-blue flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-blue-50 text-brand-blue flex items-center justify-center text-2xl mb-4 shadow-sm">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">중학생</h3>
+                    <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                        중학교 1학년이라서 선택한 대표 키워드입니다. 교복을 입고 새로운 과목들을 배우며 즐겁게 적응하고 있습니다.
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-bold text-brand-blue">
+                    ✓ 중학교 1학년 재학 중
+                </div>
+            </div>
+
+            <!-- Keyword 2 -->
+            <div class="bg-white p-6 rounded-2xl shadow-md border-b-4 border-brand-indigo flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-brand-indigo flex items-center justify-center text-2xl mb-4 shadow-sm">
+                        <i class="fa-solid fa-mars"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">남자</h3>
+                    <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                        활기차고 씩씩하게 성장해 나가는 중학교 1학년 남학생입니다!
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-bold text-brand-indigo">
+                    ✓ 씩씩하고 활발한 남학생
+                </div>
+            </div>
+
+            <!-- Keyword 3 (Core Highlight) -->
+            <div class="bg-amber-50/80 p-6 rounded-2xl shadow-md border-2 border-brand-yellow border-b-4 border-b-brand-orange relative flex flex-col justify-between">
+                <span class="absolute top-3 right-3 bg-brand-orange text-white text-[10px] font-black px-2 py-0.5 rounded-full uppercase">
+                    가장 보여주고 싶은 핵심
+                </span>
+                <div>
+                    <div class="w-12 h-12 rounded-2xl bg-amber-200 text-amber-900 flex items-center justify-center text-2xl mb-4 shadow-sm">
+                        <i class="fa-solid fa-ruler-vertical"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">키 작음</h3>
+                    <p class="text-xs text-slate-700 mt-2 leading-relaxed font-medium">
+                        주변 사람들에게 "키 작다"는 소리를 자주 듣지만, 저를 가장 잘 표현하는 가장 자신 있는 특징입니다!
+                    </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-amber-200 text-[11px] font-bold text-amber-900">
+                    ★ 나의 가장 솔직한 아이덴티티
+                </div>
+            </div>
+        </section>
+
+        <!-- SPOTLIGHT SECTION: Interactive Growth & Perspective Flip Widget -->
+        <section class="bg-gradient-to-br from-brand-darkblue via-slate-900 to-indigo-950 text-white rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+            <!-- Background Graphic Ruler Pattern -->
+            <div class="absolute inset-x-0 top-0 h-4 ruler-pattern opacity-30"></div>
+
+            <div class="max-w-2xl mx-auto text-center space-y-4 relative z-10">
+                <div class="inline-flex items-center space-x-2 bg-brand-red text-white text-xs font-black px-3.5 py-1.5 rounded-full shadow">
+                    <i class="fa-solid fa-star"></i>
+                    <span>가장 잘 보여주고 싶은 나의 모습</span>
+                </div>
+                
+                <h3 class="text-2xl sm:text-4xl font-black text-brand-yellow leading-tight">
+                    "키 작다는 소리를 많이 듣는다!"
+                </h3>
+                
+                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                    친구들이나 주변에서 자주 듣는 말이지만, 상심하지 않습니다.<br>
+                    <strong>중1은 지금부터 자라는 시기!</strong> 키는 작아도 자신감과 당당함은 이미 180cm입니다.
+                </p>
+            </div>
+
+            <!-- Interactive Height Measurement & Perspective Simulator -->
+            <div class="mt-8 bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-xl max-w-xl mx-auto relative z-10">
+                
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xs text-slate-300 font-bold flex items-center gap-1.5">
+                        <i class="fa-solid fa-sliders text-brand-yellow"></i> 성장 측정기 제어
+                    </span>
+                    <span id="height-badge" class="text-xs font-bold text-brand-yellow bg-slate-900 px-3 py-1 rounded-full border border-slate-700">
+                        단계 1: 키 작은 중1
+                    </span>
+                </div>
+
+                <!-- Slider -->
+                <input 
+                    type="range" 
+                    id="height-slider" 
+                    min="1" 
+                    max="3" 
+                    value="1" 
+                    step="1"
+                    class="w-full h-3 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-brand-yellow"
+                    oninput="updateGrowthStage(this.value)"
+                >
+
+                <!-- Scale Marks -->
+                <div class="flex justify-between text-[11px] text-slate-400 mt-2 font-mono px-1">
+                    <span>1단계 (현재: 키 작음)</span>
+                    <span>2단계 (폭풍 성장 중)</span>
+                    <span>3단계 (미래의 나)</span>
+                </div>
+
+                <!-- Visual Interactive Card -->
+                <div id="stage-card" class="mt-6 p-5 rounded-xl bg-slate-900 border border-brand-yellow/40 text-center transition-all duration-300">
+                    
+                    <!-- Dynamic Illustration Graphic inside widget -->
+                    <div class="flex justify-center items-center h-24 mb-3 relative">
+                        <div id="visual-ruler" class="w-12 h-full bg-slate-800 border-l border-r border-slate-600 rounded flex flex-col justify-between py-1 px-1 text-[8px] font-mono text-slate-500">
+                            <span>- 180</span>
+                            <span>- 160</span>
+                            <span>- 140</span>
+                        </div>
+
+                        <div id="stage-avatar" class="ml-4 transition-all duration-300 flex flex-col items-center">
+                            <!-- SVG Character that resizes with JS -->
+                            <svg id="avatar-svg" class="w-16 h-16 transition-all duration-500" viewBox="0 0 100 100" fill="none">
+                                <circle cx="50" cy="50" r="45" fill="#FFD166"/>
+                                <circle cx="35" cy="45" r="5" fill="#073B4C"/>
+                                <circle cx="65" cy="45" r="5" fill="#073B4C"/>
+                                <path d="M35 65C45 75 55 75 65 65" stroke="#073B4C" stroke-width="5" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div id="stage-title" class="font-bold text-base text-brand-yellow">
+                        "키 작다는 소리를 많이 들어요!"
+                    </div>
+                    <p id="stage-desc" class="text-xs text-slate-300 mt-1 leading-relaxed">
+                        가장 많이 듣는 소리이지만, 중학교 1학년인 저의 특권입니다. 앞으로 자랄 날이 훨씬 많이 남아있으니까요!
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Message Banner -->
+        <section class="bg-white rounded-3xl p-6 sm:p-8 shadow-md border-2 border-slate-200 flex flex-col sm:flex-row items-center gap-6">
+            <div class="w-16 h-16 rounded-2xl bg-brand-yellow text-slate-900 flex items-center justify-center text-3xl font-black flex-shrink-0 shadow-md">
+                <i class="fa-solid fa-face-smile-beam"></i>
+            </div>
+            <div class="space-y-1 text-center sm:text-left">
+                <h4 class="text-base sm:text-lg font-bold text-slate-900">
+                    작은 키에 담긴 솔직함과 자신감!
+                </h4>
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                    단순한 사실을 넘어서, '키 작음'은 저를 표현하는 가장 친근하고 확실한 아이덴티티입니다. 밝고 긍정적인 마음으로 하루하루 멋지게 성장해 나가겠습니다!
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-6 text-center border-t border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 space-y-1">
+            <p class="font-bold text-slate-300">중1 자기소개 페이지 - 나를 표현하다</p>
+            <p class="text-slate-500">본 웹페이지는 사용자가 제공한 실제 사실([중학생], [남자], [키 작음], [중학교 1학년], [키 작다는 소리를 많이 들음])만을 바탕으로 제작되었습니다.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        function updateGrowthStage(val) {
+            const badge = document.getElementById('height-badge');
+            const title = document.getElementById('stage-title');
+            const desc = document.getElementById('stage-desc');
+            const card = document.getElementById('stage-card');
+            const avatarSvg = document.getElementById('avatar-svg');
+
+            if (val == 1) {
+                badge.innerText = "1단계: 키 작은 중1 (현재)";
+                badge.className = "text-xs font-bold text-brand-yellow bg-slate-900 px-3 py-1 rounded-full border border-slate-700";
+                
+                title.innerText = '"키 작다는 소리를 많이 들어요!"';
+                desc.innerText = "자주 듣는 말이지만 걱정 없습니다. 성장판이 열려있는 중1이니까요!";
+                
+                card.className = "mt-6 p-5 rounded-xl bg-slate-900 border border-brand-yellow/50 text-center transition-all duration-300";
+                avatarSvg.className = "w-14 h-14 transition-all duration-500 transform scale-90";
+            } else if (val == 2) {
+                badge.innerText = "2단계: 폭풍 성장기 (중2~중3)";
+                badge.className = "text-xs font-bold text-brand-green bg-slate-900 px-3 py-1 rounded-full border border-slate-700";
+                
+                title.innerText = '"어? 너 요즘 키 좀 컸다?"';
+                desc.innerText = "친구들이 깜짝 놀랄 만큼 매일매일 키가 쑥쑥 자라나는 단계입니다.";
+                
+                card.className = "mt-6 p-5 rounded-xl bg-slate-900 border border-brand-green/50 text-center transition-all duration-300";
+                avatarSvg.className = "w-18 h-18 transition-all duration-500 transform scale-110 text-brand-green";
+            } else if (val == 3) {
+                badge.innerText = "3단계: 미래의 멋진 모습";
+                badge.className = "text-xs font-bold text-brand-red bg-slate-900 px-3 py-1 rounded-full border border-slate-700";
+                
+                title.innerText = '"작았던 중1 시절은 기분 좋은 추억!"';
+                desc.innerText = "키도 마음도 듬직하게 폭풍 성장을 마친 당당한 미래의 모습입니다.";
+                
+                card.className = "mt-6 p-5 rounded-xl bg-slate-900 border border-brand-red/50 text-center transition-all duration-300";
+                avatarSvg.className = "w-24 h-24 transition-all duration-500 transform scale-125 text-brand-red";
+            }
+        }
+    </script>
+</body>
+</html>
