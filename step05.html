@@ -13,7 +13,7 @@
 <header><div class="eyebrow">STEP 5차시 AI와 함께 다시 읽다</div><h1>내 분석 vs AI 분석 🤖</h1><p>친구의 처음·다시 생각을 읽고, 내 판단과 AI의 해석을 원문으로 비교해요.</p></header>
 <section id="personalAccess">
   <h2>내 활동 열기</h2>
-  <p>처음이라면 개인 코드 하나를 만들어 따로 보관하세요. 4·5차시에서 같은 학년·반·번호와 개인 코드를 쓰고, 공용 컴퓨터에서는 활동을 마친 뒤 <strong>활동 닫기</strong>를 눌러 주세요.</p>
+  <p>학년·반·번호를 입력한 뒤 새 개인 코드 만들기를 누르면 5자리 학번이 자동으로 들어갑니다. 4·5차시에서 같은 학번을 쓰고, 공용 컴퓨터에서는 활동을 마친 뒤 <strong>활동 닫기</strong>를 눌러 주세요.</p>
   <form id="personalCodeForm" autocomplete="off">
     <div class="student-fields">
       <label for="personalGrade">학년
@@ -44,7 +44,7 @@
 <section><h2>3 · AI와 비교하고 판단하기</h2><label class="block" for="ai">AI의 분석</label><textarea id="ai" maxlength="2200" placeholder="AI가 두 댓글을 분석한 내용을 붙여넣으세요."></textarea><label class="block" for="same">내 분석과 AI 분석이 같은 점</label><textarea id="same" maxlength="1000"></textarea><label class="block" for="different">다른 점 또는 AI가 놓친 의견</label><textarea id="different" maxlength="1000"></textarea><label class="block" for="verify">원문 확인 후 최종 판단 · 어떤 문장이 근거인가요?</label><textarea id="verify" maxlength="1200" placeholder="AI의 해석 중 받아들일 점이나 고칠 점을 원문과 함께 적어 보세요."></textarea><h3>🌐 영어로 의미 살피기</h3><p>이 사례를 설명할 때 어느 표현이 더 어울리나요?</p><div class="check"><label><input type="radio" name="english" value="AI helped me write it"> AI helped me write it</label><label><input type="radio" name="english" value="AI wrote it for me"> AI wrote it for me</label><label><input type="radio" name="english" value="둘 다 단정하기 어렵다"> 둘 다 단정하기 어렵다</label></div><label class="block" for="englishReason">그 표현을 고른 이유</label><textarea id="englishReason" maxlength="600"></textarea><div class="actions"><button id="submit" type="button">비교 카드 제출하기</button></div><p id="saveStatus" class="status" role="status"></p></section>
 <section id="result" class="result" hidden><h2>📄 내 분석 vs AI 분석 비교 카드</h2><div id="resultBody" class="grid"></div><div class="actions"><button id="print" type="button" class="secondary">인쇄 또는 PDF로 저장</button></div><p class="muted">저장된 카드는 이 브라우저에서 다시 열 수 있습니다. 교사는 Google Sheets의 Records_API에서도 확인할 수 있습니다.</p></section>
 </div><details><summary>교사용 웹앱 연결 설정</summary><p class="muted">4차시와 같은 Google Sheets를 사용하는 Apps Script 웹앱의 /exec 주소를 넣으세요. 5차시 저장에도 같은 주소를 씁니다.</p><label class="block" for="url">웹앱 주소</label><input id="url" type="url"><button id="connect" type="button">주소 저장하고 연결 확인</button><p id="connectStatus" class="status" role="status"></p></details>
-</main><script src="personal-activity.js"></script><script>
+</main><script src="personal-activity.js?v=student-code-5"></script><script>
 const DEFAULT_URL='https://script.google.com/macros/s/AKfycbz8mPkesqiXtO8mRB0qagPCDklzi6jTHrNPHVthzplHtDnaMmbyvDsrRssX6Derj4pRbw/exec';
 let SCRIPT_URL=localStorage.getItem('step05ScriptUrl')||localStorage.getItem('step04ScriptUrl')||DEFAULT_URL;
 const SOURCE_TOPIC='AI가 해 준 숙제, 내 숙제일까?', CARD_TOPIC='AI 숙제 생각 비교 카드';
