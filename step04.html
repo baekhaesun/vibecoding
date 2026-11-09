@@ -13,7 +13,7 @@
 <header><div class="eyebrow">STEP 04 · 4차시 친구의 생각을 읽고 연결하다</div><h1>친구의 생각을 읽다 👀</h1><p>내 생각을 남기고, 여러 반 친구들의 이유를 읽은 뒤 다시 생각해 봅시다.</p></header>
 <section id="personalAccess">
   <h2>내 활동 열기</h2>
-  <p>처음이라면 개인 코드 하나를 만들어 따로 보관하세요. 4·5차시에서 같은 학년·반·번호와 개인 코드를 쓰고, 공용 컴퓨터에서는 활동을 마친 뒤 <strong>활동 닫기</strong>를 눌러 주세요.</p>
+  <p>학년·반·번호를 입력한 뒤 새 개인 코드 만들기를 누르면 5자리 학번이 자동으로 들어갑니다. 4·5차시에서 같은 학번을 쓰고, 공용 컴퓨터에서는 활동을 마친 뒤 <strong>활동 닫기</strong>를 눌러 주세요.</p>
   <form id="personalCodeForm" autocomplete="off">
     <div class="student-fields">
       <label for="personalGrade">학년
@@ -51,7 +51,7 @@
 <section><h2>💭 친구의 생각을 읽고 다시 생각하다</h2><h3>처음 나의 생각</h3><div id="myFirst" class="original"></div><label class="block" for="repeated">반복해서 나타난 생각</label><textarea id="repeated" maxlength="1000" placeholder="여러 의견에 공통으로 나온 이유를 적어 보세요."></textarea><label class="block" for="different">나와 다른 생각과 그 이유</label><textarea id="different" maxlength="1000" placeholder="입장이 달랐던 의견의 이유를 적어 보세요."></textarea><label class="block" for="memorable">가장 기억에 남는 한 사람의 생각</label><textarea id="memorable" maxlength="1000" placeholder="숫자와 관계없이 기억에 남은 이유를 적어 보세요. 이름은 쓰지 마세요."></textarea><p class="question">친구의 생각을 읽은 뒤 내 생각은 어떤가요?</p><div class="choices"><label class="choice"><input type="radio" name="change" value="생각이 달라졌다"> 생각이 달라졌다</label><label class="choice"><input type="radio" name="change" value="입장은 같지만 이유가 달라졌다"> 입장은 같지만 이유가 달라졌다</label><label class="choice"><input type="radio" name="change" value="생각이 그대로다"> 생각이 그대로다</label></div><label class="block" for="after">지금의 내 생각과 이유</label><textarea id="after" maxlength="1500" placeholder="친구의 의견을 읽고 생각한 내용을 적어 보세요."></textarea><div class="actions"><button id="submitAfter" type="button">다시 생각한 내용 저장하기</button></div><p id="afterStatus" class="status" role="status"></p></section>
 </div>
 </div><details class="settings"><summary>교사용 연결 설정 · 저장이 안 될 때 확인</summary><p class="muted">이 페이지는 앞서 사용한 3차시 주소가 기본으로 들어 있습니다. 4차시용 Code(2).gs를 배포했다면 그 웹앱의 /exec 주소를 넣으세요.</p><label class="block" for="urlInput">Apps Script 웹앱 주소</label><input id="urlInput" type="url" placeholder="https://script.google.com/macros/s/.../exec"><button id="setUrl" type="button">주소 저장하고 연결 확인</button><p id="connectionStatus" class="status" role="status"></p></details>
-</main><script src="personal-activity.js"></script><script>
+</main><script src="personal-activity.js?v=student-code-5"></script><script>
 // 교사가 배포한 Code(2).gs 웹앱의 /exec 주소로 설정하세요.
 const DEFAULT_SCRIPT_URL='https://script.google.com/macros/s/AKfycbz8mPkesqiXtO8mRB0qagPCDklzi6jTHrNPHVthzplHtDnaMmbyvDsrRssX6Derj4pRbw/exec';
 let SCRIPT_URL=localStorage.getItem('step04ScriptUrl')||DEFAULT_SCRIPT_URL;
