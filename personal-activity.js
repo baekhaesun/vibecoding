@@ -7,20 +7,27 @@ function setupPersonalActivity(step, openActivity, isSaving) {
   const activity = document.getElementById('personalActivity');
   const access = document.getElementById('personalAccess');
 
+  function studentCode() {
+    const [grade, classNo, number] = studentFields.map(field => String(Number(field.value)));
+    return grade + classNo.padStart(2, '0') + number.padStart(2, '0');
+  }
+
   form.reset();
   create.addEventListener('click', () => {
+    if (!studentFields.every(field => field.reportValidity())) return;
     input.type = 'text';
-    input.value = crypto.randomUUID();
+    input.value = studentCode();
     input.focus();
     input.select();
-    status.textContent = '선택된 코드를 안전한 곳에 복사하거나 적어 둔 뒤 내 활동 열기를 누르세요.';
+    status.textContent = '학년·반·번호로 코드를 만들었어요. 내 활동 열기를 누르세요.';
   });
   form.addEventListener('submit', async event => {
     event.preventDefault();
     const student = studentFields.map(field => Number(field.value)).join(':');
     const code = input.value.trim().toLowerCase();
-    if (!/^[a-f0-9]{8}(-[a-f0-9]{4}){3}-[a-f0-9]{12}$/.test(code)) {
-      status.textContent = '만들어 둔 개인 코드 전체를 붙여넣거나 새 코드를 만드세요.';
+    const existingCode = /^[a-f0-9]{8}(-[a-f0-9]{4}){3}-[a-f0-9]{12}$/.test(code);
+    if (code !== studentCode() && !existingCode) {
+      status.textContent = '학년·반·번호와 일치하는 5자리 코드 또는 기존 개인 코드를 입력하세요.';
       return;
     }
 
