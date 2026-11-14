@@ -66,12 +66,74 @@ function jsonp(params){return new Promise((resolve,reject)=>{const name='cb_'+Ma
 function post(payload){const frame=document.createElement('iframe');frame.name='sink_'+makeId().replaceAll('-','');frame.hidden=true;const form=document.createElement('form');form.method='POST';form.action=SCRIPT_URL;form.target=frame.name;form.hidden=true;const field=document.createElement('input');field.name='payload';field.value=JSON.stringify(payload);form.append(field);document.body.append(frame,form);form.submit();setTimeout(()=>{frame.remove();form.remove()},20000)}
 async function save(fields){const recordId=makeId();post({action:'save',recordId,appId:APP_ID,step:STEP,topic:TOPIC,fields});for(let i=0;i<9;i++){await new Promise(r=>setTimeout(r,750));const result=await jsonp({action:'status',recordId});if(!result.ok)throw Error(result.error);if(result.saved)return recordId}throw Error('저장을 확인하지 못했습니다. 시트를 확인한 뒤 다시 시도하세요.')}
 function show(n){if(n>1&&!initial){$('firstStatus').textContent='내 생각을 먼저 제출한 뒤 친구의 의견을 읽어 보세요.';n=1}for(let i=1;i<=3;i++)$('page'+i).hidden=i!==n;document.querySelectorAll('[data-page]').forEach(b=>{b.classList.toggle('active',Number(b.dataset.page)===n);b.setAttribute('aria-current',Number(b.dataset.page)===n?'step':'false')});if(n===2)loadShared();if(n===3)renderOriginal();window.scrollTo(0,0)}
-function ownRecords(records){const own=records.filter(x=>x.step===STEP&&x.topic===TOPIC);initial=own.find(x=>x.fields?.kind==='initial')||null;reflection=own.find(x=>x.fields?.kind==='reflection')||null;$('finishActivity').hidden=!reflection;if(initial){const f=initial.fields;Array.from(document.querySelectorAll('input[name="stance"]')).find(x=>x.value===f.stance)?.click();$('reason').value=f.reason||'';$('boundary').value=f.boundary||'';$('submitFirst').disabled=true;$('firstStatus').textContent='처음 생각이 저장되어 있습니다. 친구의 생각을 읽어 보세요.'}if(reflection){const f=reflection.fields;$('repeated').value=f.repeated||'';$('different').value=f.different||'';$('memorable').value=f.memorable||'';$('after').value=f.after||'';Array.from(document.querySelectorAll('input[name="change"]')).find(x=>x.value===f.change)?.click();$('submitAfter').disabled=true;$('afterStatus').textContent='다시 생각한 내용이 저장되어 있습니다.'}}
+function ownRecords(records){const own=records.filter(x=>x.step===STEP&&x.topic===TOPIC);initial=own.find(x=>x.fields?.kind==='initial')||null;reflection=own.find(x=>x.fields?.kind==='reflection')||null;$('finishActivity').hidden=!reflection;updateReflectionButton();if(initial){const f=initial.fields;Array.from(document.querySelectorAll('input[name="stance"]')).find(x=>x.value===f.stance)?.click();$('reason').value=f.reason||'';$('boundary').value=f.boundary||'';$('submitFirst').disabled=true;$('firstStatus').textContent='처음 생각이 저장되어 있습니다. 친구의 생각을 읽어 보세요.'}if(reflection){const f=reflection.fields;$('repeated').value=f.repeated||'';$('different').value=f.different||'';$('memorable').value=f.memorable||'';$('after').value=f.after||'';Array.from(document.querySelectorAll('input[name="change"]')).find(x=>x.value===f.change)?.click();$('afterStatus').textContent='저장한 내용을 고친 뒤 수정 저장을 누르세요.'}}
 async function submitFirst(){if(busy||initial)return;const stance=document.querySelector('input[name="stance"]:checked')?.value,reason=$('reason').value.trim(),boundary=$('boundary').value.trim();if(!stance||!reason||!boundary){$('firstStatus').textContent='입장과 두 가지 이유를 모두 작성해 주세요.';return}busy=true;$('submitFirst').disabled=true;$('firstStatus').textContent='저장 확인 중...';try{const fields={kind:'initial',stance,reason,boundary};const recordId=await save(fields);initial={recordId,fields};$('firstStatus').textContent='저장되었습니다.';show(2)}catch(e){$('firstStatus').textContent='오류: '+e.message;$('submitFirst').disabled=false}finally{busy=false}}
 async function loadShared(){const root=$('cards');root.textContent='불러오는 중...';$('readStatus').textContent='';try{const r=await jsonp({action:'read',scope:'all',step:STEP,topic:TOPIC});if(!r.ok)throw Error(r.error);shared=r.records.filter(x=>x.fields?.kind==='initial');renderShared()}catch(e){root.textContent='';$('readStatus').textContent='오류: '+e.message}}
 function renderShared(){const counts={'동의해요':0,'잘 모르겠어요':0,'동의하지 않아요':0};for(const x of shared)if(x.fields.stance in counts)counts[x.fields.stance]++;const total=Object.values(counts).reduce((a,b)=>a+b,0);const summary=$('summary');summary.replaceChildren();const label=document.createElement('strong');label.textContent=`같은 주제의 의견 ${total}개`;const bar=document.createElement('div');bar.className='bar';const colors={'동의해요':'#4b83c8','잘 모르겠어요':'#eab05c','동의하지 않아요':'#bb6b8d'};for(const [stance,count] of Object.entries(counts)){if(!count)continue;const part=document.createElement('span');part.style.width=(count/total*100)+'%';part.style.background=colors[stance];part.title=`${stance} ${count}개`;bar.append(part)}const line=document.createElement('div');line.className='counts';for(const [stance,count] of Object.entries(counts)){const tag=document.createElement('span');tag.className='count';tag.textContent=`${stance} ${count}`;line.append(tag)}summary.append(label,bar,line);const root=$('cards');root.replaceChildren();const filter=$('filter').value;const items=shared.filter(x=>filter==='all'||x.fields.stance===filter);for(const item of items){const card=document.createElement('article');card.className='card';const head=document.createElement('strong');head.textContent=item.fields.stance||'의견';const reason=document.createElement('p');reason.textContent=item.fields.reason||'';const boundary=document.createElement('p');boundary.textContent='AI 도움의 범위: '+(item.fields.boundary||'');card.append(head,reason,boundary);root.append(card)}if(!items.length)root.textContent='아직 해당 의견이 없습니다.';$('readStatus').textContent=total?'숫자뿐 아니라 친구들이 쓴 이유도 읽어 보세요.':'아직 모인 의견이 없습니다. 제출 후 새 의견 불러오기를 눌러 보세요.'}
 function renderOriginal(){const root=$('myFirst');root.textContent=initial?`${initial.fields.stance}\n${initial.fields.reason}\nAI 도움의 범위: ${initial.fields.boundary}`:'처음 의견을 먼저 제출해 주세요.'}
-async function submitAfter(){if(busy||reflection)return;if(!initial){$('afterStatus').textContent='처음 생각을 먼저 제출해 주세요.';return}const change=document.querySelector('input[name="change"]:checked')?.value;const fields={kind:'reflection',change,repeated:$('repeated').value.trim(),different:$('different').value.trim(),memorable:$('memorable').value.trim(),after:$('after').value.trim(),initialStance:initial.fields.stance,initialReason:initial.fields.reason,initialBoundary:initial.fields.boundary};if(Object.values(fields).some(v=>!v)){$('afterStatus').textContent='모든 질문에 답해 주세요.';return}busy=true;$('submitAfter').disabled=true;$('afterStatus').textContent='저장 확인 중...';try{const recordId=await save(fields);reflection={recordId,fields};$('finishActivity').hidden=false;$('afterStatus').textContent='저장되었습니다. 활동 닫기를 눌러 마무리하세요.'}catch(e){$('afterStatus').textContent='오류: '+e.message;$('submitAfter').disabled=false}finally{busy=false}}
+function updateReflectionButton() {
+  $('submitAfter').textContent = reflection ? '수정 저장' : '다시 생각한 내용 저장하기';
+  $('submitAfter').disabled = false;
+}
+
+async function updateReflection(recordId, fields) {
+  const appId = APP_ID;
+  post({action:'updateStep4Reflection', recordId, appId, step:STEP, topic:TOPIC, fields});
+  for (let attempt = 0; attempt < 9; attempt++) {
+    await new Promise(resolve => setTimeout(resolve, 750));
+    const result = await jsonp({action:'read', appId});
+    if (!result.ok) throw Error(result.error);
+    const saved = result.records.find(record => record.recordId === recordId);
+    if (saved && ['change', 'repeated', 'different', 'memorable', 'after'].every(key => saved.fields[key] === fields[key])) return;
+  }
+  throw Error('수정 저장을 확인하지 못했습니다. 다시 시도해 주세요.');
+}
+
+async function submitAfter() {
+  if (busy) return;
+  if (!initial) {
+    $('afterStatus').textContent = '처음 생각을 먼저 제출해 주세요.';
+    return;
+  }
+  const fields = {
+    kind: 'reflection',
+    change: document.querySelector('input[name="change"]:checked')?.value,
+    repeated: $('repeated').value.trim(),
+    different: $('different').value.trim(),
+    memorable: $('memorable').value.trim(),
+    after: $('after').value.trim(),
+    initialStance: initial.fields.stance,
+    initialReason: initial.fields.reason,
+    initialBoundary: initial.fields.boundary
+  };
+  if (Object.values(fields).some(value => !value)) {
+    $('afterStatus').textContent = '모든 질문에 답해 주세요.';
+    return;
+  }
+  busy = true;
+  $('submitAfter').disabled = true;
+  $('setUrl').disabled = true;
+  $('afterStatus').textContent = '저장 확인 중...';
+  try {
+    const editing = Boolean(reflection);
+    let recordId;
+    if (editing) {
+      recordId = reflection.recordId;
+      await updateReflection(recordId, fields);
+    } else {
+      recordId = await save(fields);
+    }
+    reflection = {recordId, fields};
+    $('finishActivity').hidden = false;
+    $('afterStatus').textContent = editing ? '수정한 내용을 저장했습니다.' : '저장되었습니다. 내용을 고치려면 수정 저장을 누르세요.';
+  } catch (error) {
+    $('afterStatus').textContent = '오류: ' + error.message;
+  } finally {
+    busy = false;
+    $('setUrl').disabled = false;
+    updateReflectionButton();
+  }
+}
 $('urlInput').value=SCRIPT_URL;
 $('setUrl').addEventListener('click',async()=>{const url=$('urlInput').value.trim();if(!/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(url)){$('connectionStatus').textContent='웹앱 주소는 https://script.google.com/macros/s/.../exec 형식이어야 합니다.';return}SCRIPT_URL=url;$('connectionStatus').textContent='연결 확인 중...';try{const r=await jsonp({action:'read',appId:APP_ID||makeId()});if(!r.ok)throw Error(r.error);localStorage.setItem('step04ScriptUrl',url);initial=null;reflection=null;$('submitFirst').disabled=false;$('submitAfter').disabled=false;if(APP_ID)ownRecords(r.records);$('connectionStatus').textContent='연결 성공. 이제 의견을 저장할 수 있습니다.'}catch(e){$('connectionStatus').textContent='연결 실패: '+e.message+' · Code(2).gs의 배포 주소와 웹앱 접근 권한을 확인하세요.'}});
 document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>show(Number(b.dataset.page))));$('submitFirst').addEventListener('click',submitFirst);$('refresh').addEventListener('click',loadShared);$('filter').addEventListener('change',renderShared);$('toThird').addEventListener('click',()=>show(3));$('submitAfter').addEventListener('click',submitAfter);setupPersonalActivity(4, async appId => {
