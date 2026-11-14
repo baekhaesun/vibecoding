@@ -1,73 +1,362 @@
+
 <!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>내 분석 vs AI 분석 · 5차시</title>
-<style>
-:root{font-family:system-ui,-apple-system,"Malgun Gothic",sans-serif;color:#203449}*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#e6efff,#f6f8fb 45%,#fff5e9)}main{max-width:1000px;margin:auto;padding:28px 18px 75px}header{text-align:center;padding:26px 0}.eyebrow{font-weight:800;color:#4265ab;letter-spacing:.12em;font-size:.83rem}h1{font-size:clamp(2rem,5vw,3.2rem);color:#193e72;margin:9px 0}header p{color:#5a6d83}section,.card,details{background:white;border:1px solid #dfe7f0;border-radius:19px;padding:clamp(19px,3vw,29px);margin:18px 0;box-shadow:0 10px 28px #294b6a12}h2{margin:0 0 12px;color:#245889;font-size:1.35rem}h3{color:#235875;margin:7px 0}p{line-height:1.65}.muted{color:#687b90;font-size:.94rem}.source-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:14px}.source{border:1px solid #cfdeee;border-radius:13px;padding:16px;background:#f9fbff;overflow-wrap:anywhere}.source.selected{border:2px solid #4178bd;background:#eef5ff}.source p{white-space:pre-wrap;margin:7px 0}.source strong{color:#315d92}label.block{font-weight:750;display:block;margin:18px 0 7px}textarea,input[type=url]{width:100%;font:inherit;color:inherit;border:1px solid #b8cbe0;border-radius:11px;padding:13px;background:#fff}textarea{min-height:88px;resize:vertical}textarea:focus,input:focus{outline:2px solid #85a9db}.pair{display:grid;grid-template-columns:1fr 1fr;gap:13px}.pair>div{background:#f1f6fc;border-radius:13px;padding:16px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.55}.pair strong{display:block;color:#285687;margin-bottom:8px}.actions{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:17px}button{border:0;background:#3565a5;color:#fff;border-radius:10px;padding:11px 17px;font:inherit;font-weight:750;cursor:pointer}button.secondary{background:#e7effa;color:#29568b}button:disabled{opacity:.5;cursor:wait}.status{min-height:1.5em;color:#28637a;font-weight:700}.check{display:flex;gap:10px;flex-wrap:wrap}.check label{padding:10px 13px;background:#f4f7fc;border:1px solid #cbd9e9;border-radius:10px;cursor:pointer}.check input{accent-color:#3565a5}details summary{cursor:pointer;font-weight:750;color:#2d5c94}.result{border:2px solid #b8d2ed;background:#fcfeff}.result .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.result .cell{padding:14px;background:#f1f6fc;border-radius:11px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6}.result .wide{grid-column:1/-1}.result small{color:#62758a}.hidden,[hidden]{display:none!important}@media(max-width:660px){.pair,.result .grid{grid-template-columns:1fr}}
-@media print{body{background:white}header,section:not(#result),details,.actions{display:none!important}#result{display:block!important;border:0;box-shadow:none;margin:0;padding:0}.result .cell{break-inside:avoid}}
-.personal-code{display:block;width:100%;max-width:38ch;padding:12px;border:1px solid #b8c9df;border-radius:10px;font:inherit}
-.student-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:440px}
-.student-fields label{font-weight:700}
-.student-fields input,.student-fields select{display:block;width:100%;padding:9px;margin-top:5px;font:inherit;color:inherit;border:1px solid #b8c9df;border-radius:9px;background:#fff}
-#personalActivity:not([hidden])+details{display:none}
-#closePersonalActivity{background:#17366b;color:#fff;border:2px solid #17366b}
-#closePersonalActivity:hover{background:#0f2854}
-#closePersonalActivity:focus-visible{outline:3px solid #547bc5;outline-offset:3px}
-@media print{#personalAccess,#closePersonalActivity{display:none!important}}
-</style></head><body><main>
-<header><div class="eyebrow">STEP 5차시 AI와 함께 다시 읽다</div><h1>내 분석 vs AI 분석 🤖</h1><p>친구의 처음·다시 생각을 읽고, 내 판단과 AI의 해석을 원문으로 비교해요.</p></header>
-<section id="personalAccess">
-  <h2>내 활동 열기</h2>
-  <p>학년·반·번호를 입력한 뒤 새 개인 코드 만들기를 누르면 5자리 학번이 자동으로 들어갑니다. 4·5차시에서 같은 학번을 쓰고, 공용 컴퓨터에서는 활동을 마친 뒤 <strong>활동 닫기</strong>를 눌러 주세요.</p>
-  <form id="personalCodeForm" autocomplete="off">
-    <div class="student-fields">
-      <label for="personalGrade">학년
-        <select id="personalGrade" required>
-          <option value="">선택</option><option value="1">1학년</option><option value="2">2학년</option><option value="3">3학년</option>
-        </select>
-      </label>
-      <label for="personalClass">반
-        <input id="personalClass" type="number" min="1" max="50" step="1" inputmode="numeric" required>
-      </label>
-      <label for="personalNumber">번호
-        <input id="personalNumber" type="number" min="1" max="50" step="1" inputmode="numeric" required>
-      </label>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>읽고 걷고 쓰며 발견하다 | AI 읽걷쓰 × 바이브코딩</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* PDF 저장 버튼 */
+    .pdf-save-area {
+      display: flex;
+      justify-content: center;
+      margin: 32px 0 24px;
+    }
+
+    .pdf-save-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 15px 28px;
+      background: #2563eb;
+      color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .pdf-save-btn:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+    }
+
+    /* 전체 페이지 PDF 인쇄 설정 */
+    @media print {
+      @page {
+        size: A4;
+        margin: 15mm;
+      }
+
+      html, body {
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        background: #ffffff !important;
+      }
+
+      body,
+      body * {
+        visibility: visible !important;
+      }
+
+      main,
+      .lesson-shell,
+      .lesson-header,
+      .lesson-content,
+      .subject-box,
+      .humanities-box {
+        display: block !important;
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-width: none !important;
+        max-height: none !important;
+        overflow: visible !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+
+      .lesson-shell {
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+      }
+
+      .lesson-header,
+      .lesson-content {
+        box-sizing: border-box !important;
+        margin: 0 0 14px !important;
+        padding: 15px !important;
+        box-shadow: none !important;
+        break-inside: auto;
+        page-break-inside: auto;
+      }
+
+      .lesson-header {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      h1, h2, h3 {
+        break-after: avoid;
+        page-break-after: avoid;
+      }
+
+      p, li {
+        orphans: 2;
+        widows: 2;
+      }
+
+      .prompt,
+      .big-question {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        overflow-wrap: anywhere;
+        white-space: normal !important;
+      }
+
+      /* PDF에는 이동 버튼과 저장 버튼 숨김 */
+      .back-link,
+      .lesson-nav,
+      .pdf-save-area {
+        display: none !important;
+      }
+
+      body {
+        font-size: 11pt !important;
+        line-height: 1.55 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      a {
+        text-decoration: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<main class="lesson-shell">
+
+  <a class="back-link" href="index.html">
+    ← 처음으로 돌아가기
+  </a>
+
+  <!-- STEP 05 헤더 -->
+  <header class="lesson-header blue">
+    <span class="lesson-number">STEP 05 · 6~8차시</span>
+    <h1>읽고 걷고 쓰며 발견하다</h1>
+    <p>
+      우리 동네 숨은 명소 발견 → 우리말·영어 소개 → 공동 안내 지도
+    </p>
+  </header>
+
+  <!-- 교과 융합 포인트 -->
+  <section class="lesson-content subject-box">
+    <h2>교과 융합 포인트 🧩</h2>
+
+    <p class="subject-line">
+      <strong>
+        📖 국어 · 🌎 영어 · 💻 정보 · 🤖 AI인문학
+      </strong>
+    </p>
+
+    <ul>
+      <li>
+        📖 <strong>국어</strong> |
+        숨은 명소에서의 경험과 추천 이유를 우리말 이야기로 써요.
+      </li>
+      <li>
+        🌎 <strong>영어</strong> |
+        외국인 독자를 위해 장소의 매력을 쉬운 영어로 소개해요.
+      </li>
+      <li>
+        💻 <strong>정보</strong> |
+        위치·사진·소개 글을 정리해 공동 안내 지도를 만들어요.
+      </li>
+      <li>
+        🤖 <strong>AI인문학</strong> |
+        AI의 제안을 직접 경험과 비교하며 판단하고 수정해요.
+      </li>
+    </ul>
+  </section>
+
+  <!-- AI인문학 질문 -->
+  <section class="lesson-content humanities-box">
+    <h2>오늘의 AI인문학 질문 🤔</h2>
+
+    <p class="big-question">
+      <strong>
+        AI가 소개하는 장소와 내가 직접 발견한 장소의 매력은 어떻게 다를까?
+      </strong>
+    </p>
+
+    <p>
+      걷고, 쓰고, 친구의 이야기를 읽으며
+      장소를 바라보는 내 생각이 어떻게 달라졌는지 기록해 봐요.
+    </p>
+  </section>
+
+  <!-- 6차시 -->
+  <section class="lesson-content">
+    <h2>6차시 · 질문을 들고 밖으로 나가다 👟</h2>
+
+    <ul>
+      <li>
+        학교 주변이나 집 근처에서 숨은 명소로
+        추천하고 싶은 장소를 정해요.
+      </li>
+      <li>
+        ‘이곳에는 어떤 숨은 매력이 있을까?’라는
+        질문을 들고 걸으며 관찰해요.
+      </li>
+      <li>
+        장소의 위치·사진·보고 듣고 느낀 점과
+        영어 낱말을 기록해요.
+      </li>
+      <li>
+        <strong>
+          AI가 알려준 정보와 직접 확인한 사실
+        </strong>을 비교해요.
+      </li>
+    </ul>
+  </section>
+
+  <!-- 7차시 -->
+  <section class="lesson-content">
+    <h2>7차시 · 경험을 우리말 이야기로 쓰다 📖</h2>
+
+    <ul>
+      <li>
+        직접 경험한 장면과 추천 이유를 담아
+        우리말 소개 글을 써요.
+      </li>
+      <li>
+        장소의 매력을 쉬운 영어 3~5문장으로 표현해요.
+      </li>
+      <li>
+        AI에게 표현과 피드백을 요청하고,
+        내 경험과 뜻에 맞게 골라 수정해요.
+      </li>
+    </ul>
+  </section>
+
+  <!-- 8차시 -->
+  <section class="lesson-content">
+    <h2>8차시 · 다른 독자에게 다시 쓰다 🌎</h2>
+
+    <ul>
+      <li>
+        친구의 피드백을 바탕으로
+        우리말 소개 글을 고쳐 써요.
+      </li>
+      <li>
+        외국인 독자가 이해하도록
+        영어 소개와 길 안내를 다듬어요.
+      </li>
+      <li>
+        위치·사진·한영 소개 글을 모아
+        <strong>
+          각자의 추천 장소가 담긴 공동 안내 지도
+        </strong>를 만들어요.
+      </li>
+      <li>
+        정보의 정확성·출처·개인정보를 확인한 뒤
+        서로의 장소와 이야기를 읽어요.
+      </li>
+    </ul>
+  </section>
+
+  <!-- AI 프롬프트 -->
+  <section class="lesson-content">
+    <h2>AI에게 이렇게 말해 볼까요? 💬</h2>
+
+    <h3>👟 6차시 · 숨은 매력 발견하기</h3>
+    <div class="prompt">
+      학교 주변이나 집 근처의 [장소]를 관찰하려고 해.
+      숨은 매력을 발견할 수 있는 질문 3개를 제안해 줘.
+      확인이 필요한 정보는 따로 표시해 줘.
     </div>
-    <label class="block" for="personalCode">내 개인 코드</label>
-    <input id="personalCode" class="personal-code" type="password" required spellcheck="false" autocapitalize="off" maxlength="80">
-    <div class="actions">
-      <button type="submit">내 활동 열기</button>
-      <button id="createPersonalCode" type="button" class="secondary">새 개인 코드 만들기</button>
+
+    <h3>📖 7차시 · 내 경험으로 이야기 쓰기</h3>
+    <div class="prompt">
+      [장소]의 관찰 기록 [기록]을 읽고,
+      경험과 추천 이유를 더 생생하게 표현할 수 있는
+      질문 3개를 해 줘.
+      글을 대신 쓰거나 기록에 없는 사실을 추가하지 마.
     </div>
-    <p id="personalCodeStatus" class="status" role="status"></p>
-  </form>
-</section>
-<div id="personalActivity" hidden>
-<section><h2>1 · 같은 댓글 고르기</h2><p class="muted">4차시에서 한 학생이 쓴 ‘처음 생각 → 다시 생각’을 익명으로 보여줍니다. 친구의 표현을 존중하며 읽어 주세요.</p><div class="actions"><button id="refresh" type="button" class="secondary">4차시 댓글 불러오기</button><button id="manual" type="button" class="secondary">교사가 준 댓글 직접 입력</button></div><p id="loadStatus" class="status" role="status"></p><div id="sources" class="source-list"></div><div id="manualFields" hidden><label class="block" for="manualFirst">처음 생각 댓글</label><textarea id="manualFirst" maxlength="2500" placeholder="댓글의 원문을 입력하세요."></textarea><label class="block" for="manualAfter">다시 생각 댓글</label><textarea id="manualAfter" maxlength="2500" placeholder="댓글의 원문을 입력하세요."></textarea><button id="useManual" type="button">이 댓글로 분석하기</button></div></section>
-<section><h2>2 · 원문과 내 분석</h2><div class="pair"><div><strong>처음 생각</strong><span id="firstText">위에서 댓글을 선택하세요.</span></div><div><strong>다시 생각</strong><span id="afterText">위에서 댓글을 선택하세요.</span></div></div><label class="block" for="mine">내 분석 · 생각이 어떻게 바뀌었나요? 근거 문장을 포함하세요.</label><textarea id="mine" maxlength="1800" placeholder="예: 처음에는 ○○라고 했지만, 다시 생각에서는 △△를 고려했다. 근거는 ‘…’이다."></textarea><div class="actions"><button id="copyPrompt" type="button" class="secondary">같은 댓글을 AI에 보낼 질문 복사</button></div><p id="copyStatus" class="status" role="status"></p><p class="muted">AI에는 이름·학번 없이 위 두 댓글만 전달하세요. AI의 답을 확인한 뒤 아래에 직접 붙여넣습니다.</p></section>
-<section><h2>3 · AI와 비교하고 판단하기</h2><label class="block" for="ai">AI의 분석</label><textarea id="ai" maxlength="2200" placeholder="AI가 두 댓글을 분석한 내용을 붙여넣으세요."></textarea><label class="block" for="same">내 분석과 AI 분석이 같은 점</label><textarea id="same" maxlength="1000"></textarea><label class="block" for="different">다른 점 또는 AI가 놓친 의견</label><textarea id="different" maxlength="1000"></textarea><label class="block" for="verify">원문 확인 후 최종 판단 · 어떤 문장이 근거인가요?</label><textarea id="verify" maxlength="1200" placeholder="AI의 해석 중 받아들일 점이나 고칠 점을 원문과 함께 적어 보세요."></textarea><h3>🌐 영어로 의미 살피기</h3><p>이 사례를 설명할 때 어느 표현이 더 어울리나요?</p><div class="check"><label><input type="radio" name="english" value="AI helped me write it"> AI helped me write it</label><label><input type="radio" name="english" value="AI wrote it for me"> AI wrote it for me</label><label><input type="radio" name="english" value="둘 다 단정하기 어렵다"> 둘 다 단정하기 어렵다</label></div><label class="block" for="englishReason">그 표현을 고른 이유</label><textarea id="englishReason" maxlength="600"></textarea><div class="actions"><button id="submit" type="button">비교 카드 제출하기</button></div><p id="saveStatus" class="status" role="status"></p></section>
-<section id="result" class="result" hidden><h2>📄 내 분석 vs AI 분석 비교 카드</h2><div id="resultBody" class="grid"></div><div class="actions"><button id="print" type="button" class="secondary">인쇄 또는 PDF로 저장</button><button id="closePersonalActivity" type="button">활동 닫기</button></div><p class="muted">저장된 카드는 같은 학년·반·번호와 코드로 다시 열 수 있습니다. 교사는 Google Sheets의 Records_API에서도 확인할 수 있습니다.</p></section>
-</div><details><summary>교사용 웹앱 연결 설정</summary><p class="muted">4차시와 같은 Google Sheets를 사용하는 Apps Script 웹앱의 /exec 주소를 넣으세요. 5차시 저장에도 같은 주소를 씁니다.</p><label class="block" for="url">웹앱 주소</label><input id="url" type="url"><button id="connect" type="button">주소 저장하고 연결 확인</button><p id="connectStatus" class="status" role="status"></p></details>
-</main><script src="personal-activity.js?v=student-code-5"></script><script>
-const DEFAULT_URL='https://script.google.com/macros/s/AKfycbz8mPkesqiXtO8mRB0qagPCDklzi6jTHrNPHVthzplHtDnaMmbyvDsrRssX6Derj4pRbw/exec';
-let SCRIPT_URL=localStorage.getItem('step05ScriptUrl')||localStorage.getItem('step04ScriptUrl')||DEFAULT_URL;
-const SOURCE_TOPIC='AI가 해 준 숙제, 내 숙제일까?', CARD_TOPIC='AI 숙제 생각 비교 카드';
-const $=id=>document.getElementById(id);const makeId=()=>crypto.randomUUID?crypto.randomUUID():Array.from(crypto.getRandomValues(new Uint8Array(16)),b=>b.toString(16).padStart(2,'0')).join('');
-let APP_ID=null;
-let selection=null,submitted=null,busy=false;
-function jsonp(params){return new Promise((resolve,reject)=>{const name='cb_'+Math.random().toString(36).slice(2);const script=document.createElement('script');let done=false;const timer=setTimeout(()=>finish(Error('조회 시간 초과: 웹앱 주소·접근 권한을 확인하세요.')),15000);function finish(err,data){if(done)return;done=true;clearTimeout(timer);delete window[name];script.remove();err?reject(err):resolve(data)}window[name]=data=>finish(null,data);script.onerror=()=>finish(Error('조회 실패: 웹앱 주소를 확인하세요.'));script.src=SCRIPT_URL+'?'+new URLSearchParams({...params,callback:name});document.head.append(script)})}
-function post(payload){const frame=document.createElement('iframe');frame.name='sink_'+makeId().replaceAll('-','');frame.hidden=true;const form=document.createElement('form');form.method='POST';form.action=SCRIPT_URL;form.target=frame.name;form.hidden=true;const field=document.createElement('input');field.name='payload';field.value=JSON.stringify(payload);form.append(field);document.body.append(frame,form);form.submit();setTimeout(()=>{frame.remove();form.remove()},20000)}
-async function save(fields){const recordId=makeId();post({action:'save',recordId,appId:APP_ID,step:5,topic:CARD_TOPIC,fields});for(let i=0;i<9;i++){await new Promise(r=>setTimeout(r,750));const r=await jsonp({action:'status',recordId});if(!r.ok)throw Error(r.error);if(r.saved)return recordId}throw Error('저장을 확인하지 못했습니다. 배포와 시트를 확인하세요.')}
-function select(item,button){selection=item;$('firstText').textContent=item.first;$('afterText').textContent=item.after;document.querySelectorAll('.source').forEach(x=>x.classList.remove('selected'));if(button)button.classList.add('selected');$('loadStatus').textContent='댓글을 선택했습니다. 먼저 나의 분석을 적어 보세요.'}
-async function loadSources(){const root=$('sources');root.textContent='불러오는 중...';$('loadStatus').textContent='';try{const r=await jsonp({action:'read',scope:'all',step:4,topic:SOURCE_TOPIC});if(!r.ok)throw Error(r.error);const items=r.records.filter(x=>x.fields?.kind==='reflection'&&x.fields.initialReason&&x.fields.after);root.replaceChildren();for(const [i,record] of items.entries()){const f=record.fields,card=document.createElement('article');card.className='source';const title=document.createElement('strong');title.textContent=`댓글 ${i+1} · ${f.change||'생각 다시 쓰기'}`;const first=document.createElement('p');first.textContent=`처음: ${f.initialStance||''} · ${f.initialReason}`;const after=document.createElement('p');after.textContent=`다시: ${f.after}`;const button=document.createElement('button');button.type='button';button.textContent='이 댓글 분석하기';button.addEventListener('click',()=>select({sourceRecordId:record.recordId,first:`${f.initialStance||''} · ${f.initialReason}`,after:f.after},card));card.append(title,first,after,button);root.append(card)}const firstCount=r.records.filter(x=>x.fields?.kind==='initial').length;const afterCount=r.records.filter(x=>x.fields?.kind==='reflection').length;$('loadStatus').textContent=items.length?`처음 의견 ${firstCount}개 · 다시 생각 ${afterCount}개 중 비교 가능한 댓글 ${items.length}개를 불러왔습니다.`:`처음 의견 ${firstCount}개 · 다시 생각 ${afterCount}개가 조회됐지만 비교 가능한 짝이 없습니다. 두 답변을 모두 제출했는지 확인하거나 직접 입력하세요.`}catch(e){root.textContent='';$('loadStatus').textContent='불러오기 실패: '+e.message+' · 아래 연결 설정을 확인하세요.'}}
-function showOwn(records){const item=records.find(x=>x.step===5&&x.topic===CARD_TOPIC&&x.fields?.kind==='comparison');if(item){submitted=item;$('submit').disabled=true;$('saveStatus').textContent='이미 제출한 비교 카드를 불러왔습니다.';render(item.fields)}else{$('saveStatus').textContent='이 코드의 5차시 제출 기록이 없습니다. 비교 카드를 작성해 보세요.'}}
-function promptText(){return `다음은 같은 학생이 쓴 익명 댓글 두 개입니다. 처음 생각과 다시 생각에서 바뀐 점, 그대로인 점, 그 근거가 되는 원문을 구분해 분석해 주세요. 원문에 없는 동기나 사실은 추측하지 말고, 확실하지 않은 점은 모른다고 밝혀 주세요.\n\n[처음 생각]\n${selection.first}\n\n[다시 생각]\n${selection.after}`}
-function cell(parent,title,value,wide=false){const d=document.createElement('div');d.className='cell'+(wide?' wide':'');const h=document.createElement('strong');h.textContent=title;const p=document.createElement('div');p.textContent=value;d.append(h,p);parent.append(d)}
-function render(f){$('result').hidden=false;const body=$('resultBody');body.replaceChildren();cell(body,'처음 생각 댓글',f.first);cell(body,'다시 생각 댓글',f.after);cell(body,'나의 분석',f.mine);cell(body,'AI의 분석',f.ai);cell(body,'같은 점',f.same);cell(body,'다른 점·놓친 의견',f.different);cell(body,'원문 확인과 최종 판단',f.verify,true);cell(body,'영어 표현과 이유',f.english+' — '+f.englishReason,true);$('result').scrollIntoView({behavior:'smooth',block:'start'})}
-async function submit(){if(busy||submitted)return;if(!selection){$('saveStatus').textContent='분석할 댓글을 먼저 선택하세요.';return}const english=document.querySelector('input[name="english"]:checked')?.value;const fields={kind:'comparison',sourceRecordId:selection.sourceRecordId,first:selection.first,after:selection.after,mine:$('mine').value.trim(),ai:$('ai').value.trim(),same:$('same').value.trim(),different:$('different').value.trim(),verify:$('verify').value.trim(),english,englishReason:$('englishReason').value.trim()};if(!fields.mine||!fields.ai||!fields.same||!fields.different||!fields.verify||!fields.english||!fields.englishReason){$('saveStatus').textContent='모든 분석 항목과 영어 표현을 작성해 주세요.';return}if(Object.entries(fields).some(([k,v])=>k!=='sourceRecordId'&&String(v||'').length>3000)){$('saveStatus').textContent='내용이 너무 깁니다. 각 항목을 줄여 주세요.';return}busy=true;$('submit').disabled=true;$('saveStatus').textContent='제출 확인 중...';try{const recordId=await save(fields);submitted={recordId,fields};$('saveStatus').textContent='비교 카드가 저장되었습니다.';render(fields)}catch(e){$('saveStatus').textContent='오류: '+e.message;$('submit').disabled=false}finally{busy=false}}
-$('refresh').addEventListener('click',loadSources);$('manual').addEventListener('click',()=>{$('manualFields').hidden=false;$('manualFirst').focus()});$('useManual').addEventListener('click',()=>{const first=$('manualFirst').value.trim(),after=$('manualAfter').value.trim();if(!first||!after){$('loadStatus').textContent='처음과 다시 생각 댓글을 모두 입력해 주세요.';return}select({sourceRecordId:'manual',first,after},null)});$('copyPrompt').addEventListener('click',async()=>{if(!selection){$('copyStatus').textContent='댓글을 먼저 선택하세요.';return}try{await navigator.clipboard.writeText(promptText());$('copyStatus').textContent='질문을 복사했습니다. AI에 붙여넣고 답변을 확인하세요.'}catch(e){$('copyStatus').textContent='자동 복사가 차단되었습니다. 댓글 두 개를 직접 복사해 AI에 입력하세요.'}});$('submit').addEventListener('click',submit);$('print').addEventListener('click',()=>window.print());$('url').value=SCRIPT_URL;$('connect').addEventListener('click',async()=>{const url=$('url').value.trim();if(!/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(url)){$('connectStatus').textContent='.../exec로 끝나는 웹앱 주소를 입력하세요.';return}SCRIPT_URL=url;$('connectStatus').textContent='연결 확인 중...';try{const r=await jsonp({action:'read',scope:'all',step:4,topic:SOURCE_TOPIC});if(!r.ok)throw Error(r.error);localStorage.setItem('step05ScriptUrl',url);$('connectStatus').textContent='연결되었습니다.';if(APP_ID)loadSources()}catch(e){$('connectStatus').textContent='연결 실패: '+e.message}});setupPersonalActivity(5, async appId => {
-  const response = await jsonp({action:'read',appId});
-  if (!response.ok) throw Error(response.error);
-  showOwn(response.records);
-  APP_ID = appId;
-  loadSources();
-}, () => busy);
-</script></body></html>
+
+    <h3>🌎 8차시 · 다른 독자를 위해 다듬기</h3>
+    <div class="prompt">
+      우리말 소개 [글]과 내가 쓴 영어 소개 [문장]을 비교해 줘.
+      외국인 독자가 이해하기 어려운 부분을 짚고,
+      중1 수준의 영어 표현 2가지를 제안해 줘.
+      내 뜻에 맞는 최종 표현은 내가 선택할게.
+    </div>
+  </section>
+
+  <!-- 결과물 -->
+  <section class="lesson-content">
+    <h2>결과물 🎁</h2>
+
+    <p>
+      <strong>
+        우리 동네 숨은 명소 한·영 안내 지도
+      </strong>
+    </p>
+
+    <p>
+      관찰 기록 + 우리말·영어 소개 글 +
+      장소 사진·위치 + AI 정보와 직접 경험 비교 기록
+    </p>
+  </section>
+
+  <!-- 핵심 흐름 -->
+  <section class="lesson-content">
+    <h2>오늘의 핵심 흐름 🔄</h2>
+
+    <p>
+      <strong>
+        💡 질문 떠올리기 →
+        💬 AI에게 물어보기 →
+        👟 걷고 관찰하기 →
+        👀 숨은 매력 발견하기 →
+        🌱 비교하며 생각 더하기 →
+        ✨ 나의 이야기로 소개하기
+      </strong>
+    </p>
+  </section>
+
+  <!-- PDF 저장 버튼 -->
+  <div class="pdf-save-area">
+    <button
+      type="button"
+      class="pdf-save-btn"
+      onclick="saveFullPDF()"
+    >
+      📄 전체 페이지 PDF로 저장
+    </button>
+  </div>
+
+  <!-- 이전·다음 STEP 이동 -->
+  <nav class="lesson-nav" aria-label="STEP 이동">
+    <a href="4.html">← STEP 04</a>
+    <a href="6.html">STEP 06 →</a>
+  </nav>
+
+</main>
+
+<script>
+  function saveFullPDF() {
+    window.print();
+  }
+</script>
+
+</body>
+</html>
